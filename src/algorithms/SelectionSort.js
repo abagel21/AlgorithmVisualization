@@ -1,4 +1,5 @@
 import copyArr from "../util/copyArr";
+/* eslint-disable */
 export default async function SelectionSort(arr, setSortableComponents, getStop, getSpeed, getOtherStop) {
     const speed = document.querySelector(".speedNumber");
     const stop = document.querySelector(".stopSorting");
@@ -33,8 +34,7 @@ export default async function SelectionSort(arr, setSortableComponents, getStop,
                 }
                 min = i;
                 arr[min].div.style.backgroundColor = "green";
-            }
-            else {
+            } else {
                 arr[i].div.style.backgroundColor = "red";
             }
         }
