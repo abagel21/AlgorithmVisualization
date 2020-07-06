@@ -234,6 +234,20 @@ const AlgorithmSettings = ({
         />
       </div>
       <div className="dropdown">
+        <label className = "dataTypeLabel" htmlFor="dataType">I want the data to be...</label>
+        <p id = "dataType" className="dropdownTop">{currSelected2}</p>
+        <div className="dropdownContent2" onClick={(e) => {}}>
+          {[
+            "randomized",
+            "ascending",
+            "descending",
+            "randomized w/ duplicates",
+          ].map((txt) => {
+            return <p onClick={(e) => handleDataType(txt)}>{txt}</p>;
+          })}
+        </div>
+      </div>
+      <div className="dropdown">
         <p className="dropdownTop">{currSelected}</p>
         <div
           className="dropdownContent"
@@ -257,20 +271,6 @@ const AlgorithmSettings = ({
       </div>
       <div className="sort" onClick={(e) => handleSort(e)}>
         Sort
-      </div>
-      <div className="dropdown">
-        <label className = "dataTypeLabel" htmlFor="dataType">I want the data to be...</label>
-        <p id = "dataType" className="dropdownTop">{currSelected2}</p>
-        <div className="dropdownContent2" onClick={(e) => {}}>
-          {[
-            "randomized",
-            "ascending",
-            "descending",
-            "randomized w/ duplicates",
-          ].map((txt) => {
-            return <p onClick={(e) => handleDataType(txt)}>{txt}</p>;
-          })}
-        </div>
       </div>
     </div>
   );

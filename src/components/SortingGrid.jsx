@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useRef, useEffect } from "react";
 
 const SortingGrid = ({ sortableComponents, setSortableComponents }) => {
   useEffect(() => {
@@ -8,6 +7,7 @@ const SortingGrid = ({ sortableComponents, setSortableComponents }) => {
     sortableComponents.map((sortableComponent) => {
       topLevelElement.current.appendChild(sortableComponent.div.cloneNode());
     });
+    return;
   }, [sortableComponents]);
   const topLevelElement = useRef(null);
   // console.log(sortableComponents[0].div)
