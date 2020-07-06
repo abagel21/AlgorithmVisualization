@@ -5,7 +5,7 @@ import createSortableComponents from "../util/createSortableComponents";
 import AlgorithmSettings from "./AlgorithmSettings";
 import copyArr from "../util/copyArr";
 
-/* eslint-disabel */
+/* eslint-disable */
 
 const SortingSpace = (props) => {
   useEffect(() => {

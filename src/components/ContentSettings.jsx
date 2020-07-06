@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import createSortableComponents from "../util/createSortableComponents";
 import createDuplicateSortableComponents from "../util/createDuplicateSortableComponents"
-/* eslint-disabel */
+/* eslint-disable */
 
 const ContentSettings = ({
   setSortableComponents,

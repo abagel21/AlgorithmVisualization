@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-/* eslint-disabel */
+/* eslint-disable */
 
 const SortingGrid = ({ sortableComponents, setSortableComponents }) => {
   useEffect(() => {

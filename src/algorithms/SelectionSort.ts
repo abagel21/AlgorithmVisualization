@@ -1,6 +1,6 @@
 import SortableComponent from "../util/SortableComponent";
 import copyArr from "../util/copyArr";
-/* eslint-disabel */
+/* eslint-disable */
 export default async function SelectionSort(
   arr: SortableComponent[],
   setSortableComponents: any,
