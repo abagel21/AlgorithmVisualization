@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import SortingGrid from "./SortingGrid";
 import ContentSettings from "./ContentSettings";
 import createSortableComponents from "../util/createSortableComponents";
 import AlgorithmSettings from "./AlgorithmSettings";
 import copyArr from "../util/copyArr";
-import { set } from "lodash";
+
+/* eslint-disabel */
 
 const SortingSpace = (props) => {
   useEffect(() => {
@@ -16,7 +16,7 @@ const SortingSpace = (props) => {
   //for type of data (randomized, ascending, descending, etc)
   const [currSelected2, setCurrSelected2] = useState("randomized");
   //for information an algorithm specifies at run time (such as shuffling vs sorting for quicksort)
-  const [algInfo, setAlgInfo] = useState("Using Knuth Shuffle for Probabilistic Guarantee of Speed");
+  const [algInfo, setAlgInfo] = useState("Using Knuth Shuffle First for Probabilistic Guarantee of Speed");
   function getStop() {
     const stop = document.querySelector(".stopSorting")
     return stop.dataset.status === "true";

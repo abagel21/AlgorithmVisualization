@@ -10,6 +10,8 @@ import knuth from "../algorithms/KnuthShuffle";
 import createSortableComponents from "../util/createSortableComponents";
 import createDuplicateSortableComponents from "../util/createDuplicateSortableComponents";
 
+/* eslint-disabel */
+
 const AlgorithmSettings = ({
   sortableComponents,
   setSortableComponents,

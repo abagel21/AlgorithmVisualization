@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
 
+/* eslint-disabel */
+
 const SortingGrid = ({ sortableComponents, setSortableComponents }) => {
   useEffect(() => {
     topLevelElement.current.innerHTML = "";
