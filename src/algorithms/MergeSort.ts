@@ -19,7 +19,6 @@ export default async function MergeSort(
   if (getOtherStop()) {
     return null;
   }
-  console.log(arr.length);
   const aux: SortableComponent[] = copyArr(arr);
   await sort(
     arr,
@@ -34,6 +33,7 @@ export default async function MergeSort(
   for (let i = 0; i < arr.length; i++) {
     arr[i].div.style.backgroundColor = "red";
   }
+  console.log(arr);
   return arr;
 }
 
@@ -50,14 +50,27 @@ async function merge(
 ) {
   let i = lo;
   let j = mid + 1;
-  for (let i = lo; i < hi; i++) {
-      aux[i] = arr[i];
+  //copy array
+for(let i = lo; i <= hi; i++) {
+    aux[i] = arr[i];
+    // arr[i].div = arr[i].div.cloneNode() as HTMLDivElement;
+    // arr[i].div.setAttribute("key", Math.random() * 100000 + "");
+}
+  //color partitions
+  for (let i = lo; i <= hi; i++) {
     if (i <= mid) {
       arr[i].div.style.backgroundColor = "blue";
+      aux[i].div.style.backgroundColor = "blue";
     } else {
       arr[i].div.style.backgroundColor = "green";
+      aux[i].div.style.backgroundColor = "green";
     }
   }
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(null);
+    }, getSpeed());
+  });
   for (let n = lo; n <= hi; n++) {
     while (getStop()) {
       await new Promise((resolve, reject) => {
@@ -66,43 +79,23 @@ async function merge(
         }, 500);
       });
     }
-    //Create new div to avoid issue where divs cannot be double rendered
-    const div : HTMLDivElement = document.createElement("DIV")! as HTMLDivElement;
-        div.setAttribute("key", Math.random()*100000 + "");
-        div.classList.add('sortableElement');
         
     if (getOtherStop()) {
       return null;
     }
+    console.log(arr);
     if (i > mid){ 
-        div.setAttribute('data-status', aux[j].value.toString());
-        aux[j].div = div;
-        aux[j].setSize((window.innerWidth - window.innerWidth * .1)/(aux.length) - 8 + "px");
-        arr[n] = arr[j];
-        j++;
+        arr[n] = aux[j++];
     }
     else if (j > hi){ 
-        div.setAttribute('data-status', aux[j].value.toString());
-        aux[i].div = div;
-        aux[i].setSize((window.innerWidth - window.innerWidth * .1)/(aux.length) - 8 + "px");
-        arr[n] = aux[i];
-        i++;
+        arr[n] = aux[i++];
     }
     else if (aux[j].value < aux[i].value) { 
-        div.setAttribute('data-status', aux[j].value.toString());
-        aux[j].div = div;
-        aux[j].setSize((window.innerWidth - window.innerWidth * .1)/(aux.length) - 8 + "px");
-        arr[n] = aux[j];
-        j++;
+        arr[n] = aux[j++];
     }
     else {
-        div.setAttribute('data-status', aux[j].value.toString());
-        aux[i].div = div;
-        aux[i].setSize((window.innerWidth - window.innerWidth * .1)/(aux.length) - 8 + "px");
-         arr[n] = aux[i];
-         i++;
+         arr[n] = aux[i++];
         }
-        arr[n].div.style.backgroundColor = "red";
     setSortableComponents(copyArr(arr));
     await new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -110,8 +103,10 @@ async function merge(
       }, getSpeed());
     });
   }
+  arr[mid].div.style.backgroundColor = "red";
   for (let i = lo; i < hi; i++) {
     arr[i].div.style.backgroundColor = "red";
+    aux[i].div.style.backgroundColor = "red";
   }
 }
 
@@ -125,7 +120,6 @@ async function sort(
   getSpeed: any,
   getOtherStop: any
 ) {
-  console.log("sort");
 
   if (j <= i) {
     return;
