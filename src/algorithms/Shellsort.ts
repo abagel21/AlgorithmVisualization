@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import SortableComponent from '../util/SortableComponent';
 import copyArr from "../util/copyArr";
 import checkForStop from "../util/checkForStop";

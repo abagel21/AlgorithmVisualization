@@ -1,6 +1,7 @@
 import copyArr from "../util/copyArr";
 import checkForStop from "../util/checkForStop";
 import speedBlock from "../util/speedBlock";
+/* eslint-disable */
 class PriorityQueue {
     //UNFINISHED
     async pop(arr, lastIndex, setSortableComponents) {

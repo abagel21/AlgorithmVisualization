@@ -1,8 +1,8 @@
-import _ from 'lodash';
 import SortableComponent from '../util/SortableComponent';
 import copyArr from "../util/copyArr";
 import checkForStop from "../util/checkForStop";
 import speedBlock from "../util/speedBlock";
+/* eslint-disable */
 export default async function knuth(arr : SortableComponent[], setSortableComponents : any) {
     for(let i = 0; i < arr.length - 1; i++) {
         if(await checkForStop()) return null;

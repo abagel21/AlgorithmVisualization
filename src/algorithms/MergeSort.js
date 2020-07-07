@@ -1,6 +1,7 @@
 import copyArr from "../util/copyArr";
 import checkForStop from "../util/checkForStop";
 import speedBlock from "../util/speedBlock";
+/* eslint-disable */
 export default async function MergeSort(arr, setSortableComponents) {
     if (await checkForStop())
         return null;
