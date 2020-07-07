@@ -52,7 +52,8 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
     let originalHi = hi;
     let originalLo = lo;
     lo++;
-    arr[pointer].div.style.backgroundColor = "black";
+    arr[pointer].div.style.backgroundColor = "purple";
+    setSortableComponents(copyArr(arr));
     while (hi !== lo) {
         while (getStop()) {
             await new Promise((resolve, reject) => {
@@ -64,9 +65,19 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
         if (getOtherStop()) {
             return null;
         }
-        arr[pointer].div.style.backgroundColor = "black";
-        arr[hi].div.style.backgroundColor = "green";
-        arr[lo].div.style.backgroundColor = "blue";
+        for (let i = originalLo; i <= originalHi; i++) {
+            if (i === hi)
+                arr[i].div.style.backgroundColor = "green";
+            else if (i === lo)
+                arr[i].div.style.backgroundColor = "blue";
+            else
+                arr[i].div.style.backgroundColor = "black";
+        }
+        arr[pointer].div.style.backgroundColor = "purple";
+        setSortableComponents(copyArr(arr));
+        // arr[pointer].div.style.backgroundColor = "purple";
+        // arr[hi].div.style.backgroundColor = "green";
+        // arr[lo].div.style.backgroundColor = "blue";
         await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(null);
@@ -89,15 +100,11 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
             if (pointer !== lo)
                 arr[lo].div.style.backgroundColor = "blue";
             lo++;
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
             //changing div colors
             if (lo - 1 !== pointer)
-                arr[lo - 1].div.style.backgroundColor = "red";
+                arr[lo - 1].div.style.backgroundColor = "black";
             arr[lo].div.style.backgroundColor = "blue";
+            setSortableComponents(copyArr(arr));
             await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(null);
@@ -119,14 +126,10 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
             if (hi === lo)
                 break;
             hi--;
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
             //changing colors
-            arr[hi + 1].div.style.backgroundColor = "red";
+            arr[hi + 1].div.style.backgroundColor = "black";
             arr[hi].div.style.backgroundColor = "green";
+            setSortableComponents(copyArr(arr));
             await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(null);
@@ -138,8 +141,8 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
         arr[lo] = arr[hi];
         arr[hi] = temp;
         //swapping colors back
-        arr[lo].div.style.backgroundColor = "red";
-        arr[hi].div.style.backgroundColor = "red";
+        arr[lo].div.style.backgroundColor = "black";
+        arr[hi].div.style.backgroundColor = "black";
         setSortableComponents(copyArr(arr));
         await new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -147,11 +150,6 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
             }, getSpeed());
         });
     }
-    await new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(null);
-        }, getSpeed());
-    });
     if (arr[hi].value > arr[pointer].value) {
         hi--;
     }
@@ -162,8 +160,11 @@ async function quicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, 
     arr[hi] = arr[pointer];
     arr[pointer] = temp;
     setSortableComponents(copyArr(arr));
+    for (let i = originalLo; i <= originalHi; i++) {
+        arr[i].div.style.backgroundColor = "red";
+    }
     arr[pointer].div.style.backgroundColor = "red";
-    arr[hi].div.style.backgroundColor = "red";
+    setSortableComponents(copyArr(arr));
     await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(null);

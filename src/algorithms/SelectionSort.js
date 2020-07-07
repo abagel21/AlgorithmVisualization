@@ -6,6 +6,7 @@ export default async function SelectionSort(arr, setSortableComponents, getStop,
     for (let pointer = 0; pointer < arr.length - 1; pointer++) {
         let min = pointer;
         arr[pointer].div.style.backgroundColor = "black";
+        setSortableComponents(copyArr(arr));
         await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(null);
@@ -23,6 +24,7 @@ export default async function SelectionSort(arr, setSortableComponents, getStop,
                 return null;
             }
             arr[i].div.style.backgroundColor = "blue";
+            setSortableComponents(copyArr(arr));
             await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(null);
@@ -34,7 +36,8 @@ export default async function SelectionSort(arr, setSortableComponents, getStop,
                 }
                 min = i;
                 arr[min].div.style.backgroundColor = "green";
-            } else {
+            }
+            else {
                 arr[i].div.style.backgroundColor = "red";
             }
         }

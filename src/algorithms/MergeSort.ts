@@ -9,7 +9,6 @@ export default async function MergeSort(
   getOtherStop: any
 ) {
   while (getStop()) {
-    console.log(getStop());
     await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(null);
@@ -33,7 +32,6 @@ export default async function MergeSort(
   for (let i = 0; i < arr.length; i++) {
     arr[i].div.style.backgroundColor = "red";
   }
-  console.log(arr);
   return arr;
 }
 
@@ -83,7 +81,6 @@ for(let i = lo; i <= hi; i++) {
     if (getOtherStop()) {
       return null;
     }
-    console.log(arr);
     if (i > mid){ 
         arr[n] = aux[j++];
     }

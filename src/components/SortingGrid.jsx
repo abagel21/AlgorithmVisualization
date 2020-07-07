@@ -5,7 +5,6 @@ import React, { useRef, useEffect } from "react";
 const SortingGrid = ({ sortableComponents, setSortableComponents }) => {
   useEffect(() => {
     topLevelElement.current.innerHTML = "";
-    console.log("NEW RENDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     sortableComponents.map((sortableComponent) => {
       topLevelElement.current.appendChild(sortableComponent.div.cloneNode());
     });

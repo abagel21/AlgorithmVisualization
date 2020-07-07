@@ -1,7 +1,6 @@
 import copyArr from "../util/copyArr";
 export default async function MergeSort(arr, setSortableComponents, getStop, getSpeed, getOtherStop) {
     while (getStop()) {
-        console.log(getStop());
         await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(null);
@@ -16,7 +15,6 @@ export default async function MergeSort(arr, setSortableComponents, getStop, get
     for (let i = 0; i < arr.length; i++) {
         arr[i].div.style.backgroundColor = "red";
     }
-    console.log(arr);
     return arr;
 }
 async function merge(arr, aux, lo, mid, hi, setSortableComponents, getStop, getSpeed, getOtherStop) {
@@ -55,7 +53,6 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents, getStop, getS
         if (getOtherStop()) {
             return null;
         }
-        console.log(arr);
         if (i > mid) {
             arr[n] = aux[j++];
         }

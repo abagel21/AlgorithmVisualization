@@ -41,7 +41,7 @@ code {
 
 .dropdown:hover .dropdownContent {
   visibility: visible;
-  height: 17rem;
+  height: 19.5rem;
 }
 
 .dropdown:hover .dropdownContent2 {

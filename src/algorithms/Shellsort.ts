@@ -8,6 +8,7 @@ export default async function ShellSort(arr : SortableComponent[], setSortableCo
         while(h>=1) {
     for(let i = h; i < arr.length; i++) {
         arr[i].div.style.backgroundColor = "black";
+        setSortableComponents(copyArr(arr));
         await new Promise((resolve, reject) => {
             setTimeout(() => {resolve(null)}, getSpeed())
         })
@@ -25,6 +26,7 @@ export default async function ShellSort(arr : SortableComponent[], setSortableCo
                 return null;
               }
               if(i !== j) arr[j].div.style.backgroundColor = "blue";
+              setSortableComponents(copyArr(arr));
             await new Promise((resolve, reject) => {
                 setTimeout(() => {resolve(null)}, getSpeed())
             })
@@ -41,16 +43,20 @@ export default async function ShellSort(arr : SortableComponent[], setSortableCo
                     setTimeout(() => {resolve(null)}, getSpeed())
                 })
                 if(i !== j) arr[j].div.style.backgroundColor = "red";
+                setSortableComponents(copyArr(arr));
                 await new Promise((resolve, reject) => {
                     setTimeout(() => {resolve(null)}, getSpeed())
                 })
             } else {
                 arr[j].div.style.backgroundColor = "red";
+                setSortableComponents(copyArr(arr));
                 break;
             }
             arr[0].div.style.backgroundColor = "red";
+            setSortableComponents(copyArr(arr));
         }
         arr[i].div.style.backgroundColor = "red";
+        setSortableComponents(copyArr(arr));
     }
     h = Math.floor(h/3);
 }
