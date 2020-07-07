@@ -1,54 +1,31 @@
 import copyArr from "../util/copyArr";
 import assert from "assert";
-export default async function HeapSort(arr, setSortableComponents, getStop, getSpeed, getOtherStop) {
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
+export default async function HeapSort(arr, setSortableComponents) {
     //construct a binary heap from the data from the bottom up
     for (let i = Math.floor((arr.length - 1) / 2); i >= 0; i--) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        if (await checkForStop())
             return null;
-        }
         arr[i].div.style.backgroundColor = "purple";
         setSortableComponents(copyArr(arr));
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
-        let x = (await sink(arr, i, arr.length, getStop, getOtherStop, getSpeed, setSortableComponents));
+        await speedBlock();
+        let x = (await sink(arr, i, arr.length, setSortableComponents));
         arr[i].div.style.backgroundColor = "red";
         arr[x].div.style.backgroundColor = "red";
         setSortableComponents(copyArr(arr));
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
+        await speedBlock();
     }
     console.log(isHeap(arr, 0, arr.length - 1));
     //pop the minimum repeatedly and enqueue it onto the end of the pq
     for (let i = arr.length - 1; i > 0; i--) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        if (await checkForStop())
             return null;
-        }
-        await pop(arr, i, getStop, getOtherStop, getSpeed, setSortableComponents);
+        await pop(arr, i, setSortableComponents);
     }
-    console.log("fin");
     return copyArr(arr);
 }
-async function pop(arr, lastIndex, getStop, getOtherStop, getSpeed, setSortableComponents) {
+async function pop(arr, lastIndex, setSortableComponents) {
     arr[lastIndex].div.style.backgroundColor = "purple";
     arr[0].div.style.backgroundColor = "black";
     let temp = arr[lastIndex];
@@ -58,29 +35,17 @@ async function pop(arr, lastIndex, getStop, getOtherStop, getSpeed, setSortableC
     assert(otherTemp.value === arr[lastIndex].value);
     assert(temp.value === arr[0].value);
     setSortableComponents(copyArr(arr));
-    await new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(null);
-        }, getSpeed());
-    });
-    await sink(arr, 0, lastIndex, getStop, getOtherStop, getSpeed, setSortableComponents);
+    await speedBlock();
+    await sink(arr, 0, lastIndex, setSortableComponents);
     arr[lastIndex].div.style.backgroundColor = "red";
     arr[0].div.style.backgroundColor = "red";
     setSortableComponents(copyArr(arr));
 }
-async function sink(arr, i, lastIndex, getStop, getOtherStop, getSpeed, setSortableComponents) {
+async function sink(arr, i, lastIndex, setSortableComponents) {
     //if aux[i] is less than the lower node on the tree, swap
     while (2 * (i + 1) - 1 < lastIndex) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        if (await checkForStop())
             return null;
-        }
         arr[i].div.style.backgroundColor = "purple";
         let j = 2 * (i + 1) - 1;
         if (j + 1 < lastIndex && arr[j].value < arr[j + 1].value)
@@ -94,22 +59,14 @@ async function sink(arr, i, lastIndex, getStop, getOtherStop, getSpeed, setSorta
             arr[i].div.style.backgroundColor = "red";
             i = j;
             setSortableComponents(copyArr(arr));
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
+            await speedBlock();
         }
         else {
             arr[j].div.style.backgroundColor = "red";
             break;
         }
         setSortableComponents(copyArr(arr));
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
+        await speedBlock();
     }
     arr[i].div.style.backgroundColor = "red";
     return i;

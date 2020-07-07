@@ -32,15 +32,6 @@ const AlgorithmSettings = ({
   let speedObj = {
     speed: sliderValue,
   };
-  const getSpeed = () => {
-    let speedEl = document.querySelector(".speedNumber");
-    let speed = speedEl.value / 6.25;
-    return speed < 8
-      ? 25 * (8 - speed)
-      : speed === 8
-      ? 25
-      : (12.5 * 1) / (speed - 8);
-  };
   const [currSelected, setCurrSelected] = useState("Select an algorithm");
   const handleDataType = async (txt) => {
     setCurrSelected2(txt);
@@ -103,10 +94,7 @@ const AlgorithmSettings = ({
           resolve(
             selectionSort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -163,10 +151,7 @@ const AlgorithmSettings = ({
           resolve(
             ThreeWayQuicksort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -178,10 +163,7 @@ const AlgorithmSettings = ({
           resolve(
             Shellsort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });

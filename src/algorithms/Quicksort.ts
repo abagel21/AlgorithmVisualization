@@ -1,51 +1,29 @@
 import _ from "lodash";
 import SortableComponent from "../util/SortableComponent";
 import copyArr from "../util/copyArr";
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
 export default async function Quicksort(
   arr: SortableComponent[],
   setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
 ) {
 //   knuth shuffle for probabilistic guarantee (and displaying that shuffling is happening)
   const info = document.querySelector(".algorithmInformation")! as HTMLDivElement;
   info.style.visibility = "visible";
     for (let i = 0; i < arr.length - 1; i++) {
-      while (getStop()) {
-        await new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(null);
-          }, 500);
-        });
-      }
-      if (getOtherStop()) {
-        return null;
-      }
+      if(await checkForStop()) return null;
       arr[i].div.style.backgroundColor = "black";
       let j = Math.floor(Math.random() * (arr.length - i)) + i;
       arr[j].div.style.backgroundColor = "blue";
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed() * 3);
-      });
+      await speedBlock();
       let temp = arr[j];
       arr[j] = arr[i];
       arr[i] = temp;
       setSortableComponents(copyArr(arr));
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed() * 3);
-      });
+      await speedBlock();
       arr[i].div.style.backgroundColor = "red";
       arr[j].div.style.backgroundColor = "red";
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed() * 3);
-      });
+      await speedBlock();
     }
     //setting info div to invisible
     info.style.visibility = "hidden";
@@ -54,10 +32,7 @@ export default async function Quicksort(
     arr,
     0,
     arr.length - 1,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
   return arr;
 }
@@ -67,9 +42,6 @@ async function quicksort(
   lo: number,
   hi: number,
   setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
 ) {
   if (hi <= lo) return;
   let pointer = lo;
@@ -80,16 +52,7 @@ async function quicksort(
   arr[pointer].div.style.backgroundColor = "purple";
   setSortableComponents(copyArr(arr));
   while (hi !== lo) {
-    while (getStop()) {
-        await new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(null);
-          }, 500);
-        });
-      }
-      if (getOtherStop()) {
-        return null;
-      }
+    if(await checkForStop()) return null;
       for(let i = originalLo; i <= originalHi; i++) {
         if(i === hi) arr[i].div.style.backgroundColor = "green"
         else if (i === lo) arr[i].div.style.backgroundColor = "blue"
@@ -100,23 +63,10 @@ async function quicksort(
     // arr[pointer].div.style.backgroundColor = "purple";
     // arr[hi].div.style.backgroundColor = "green";
     // arr[lo].div.style.backgroundColor = "blue";
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
+    await speedBlock();
     //incrementing lo while the value at lo is less than the value at pointer
     while (arr[lo].value < arr[pointer].value) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve(null);
-              }, 500);
-            });
-          }
-          if (getOtherStop()) {
-            return null;
-          }
+        if(await checkForStop()) return null;
       if (hi === lo) break;
       if (pointer !== lo) arr[lo].div.style.backgroundColor = "blue";
       lo++;
@@ -124,35 +74,18 @@ async function quicksort(
             if (lo - 1 !== pointer) arr[lo - 1].div.style.backgroundColor = "black";
             arr[lo].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed());
-      });
+            await speedBlock();
     }
     //incrementing hi while the value at hi is greater than the value at pointer
     while (arr[hi].value > arr[pointer].value) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve(null);
-              }, 500);
-            });
-          }
-          if (getOtherStop()) {
-            return null;
-          }
+        if(await checkForStop()) return null;
       if (hi === lo) break;
       hi--;
             //changing colors
             arr[hi + 1].div.style.backgroundColor = "black";
             arr[hi].div.style.backgroundColor = "green";
             setSortableComponents(copyArr(arr));
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed());
-      });
+            await speedBlock();
     }
     //swapping the two "erroneous" values
     let temp: SortableComponent = arr[lo];
@@ -162,11 +95,7 @@ async function quicksort(
     arr[lo].div.style.backgroundColor = "black";
     arr[hi].div.style.backgroundColor = "black";
     setSortableComponents(copyArr(arr));
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
+    await speedBlock();
   }
   if (arr[hi].value > arr[pointer].value) {
     hi--;
@@ -183,47 +112,19 @@ async function quicksort(
   }
   arr[pointer].div.style.backgroundColor = "red";
   setSortableComponents(copyArr(arr));
-  await new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(null);
-    }, getSpeed());
-  });
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+  await speedBlock();
+  if(await checkForStop()) return null;
   await quicksort(
     arr,
     originalLo,
     hi - 1,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+    if(await checkForStop()) return null;
   await quicksort(
     arr,
     hi + 1,
     originalHi,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
 }

@@ -1,54 +1,36 @@
 import copyArr from "../util/copyArr";
-export default async function ThreeWayQuicksort(arr, setSortableComponents, getStop, getSpeed, getOtherStop) {
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
+export default async function ThreeWayQuicksort(arr, setSortableComponents) {
     //shuffle for probabilistic guarantee (and displaying that shuffling is happening)
     const info = document.querySelector(".algorithmInformation");
     info.style.visibility = "visible";
     for (let i = 0; i < arr.length - 1; i++) {
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        if (await checkForStop())
             return null;
-        }
         arr[i].div.style.backgroundColor = "black";
         let j = Math.floor(Math.random() * (arr.length - i)) + i;
         arr[j].div.style.backgroundColor = "blue";
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed() * 3);
-        });
+        await speedBlock();
         let temp = arr[j];
         arr[j] = arr[i];
         arr[i] = temp;
         setSortableComponents(copyArr(arr));
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed() * 3);
-        });
+        await speedBlock();
         arr[i].div.style.backgroundColor = "red";
         arr[j].div.style.backgroundColor = "red";
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed() * 3);
-        });
+        await speedBlock();
     }
     //setting information div to invisible
     info.style.visibility = "hidden";
     //first call to recursive three way quicksort
-    await threeWayQuicksort(arr, 0, arr.length - 1, setSortableComponents, getStop, getSpeed, getOtherStop);
+    await threeWayQuicksort(arr, 0, arr.length - 1, setSortableComponents);
     for (let i = 0; i < arr.length; i++) {
         arr[i].div.style.backgroundColor = "red";
     }
     return arr;
 }
-async function threeWayQuicksort(arr, lo, hi, setSortableComponents, getStop, getSpeed, getOtherStop) {
+async function threeWayQuicksort(arr, lo, hi, setSortableComponents) {
     if (hi <= lo)
         return;
     const originalLo = lo;
@@ -56,21 +38,9 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents, getStop, ge
     let pointer = originalLo + 1;
     while (pointer <= hi) {
         // arr[pointer].div.style.backgroundColor = "purple";
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        await speedBlock();
+        if (checkForStop())
             return null;
-        }
         for (let i = originalLo; i <= originalHi; i++) {
             if (i < lo)
                 arr[i].div.style.backgroundColor = "blue";
@@ -81,26 +51,10 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents, getStop, ge
             else
                 arr[i].div.style.backgroundColor = "black";
         }
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
-        while (getStop()) {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, 500);
-            });
-        }
-        if (getOtherStop()) {
+        await speedBlock();
+        if (checkForStop())
             return null;
-        }
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(null);
-            }, getSpeed());
-        });
+        await speedBlock();
         if (arr[pointer].value < arr[lo].value) {
             let temp = arr[pointer];
             arr[pointer] = arr[lo];
@@ -109,11 +63,7 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents, getStop, ge
             pointer++;
             // arr[lo].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
+            await speedBlock();
         }
         else if (arr[pointer].value > arr[lo].value) {
             let temp = arr[pointer];
@@ -121,24 +71,16 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents, getStop, ge
             arr[hi] = temp;
             hi--;
             setSortableComponents(copyArr(arr));
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
+            await speedBlock();
         }
         else {
             pointer++;
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, getSpeed());
-            });
+            await speedBlock();
         }
     }
     for (let i = originalLo; i <= originalHi; i++) {
         arr[i].div.style.backgroundColor = "red";
     }
-    await threeWayQuicksort(arr, originalLo, lo - 1, setSortableComponents, getStop, getSpeed, getOtherStop);
-    await threeWayQuicksort(arr, pointer, originalHi, setSortableComponents, getStop, getSpeed, getOtherStop);
+    await threeWayQuicksort(arr, originalLo, lo - 1, setSortableComponents);
+    await threeWayQuicksort(arr, pointer, originalHi, setSortableComponents);
 }

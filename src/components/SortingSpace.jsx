@@ -17,14 +17,14 @@ const SortingSpace = (props) => {
   const [currSelected2, setCurrSelected2] = useState("randomized");
   //for information an algorithm specifies at run time (such as shuffling vs sorting for quicksort)
   const [algInfo, setAlgInfo] = useState("Using Knuth Shuffle First for Probabilistic Guarantee of Speed");
-  function getStop() {
-    const stop = document.querySelector(".stopSorting")
-    return stop.dataset.status === "true";
-  }
-  function getOtherStop() {
-    const stop = document.querySelector(".stopSorting")
-    return stop.dataset.reset === "true";
-  }
+  // function getStop() {
+  //   const stop = document.querySelector(".stopSorting")
+  //   return stop.dataset.status === "true";
+  // }
+  // function getOtherStop() {
+  //   const stop = document.querySelector(".stopSorting")
+  //   return stop.dataset.reset === "true";
+  // }
   const handleReset = async (e) => {
     const stop = document.querySelector(".stopSorting")
     stop.dataset.reset = "true";
@@ -42,8 +42,6 @@ const SortingSpace = (props) => {
       <AlgorithmSettings
         sortableComponents={renderedArray}
         setSortableComponents={setRenderedArray}
-        getStop={getStop}
-        getOtherStop={getOtherStop}
         currSelected2 = {currSelected2}
         setCurrSelected2 = {setCurrSelected2}
         setAlgInfo = {setAlgInfo}

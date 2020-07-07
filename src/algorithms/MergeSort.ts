@@ -1,33 +1,20 @@
 import _ from "lodash";
 import SortableComponent from "../util/SortableComponent";
 import copyArr from "../util/copyArr";
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
 export default async function MergeSort(
   arr: SortableComponent[],
-  setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
+  setSortableComponents: any
 ) {
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+  if(await checkForStop()) return null;
   const aux: SortableComponent[] = copyArr(arr);
   await sort(
     arr,
     aux,
     0,
     arr.length - 1,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
   for (let i = 0; i < arr.length; i++) {
     arr[i].div.style.backgroundColor = "red";
@@ -41,10 +28,7 @@ async function merge(
   lo: number,
   mid: number,
   hi: number,
-  setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
+  setSortableComponents: any
 ) {
   let i = lo;
   let j = mid + 1;
@@ -64,23 +48,9 @@ for(let i = lo; i <= hi; i++) {
       aux[i].div.style.backgroundColor = "green";
     }
   }
-  await new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(null);
-    }, getSpeed());
-  });
+  await speedBlock();
   for (let n = lo; n <= hi; n++) {
-    while (getStop()) {
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, 500);
-      });
-    }
-        
-    if (getOtherStop()) {
-      return null;
-    }
+    if(await checkForStop()) return null;
     if (i > mid){ 
         arr[n] = aux[j++];
     }
@@ -94,11 +64,7 @@ for(let i = lo; i <= hi; i++) {
          arr[n] = aux[i++];
         }
     setSortableComponents(copyArr(arr));
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
+    await speedBlock();
   }
   arr[mid].div.style.backgroundColor = "red";
   for (let i = lo; i < hi; i++) {
@@ -112,79 +78,40 @@ async function sort(
   aux: SortableComponent[],
   i: number,
   j: number,
-  setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
+  setSortableComponents: any
 ) {
 
   if (j <= i) {
     return;
   }
 
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+  if(await checkForStop()) return null;
 
   await sort(
     arr,
     aux,
     i,
     Math.floor(i + (j - i) / 2),
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
 
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+  if(await checkForStop()) return null;
 
   await sort(
     arr,
     aux,
     Math.floor(i + (j - i) / 2) + 1,
     j,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
 
-  while (getStop()) {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 500);
-    });
-  }
-  if (getOtherStop()) {
-    return null;
-  }
+  if(await checkForStop()) return null;
   await merge(
     arr,
     aux,
     i,
     Math.floor(i + (j - i) / 2),
     j,
-    setSortableComponents,
-    getStop,
-    getSpeed,
-    getOtherStop
+    setSortableComponents
   );
 }

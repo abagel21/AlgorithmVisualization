@@ -1,28 +1,18 @@
 import copyArr from "../util/copyArr";
-export default async function InsertionSort(arr, setSortableComponents, getStop, getSpeed, getOtherStop) {
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
+export default async function InsertionSort(arr, setSortableComponents) {
     for (let i = 0; i < arr.length; i++) {
         arr[i].div.style.backgroundColor = "black";
-        await new Promise((resolve, reject) => {
-            setTimeout(() => { resolve(null); }, getSpeed());
-        });
+        await speedBlock();
         for (let j = i; j > 0; j--) {
             //stop condition for pausing
-            while (getStop()) {
-                await new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        resolve(null);
-                    }, 500);
-                });
-            }
-            //stop condition for reset
-            if (getOtherStop()) {
+            if (await checkForStop())
                 return null;
-            }
             if (i !== j)
                 arr[j].div.style.backgroundColor = "blue";
-            await new Promise((resolve, reject) => {
-                setTimeout(() => { resolve(null); }, getSpeed());
-            });
+            setSortableComponents(copyArr(arr));
+            await speedBlock();
             if (arr[j].value < arr[j - 1].value) {
                 let temp = arr[j];
                 arr[j] = arr[j - 1];
@@ -33,22 +23,20 @@ export default async function InsertionSort(arr, setSortableComponents, getStop,
                 }
                 ;
                 setSortableComponents(copyArr(arr));
-                await new Promise((resolve, reject) => {
-                    setTimeout(() => { resolve(null); }, getSpeed());
-                });
+                await speedBlock();
                 if (i !== j)
                     arr[j].div.style.backgroundColor = "red";
-                await new Promise((resolve, reject) => {
-                    setTimeout(() => { resolve(null); }, getSpeed());
-                });
+                await speedBlock();
             }
             else {
                 arr[j].div.style.backgroundColor = "red";
                 break;
             }
             arr[0].div.style.backgroundColor = "red";
+            setSortableComponents(copyArr(arr));
         }
         arr[i].div.style.backgroundColor = "red";
+        setSortableComponents(copyArr(arr));
     }
     return copyArr(arr);
 }

@@ -1,12 +1,11 @@
 import SortableComponent from "../util/SortableComponent";
 import copyArr from "../util/copyArr";
+import checkForStop from "../util/checkForStop";
+import speedBlock from "../util/speedBlock";
 /* eslint-disable */
 export default async function SelectionSort(
   arr: SortableComponent[],
   setSortableComponents: any,
-  getStop: any,
-  getSpeed: any,
-  getOtherStop: any
 ) {
   const speed: HTMLInputElement = document.querySelector(
     ".speedNumber"
@@ -18,29 +17,14 @@ export default async function SelectionSort(
     let min: number = pointer;
     arr[pointer].div.style.backgroundColor = "black";
     setSortableComponents(copyArr(arr));
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
+    await speedBlock();
     for (let i = pointer + 1; i < arr.length; i++) {
-      while (getStop()) {
-        await new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(null);
-          }, 500);
-        });
-      }
-      if (getOtherStop()) {
+      if(await checkForStop()) {
         return null;
       }
       arr[i].div.style.backgroundColor = "blue";
       setSortableComponents(copyArr(arr));
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, getSpeed());
-      });
+      speedBlock();
       if (arr[i].value < arr[min].value) {
         if (min !== pointer) {
           arr[min].div.style.backgroundColor = "red";
@@ -55,11 +39,7 @@ export default async function SelectionSort(
     arr[min] = arr[pointer];
     arr[pointer] = temp;
     setSortableComponents(copyArr(arr));
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
+    await speedBlock();
     arr[min].div.style.backgroundColor = "red";
     arr[pointer].div.style.backgroundColor = "red";
   }
