@@ -145,39 +145,39 @@ async function sink(
   return i;
 }
 
-async function swim(
-  aux: SortableComponent[],
-  i: number,
-  getStop: any,
-  getOtherStop: any,
-  getSpeed: any,
-  setSortableComponents: any
-) {
-  //if aux[i] is more than the higher node on the tree, swap
-  while (i > 1 && aux[i].value > aux[Math.floor(i / 2)].value) {
-    while (getStop()) {
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(null);
-        }, 500);
-      });
-    }
-    if (getOtherStop()) {
-      return null;
-    }
-    let j = Math.floor(i / 2);
-    let temp: SortableComponent = aux[i];
-    aux[i] = aux[j];
-    aux[j] = temp;
-    i = j;
-    setSortableComponents(copyArr(aux));
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(null);
-      }, getSpeed());
-    });
-  }
-}
+// async function swim(
+//   aux: SortableComponent[],
+//   i: number,
+//   getStop: any,
+//   getOtherStop: any,
+//   getSpeed: any,
+//   setSortableComponents: any
+// ) {
+//   //if aux[i] is more than the higher node on the tree, swap
+//   while (i > 1 && aux[i].value > aux[Math.floor(i / 2)].value) {
+//     while (getStop()) {
+//       await new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//           resolve(null);
+//         }, 500);
+//       });
+//     }
+//     if (getOtherStop()) {
+//       return null;
+//     }
+//     let j = Math.floor(i / 2);
+//     let temp: SortableComponent = aux[i];
+//     aux[i] = aux[j];
+//     aux[j] = temp;
+//     i = j;
+//     setSortableComponents(copyArr(aux));
+//     await new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve(null);
+//       }, getSpeed());
+//     });
+//   }
+// }
 
 function isHeap(arr: SortableComponent[], i: number, n: number) {
   // If a leaf node
