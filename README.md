@@ -10,9 +10,11 @@ The site is hosted at <a href='https://algorithms-visualize.netlify.app'>algorit
 The site includes selection sort, insertion sort, quicksort, merge sort, three way quicksort, heapsort, shellsort, and an obligatory Knuth shuffle as used in the two quicksort algorithms. To improve user experience and the value of the visualization, not only can the functions be paused while running, the speed can be changed during the algorithm to better experience the nuances of the sorting. Furthermore, the user can choose between randomized, sorted, descending sorted, and randomized with many duplicates data in order to showcase advantages of certain algorithms over others.
 
 ## Built With
-Javascript
-Typescript
-React
-SCSS
+- Javascript
+- Typescript
+- React
+- SCSS
 
-
+## Planned Updates
+- Bubble Sort
+- Quick Select
