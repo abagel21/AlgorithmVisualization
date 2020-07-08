@@ -15,8 +15,6 @@ import createDuplicateSortableComponents from "../util/createDuplicateSortableCo
 const AlgorithmSettings = ({
   sortableComponents,
   setSortableComponents,
-  getStop,
-  getOtherStop,
   currSelected2,
   setCurrSelected2,
   setAlgInfo
@@ -32,7 +30,7 @@ const AlgorithmSettings = ({
   let speedObj = {
     speed: sliderValue,
   };
-  const [currSelected, setCurrSelected] = useState("Select an algorithm");
+  const [currSelected, setCurrSelected] = useState("Select algorithm");
   const handleDataType = async (txt) => {
     setCurrSelected2(txt);
     switch (txt) {
@@ -79,10 +77,7 @@ const AlgorithmSettings = ({
           resolve(
             insertionSort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -106,10 +101,7 @@ const AlgorithmSettings = ({
           resolve(
             mergeSort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -121,10 +113,7 @@ const AlgorithmSettings = ({
           resolve(
             knuth(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -136,10 +125,7 @@ const AlgorithmSettings = ({
           resolve(
             Quicksort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -175,10 +161,7 @@ const AlgorithmSettings = ({
           resolve(
             heapSort(
               sortableComponents,
-              setSortableComponents,
-              getStop,
-              getSpeed,
-              getOtherStop
+              setSortableComponents
             )
           );
         });
@@ -193,7 +176,7 @@ const AlgorithmSettings = ({
     <div className="settings">
       <div className="speedSettings">
         <label htmlFor="#speedRange" className="speedLabel">
-          Set the speed of the sorting function
+          Set speed
         </label>
         <label className="eighthx sliderLabel" htmlFor="speedRange">
           1/8x
@@ -218,7 +201,7 @@ const AlgorithmSettings = ({
         />
       </div>
       <div className="dropdown">
-        <label className = "dataTypeLabel" htmlFor="dataType">I want the data to be...</label>
+        <label className = "dataTypeLabel" htmlFor="dataType">Set Data Type</label>
         <p id = "dataType" className="dropdownTop">{currSelected2}</p>
         <div className="dropdownContent2" onClick={(e) => {}}>
           {[

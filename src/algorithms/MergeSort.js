@@ -32,7 +32,6 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
             aux[i].div.style.backgroundColor = "green";
         }
     }
-    await speedBlock();
     for (let n = lo; n <= hi; n++) {
         if (await checkForStop())
             return null;
@@ -52,10 +51,12 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
         await speedBlock();
     }
     arr[mid].div.style.backgroundColor = "red";
-    for (let i = lo; i < hi; i++) {
+    for (let i = lo; i <= hi; i++) {
         arr[i].div.style.backgroundColor = "red";
         aux[i].div.style.backgroundColor = "red";
     }
+    setSortableComponents(copyArr(arr));
+    await speedBlock();
 }
 async function sort(arr, aux, i, j, setSortableComponents) {
     if (j <= i) {

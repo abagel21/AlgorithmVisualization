@@ -10,14 +10,15 @@ function getStop() {
   }
 //checks both stopping functions and interrupts/ends the function if necessary
   export default async function checkForStop() {
+    if (getOtherStop()) {
+      console.log("TRUE")
+      return true;
+    }
     while (getStop()) {
         await new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve(false);
           }, 500);
         });
-      }
-      if (getOtherStop()) {
-        return true;
       }
   }

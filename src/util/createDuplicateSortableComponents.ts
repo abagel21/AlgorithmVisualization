@@ -2,7 +2,7 @@ import SortableComponent from './SortableComponent';
 export default function createDuplicateSortableComponents(num : number) : SortableComponent[] {
     const sortableComponents : SortableComponent[] = []
     for(let i = 0; i < num; i++) {
-        const randDouble = Math.random()*(window.innerHeight*.65 + 1)
+        const randDouble = Math.random()*(window.innerHeight*(window.innerWidth < 500 ? .5 : .6) + 1)
         const div : HTMLDivElement = document.createElement("DIV")! as HTMLDivElement;
         div.setAttribute('data-status', randDouble.toString());
         div.setAttribute("key", i + "");

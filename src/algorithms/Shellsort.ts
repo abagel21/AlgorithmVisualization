@@ -36,6 +36,7 @@ export default async function ShellSort(arr : SortableComponent[], setSortableCo
         setSortableComponents(copyArr(arr));
         await speedBlock();
     }
+    arr[0].div.style.backgroundColor = "red";
     h = Math.floor(h/3);
 }
     return copyArr(arr);

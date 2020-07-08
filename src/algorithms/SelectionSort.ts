@@ -24,7 +24,7 @@ export default async function SelectionSort(
       }
       arr[i].div.style.backgroundColor = "blue";
       setSortableComponents(copyArr(arr));
-      speedBlock();
+      await speedBlock();
       if (arr[i].value < arr[min].value) {
         if (min !== pointer) {
           arr[min].div.style.backgroundColor = "red";
