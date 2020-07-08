@@ -357,7 +357,7 @@ code {
 }
 
 .sortableElement {
-  background-color: #44cce4;
+  background-color: "red";
   margin-left: 4px;
   margin-right: 4px;
 }
