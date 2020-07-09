@@ -47,15 +47,17 @@ async function threeWayQuicksort(
   while(pointer <= hi) {
     // arr[pointer].div.style.backgroundColor = "purple";
     await speedBlock();
-    if(checkForStop()) return null;
+    if(await checkForStop()) 
+      return null;
     for(let i = originalLo; i <= originalHi; i++) {
       if(i < lo) arr[i].div.style.backgroundColor = "blue";
       else if( i > hi) arr[i].div.style.backgroundColor = "green";
       else if(i >= lo && i < pointer) arr[i].div.style.backgroundColor = "purple";
       else arr[i].div.style.backgroundColor = "black";
     }
+    setSortableComponents(copyArr(arr));
     await speedBlock();
-    if(checkForStop()) return null;
+    if(await checkForStop()) return null;
     await speedBlock();
     if(arr[pointer].value < arr[lo].value) {
       let temp = arr[pointer];
@@ -81,6 +83,7 @@ async function threeWayQuicksort(
   for(let i = originalLo; i <= originalHi; i++) {
     arr[i].div.style.backgroundColor = "red";
   }
+  setSortableComponents(copyArr(arr));
   await threeWayQuicksort(arr, originalLo, lo-1, setSortableComponents);
   await threeWayQuicksort(arr, pointer, originalHi, setSortableComponents);
 }
