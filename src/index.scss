@@ -206,7 +206,10 @@ code {
     }
     &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .15)
+        box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .15);
+        @media(max-width: 500px) {
+            transform: translate(-50%, -3px);
+        }
     }
     &:active {
         transform: translateY(1px);

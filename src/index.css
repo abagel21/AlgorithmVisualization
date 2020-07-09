@@ -265,6 +265,13 @@ code {
           box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
+@media (max-width: 500px) {
+  .settingsSubmit:hover {
+    -webkit-transform: translate(-50%, -3px);
+            transform: translate(-50%, -3px);
+  }
+}
+
 .settingsSubmit:active {
   -webkit-transform: translateY(1px);
           transform: translateY(1px);
