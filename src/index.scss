@@ -548,71 +548,109 @@ code {
     cursor: pointer;
     transition: all .2s ease;
     visibility: hidden;
+    @media(min-height: 900px) {
+        top: 22%;
+    }
     @media(min-height: 1000px) {
-        top: 26.5%;
+        top: 21.75%;
     }
     @media(min-height: 1050px) {
-        top: 26.25%;
+        top: 21%;
     }
     @media(min-height: 1100px) {
         top: 25.75%;
     }
     @media(min-height: 1100px) {
-        top: 25.5%;
+        top: 20.5%;
     }
     @media(min-height: 1200px) {
-        top: 25.25%;
+        top: 20.25%;
     }
     @media(min-height: 1250px) {
-        top: 24.75%;
+        top: 19.75%;
     }
     @media(min-height: 1300px) {
-        top: 24.5%;
+        top: 19.5%;
     }
     @media(max-height: 950px) {
-        top: 24.25%;
+        top: 22.25%;
     }
     @media(max-height: 900px) {
-        top: 28%;
+        top: 23%;
     }
     @media(max-height: 850px) {
-        top: 28.5%;
+        top: 23.5%;
     }
     @media(max-height: 800px) {
-        top: 28%;
+        top: 24%;
     }
     @media(max-height: 780px) {
-        top: 28.5%;
+        top: 24.5%;
     }
     @media(max-height: 730px) {
-        top: 28%;
+        top: 24.75%;
     }
     @media(max-height: 705px) {
-        top: 28.5%;
+        top: 25.5%;
     }
     @media(max-height: 675px) {
-        top: 29%;
+        top: 26%;
     }
     @media(max-height: 650px) {
-        top: 29.5%;
+        top: 26.5%;
     }
     @media(max-height: 625px) {
-        top: 30%;
+        top: 25%;
     }
     @media(max-height: 600px) {
-        top: 30.5%;
+        top: 25.5%;
     }
     @media(max-height: 575px) {
-        top: 31%;
+        top: 26%;
     }
     @media(max-width: 1200px) {
-        right: 4.25%;
+        left: 4.25%;
     }
     @media(max-width: 650px) {
-        right: 4%;
+        left: 4%;
     }
     @media(max-width: 525px) {
-        right: 3.75%;
+        left: 3.75%;
+    }
+    @media(max-width: 500px) {
+        @media(max-height: 900px) {
+            top: 27.75%;
+        }
+        @media(max-height: 850px) {
+            top: 28.5%;
+        }
+        @media(max-height: 800px) {
+            top: 29%;
+        }
+        @media(max-height: 780px) {
+            top: 29.5%;
+        }
+        @media(max-height: 730px) {
+            top: 30%;
+        }
+        @media(max-height: 705px) {
+            top: 30.5%;
+        }
+        @media(max-height: 675px) {
+            top: 31%;
+        }
+        @media(max-height: 650px) {
+            top: 31.5%;
+        }
+        @media(max-height: 625px) {
+            top: 32%;
+        }
+        @media(max-height: 600px) {
+            top: 33.5%;
+        }
+        @media(max-height: 575px) {
+            top: 34%;
+        }
     }
     &:hover {
         transform: translateY(-3px);
