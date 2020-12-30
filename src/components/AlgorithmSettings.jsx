@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import insertionSort from "../algorithms/InsertionSort";
-import selectionSort from "../algorithms/SelectionSort";
-import mergeSort from "../algorithms/MergeSort";
-import Quicksort from "../algorithms/Quicksort";
-import heapSort from "../algorithms/HeapSort";
-import ThreeWayQuicksort from "../algorithms/ThreeWayQuicksort";
-import Shellsort from "../algorithms/Shellsort";
-import knuth from "../algorithms/KnuthShuffle";
+import insertionSort from "../algorithms/sorting/InsertionSort";
+import selectionSort from "../algorithms/sorting/SelectionSort";
+import mergeSort from "../algorithms/sorting/MergeSort";
+import Quicksort from "../algorithms/sorting/Quicksort";
+import heapSort from "../algorithms/sorting/HeapSort";
+import ThreeWayQuicksort from "../algorithms/sorting/ThreeWayQuicksort";
+import Shellsort from "../algorithms/sorting/Shellsort";
+import knuth from "../algorithms/sorting/KnuthShuffle";
 import createSortableComponents from "../util/createSortableComponents";
 import createDuplicateSortableComponents from "../util/createDuplicateSortableComponents";
 

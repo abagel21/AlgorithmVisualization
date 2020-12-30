@@ -1,6 +1,6 @@
-import copyArr from "../util/copyArr";
-import checkForStop from "../util/checkForStop";
-import speedBlock from "../util/speedBlock";
+import copyArr from "../../util/copyArr";
+import checkForStop from "../../util/checkForStop";
+import speedBlock from "../../util/speedBlock";
 export default async function ThreeWayQuicksort(arr, setSortableComponents) {
     //shuffle for probabilistic guarantee (and displaying that shuffling is happening)
     const info = document.querySelector(".algorithmInformation");
@@ -65,16 +65,14 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents) {
             // arr[lo].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
             await speedBlock();
-        }
-        else if (arr[pointer].value > arr[lo].value) {
+        } else if (arr[pointer].value > arr[lo].value) {
             let temp = arr[pointer];
             arr[pointer] = arr[hi];
             arr[hi] = temp;
             hi--;
             setSortableComponents(copyArr(arr));
             await speedBlock();
-        }
-        else {
+        } else {
             pointer++;
             await speedBlock();
         }

@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
-    "noEmit": false,
+    "noEmit": true,
     "jsx": "react"
   },
   "include": [

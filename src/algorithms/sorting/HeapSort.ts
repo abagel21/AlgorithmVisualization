@@ -1,8 +1,8 @@
-import SortableComponent from "../util/SortableComponent";
-import copyArr from "../util/copyArr";
+import SortableComponent from "../../util/SortableComponent";
+import copyArr from "../../util/copyArr";
 import assert from "assert";
-import checkForStop from "../util/checkForStop";
-import speedBlock from "../util/speedBlock";
+import checkForStop from "../../util/checkForStop";
+import speedBlock from "../../util/speedBlock";
 export default async function HeapSort(
   arr: SortableComponent[],
   setSortableComponents: any

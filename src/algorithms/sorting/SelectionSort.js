@@ -1,6 +1,6 @@
-import copyArr from "../util/copyArr";
-import checkForStop from "../util/checkForStop";
-import speedBlock from "../util/speedBlock";
+import copyArr from "../../util/copyArr";
+import checkForStop from "../../util/checkForStop";
+import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
 export default async function SelectionSort(arr, setSortableComponents) {
     const speed = document.querySelector(".speedNumber");
@@ -23,8 +23,7 @@ export default async function SelectionSort(arr, setSortableComponents) {
                 }
                 min = i;
                 arr[min].div.style.backgroundColor = "green";
-            }
-            else {
+            } else {
                 arr[i].div.style.backgroundColor = "red";
             }
         }

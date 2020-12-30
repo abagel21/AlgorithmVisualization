@@ -1,6 +1,6 @@
-import copyArr from "../util/copyArr";
-import checkForStop from "../util/checkForStop";
-import speedBlock from "../util/speedBlock";
+import copyArr from "../../util/copyArr";
+import checkForStop from "../../util/checkForStop";
+import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
 export default async function InsertionSort(arr, setSortableComponents) {
     for (let i = 0; i < arr.length; i++) {
@@ -21,15 +21,13 @@ export default async function InsertionSort(arr, setSortableComponents) {
                 if (i === j) {
                     arr[j].div.style.backgroundColor = "black";
                     arr[j - 1].div.style.backgroundColor = "blue";
-                }
-                ;
+                };
                 setSortableComponents(copyArr(arr));
                 await speedBlock();
                 if (i !== j)
                     arr[j].div.style.backgroundColor = "red";
                 await speedBlock();
-            }
-            else {
+            } else {
                 arr[j].div.style.backgroundColor = "red";
                 break;
             }

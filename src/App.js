@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import SortingSpace from './components/SortingSpace'
+import AlgorithmPage from './components/AlgorithmPage';
+import AlgorithmNavigation from "./components/AlgorithmNavigation";
 
 function App() {
+  const [selected, setSelected] = useState("Sorting");
   return (
     <div className="App">
-      <h2 className="heading">Algorithm Visualization</h2>
-      <div className = 'spaceWrapper'>
-      <SortingSpace />
-      </div>
+      <AlgorithmNavigation setSelected={setSelected} />
+      <AlgorithmPage selected={selected}/>
     </div>
   );
 }

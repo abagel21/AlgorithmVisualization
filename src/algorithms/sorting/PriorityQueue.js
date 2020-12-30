@@ -1,6 +1,6 @@
-import copyArr from "../util/copyArr";
-import checkForStop from "../util/checkForStop";
-import speedBlock from "../util/speedBlock";
+import copyArr from "../../util/copyArr";
+import checkForStop from "../../util/checkForStop";
+import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
 class PriorityQueue {
     //UNFINISHED
@@ -36,8 +36,7 @@ class PriorityQueue {
                 i = j;
                 setSortableComponents(copyArr(arr));
                 await speedBlock();
-            }
-            else {
+            } else {
                 break;
             }
             arr[j].div.style.backgroundColor = "red";
