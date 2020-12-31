@@ -67,8 +67,11 @@ const ContentSettings = ({
   return (
     <div className="contentSettings" onSubmit={(e) => onSubmit(e)}>
       <form action="" className="settingsForm">
-        <label className="settingsNumberLabel" htmlFor="#settingsRange">
+        {/* <label className="settingsNumberLabel" htmlFor="#settingsRange">
           Set the number of elements
+        </label> */}
+        <label className="numberLabel" htmlFor="#settingsRange">
+          {sliderValue}
         </label>
         <input
           onChange={(e) => {
@@ -81,9 +84,6 @@ const ContentSettings = ({
           min="3"
           max={Math.floor((window.innerWidth - window.innerWidth * 0.1) / 18)}
         />
-        <label className="numberLabel" htmlFor="#settingsRange">
-          {sliderValue}
-        </label>
         <button className="settingsSubmit" type="submit">
           Submit
         </button>

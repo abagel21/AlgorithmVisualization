@@ -21,13 +21,15 @@ export default async function InsertionSort(arr, setSortableComponents) {
                 if (i === j) {
                     arr[j].div.style.backgroundColor = "black";
                     arr[j - 1].div.style.backgroundColor = "blue";
-                };
+                }
+                ;
                 setSortableComponents(copyArr(arr));
                 await speedBlock();
                 if (i !== j)
                     arr[j].div.style.backgroundColor = "red";
                 await speedBlock();
-            } else {
+            }
+            else {
                 arr[j].div.style.backgroundColor = "red";
                 break;
             }

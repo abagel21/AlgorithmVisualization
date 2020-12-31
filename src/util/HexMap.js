@@ -5,12 +5,13 @@ export default class HexMap {
         this.width = width;
         this.height = height;
         for (let i = 0; i < height; i++) {
-            let temparr = Array.apply(0, Array(width)).map(function() { return 0; });
+            let temparr = Array.apply(0, Array(width)).map(function () { return 0; });
             this.contents.push(temparr);
         }
         if (height % 2 != 0) {
             this.odd = true;
-        } else {
+        }
+        else {
             this.odd = false;
         }
     }
@@ -22,25 +23,26 @@ export default class HexMap {
         let height = this.convertToHeight(c, r);
         this.contents[c][height] = 1;
     }
-    hexInfo(c, r) {
-        let height = this.convertToHeight(c, r);
+    hexInfo(c, height) {
         if (c < 0 || height < 0)
-            return -1;
+            return -2;
         // check the edges if the top level is irregular then check if the hex is out of bounds or a rock for odd cols
-        if (this.odd && c % 2 != 0 && (c >= this.contents.length || height >= this.contents[0].length - 1 || this.contents[c][height] == -1)) {
-            return -1;
+        if (this.odd && c % 2 != 0 && (c >= this.contents.length || height >= this.contents[0].length - 1)) {
+            return -2;
         }
         // if the top level is not irregular or if the top level is irregular but we are looking at even column
-        else if (c >= this.contents.length || height >= this.contents[0].length || this.contents[c][height] == -1) {
-            return -1;
-        } else {
+        else if (c >= this.contents.length || height >= this.contents[0].length) {
+            return -2;
+        }
+        else {
             return this.contents[c][height];
         }
     }
     convertToHeight(c, r) {
         if (c % 2 != 0) {
             return r - (c + 1) / 2;
-        } else {
+        }
+        else {
             return r - c / 2;
         }
     }

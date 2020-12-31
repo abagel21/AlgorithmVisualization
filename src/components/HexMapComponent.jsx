@@ -18,7 +18,7 @@ const HexMapComponent = props => {
         <div className = "hexMapWrapper">
             {map.contents.map((item, i) => {
                 return item.map((hex, j) => {
-                    return (<Hex val = {hex} col={i} height={j} hexes={map} hoffset = {horizontalOffset} mouseIsDown = {mouseIsDown} setMouseDown={setMouseDown} isStart={j == targetHeight ? i == targetStartWidth ? true : false : false} isTarget = {j == targetHeight ? i == targetWidth ? true : false : false}/>)
+                    return (<Hex key={Math.floor((i + j)*(i + j + 1)/2 + j)}val = {hex} col={i} height={j} hexes={map} hoffset = {horizontalOffset} mouseIsDown = {mouseIsDown} setMouseDown={setMouseDown} isStart={j == targetHeight ? i == targetStartWidth ? true : false : false} isTarget = {j == targetHeight ? i == targetWidth ? true : false : false}/>)
                 })
             })}
         </div>

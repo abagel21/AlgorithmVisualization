@@ -60,7 +60,8 @@ async function sink(arr, i, lastIndex, setSortableComponents) {
             i = j;
             setSortableComponents(copyArr(arr));
             await speedBlock();
-        } else {
+        }
+        else {
             arr[j].div.style.backgroundColor = "red";
             break;
         }

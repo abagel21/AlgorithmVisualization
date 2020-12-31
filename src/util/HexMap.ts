@@ -25,8 +25,7 @@ export default class HexMap {
         let height: number = this.convertToHeight(c, r);
         this.contents[c][height] = 1;
     }
-    hexInfo(c:number, r:number) : number {
-        let height: number = this.convertToHeight(c, r);
+    hexInfo(c:number, height:number) : number {
         if(c < 0 || height < 0) return -2;
         // check the edges if the top level is irregular then check if the hex is out of bounds or a rock for odd cols
         if (this.odd && c % 2 != 0 && (c >= this.contents.length || height >= this.contents[0].length - 1)) {

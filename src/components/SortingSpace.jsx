@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SortingGrid from "./SortingGrid";
-import ContentSettings from "./ContentSettings";
 import createSortableComponents from "../util/createSortableComponents";
 import AlgorithmSettings from "./AlgorithmSettings";
 import copyArr from "../util/copyArr";
 
 /* eslint-disable */
 
-const SortingSpace = (props) => {
+const SortingSpace = ({selected}) => {
   useEffect(() => {
     setRenderedArray(createSortableComponents(30));
   }, []);
@@ -39,38 +38,24 @@ const SortingSpace = (props) => {
   };
   return (
     <div className="sortingWrapper">
-      <AlgorithmSettings
-        sortableComponents={renderedArray}
-        setSortableComponents={setRenderedArray}
-        currSelected2 = {currSelected2}
-        setCurrSelected2 = {setCurrSelected2}
-        setAlgInfo = {setAlgInfo}
-      />
-      <div className="stopSorting" data-status = "false" data-visibility = "false" data-reset = "false" onClick={(e) => {
-        if(e.target.dataset.status === "true") {
-          e.target.dataset.status = "false";
-          e.target.textContent = "Stop";
-        } else {
-          e.target.dataset.status = "true";
-          e.target.textContent = "Start";
-        }
-      }}>
-        Stop
+      <div className="topBar" data-status={selected == "Sorting" ? "sortingSettings" : "false"}>
+        <AlgorithmSettings
+          sortableComponents={renderedArray}
+          setSortableComponents={setRenderedArray}
+          currSelected2 = {currSelected2}
+          setCurrSelected2 = {setCurrSelected2}
+          setAlgInfo = {setAlgInfo}
+        />
       </div>
-      <div className="resetSorting" onClick={(e) => handleReset(e)}>
-        Reset
-      </div>
+      
     <div className="algorithmInformation">{algInfo}</div>
-      <SortingGrid
-        sortableComponents={renderedArray}
-        setSortableComponents={setRenderedArray}
-      />
-
-      <ContentSettings
-        setSortableComponents={setRenderedArray}
-        currSelected2 = {currSelected2}
-        sortableComponents={renderedArray}
-      />
+    <div className="flexWrapper">
+        <SortingGrid
+          sortableComponents={renderedArray}
+          setSortableComponents={setRenderedArray}
+          currSelected2={currSelected2}
+        />
+      </div>
     </div>
   );
 };

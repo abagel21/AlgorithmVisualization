@@ -25,7 +25,8 @@ export default async function ShellSort(arr, setSortableComponents) {
                     arr[j - h] = temp;
                     setSortableComponents(copyArr(arr));
                     await speedBlock();
-                } else {
+                }
+                else {
                     break;
                 }
             }

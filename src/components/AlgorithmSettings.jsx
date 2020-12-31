@@ -174,34 +174,26 @@ const AlgorithmSettings = ({
   };
   return (
     <div className="settings">
-      <div className="speedSettings">
-        <label htmlFor="#speedRange" className="speedLabel">
-          Set speed
-        </label>
-        <label className="eighthx sliderLabel" htmlFor="speedRange">
-          1/8x
-        </label>
-        <label className="onex sliderLabel" htmlFor="speedRange">
-          1x
-        </label>
-        <label className="eightx sliderLabel" htmlFor="speedRange">
-          8x
-        </label>
-        <input
-          onChange={(e) => {
-            speedObj.speed = e.target.value;
-            setSliderValue(e.target.value);
-          }}
-          style={{ padding: "0" }}
-          list="tickmarks"
-          className="speedNumber"
-          id="speedRange"
-          type="range"
-          step="6.25"
-        />
+      <div className="dropdown">
+        <p className="dropdownTop">Set Speed</p>
+        <div className="dropdownContent3">
+          <div className="dc3Wrapper">
+            <input
+              onChange={(e) => {
+                speedObj.speed = e.target.value;
+                setSliderValue(e.target.value);
+              }}
+              style={{ padding: "0" }}
+              list="tickmarks"
+              className="speedNumber"
+              id="speedRange"
+              type="range"
+              step="6.25"
+            />
+        </div>
+        </div>
       </div>
       <div className="dropdown">
-        <label className = "dataTypeLabel" htmlFor="dataType">Set Data Type</label>
         <p id = "dataType" className="dropdownTop">{currSelected2}</p>
         <div className="dropdownContent2" onClick={(e) => {}}>
           {[

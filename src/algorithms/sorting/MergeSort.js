@@ -26,7 +26,8 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
         if (i <= mid) {
             arr[i].div.style.backgroundColor = "blue";
             aux[i].div.style.backgroundColor = "blue";
-        } else {
+        }
+        else {
             arr[i].div.style.backgroundColor = "green";
             aux[i].div.style.backgroundColor = "green";
         }
@@ -36,11 +37,14 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
             return null;
         if (i > mid) {
             arr[n] = aux[j++];
-        } else if (j > hi) {
+        }
+        else if (j > hi) {
             arr[n] = aux[i++];
-        } else if (aux[j].value < aux[i].value) {
+        }
+        else if (aux[j].value < aux[i].value) {
             arr[n] = aux[j++];
-        } else {
+        }
+        else {
             arr[n] = aux[i++];
         }
         setSortableComponents(copyArr(arr));

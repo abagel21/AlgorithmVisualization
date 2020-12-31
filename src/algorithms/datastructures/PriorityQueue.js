@@ -36,7 +36,8 @@ class PriorityQueue {
                 i = j;
                 setSortableComponents(copyArr(arr));
                 await speedBlock();
-            } else {
+            }
+            else {
                 break;
             }
             arr[j].div.style.backgroundColor = "red";

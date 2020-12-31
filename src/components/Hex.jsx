@@ -12,7 +12,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
     } else {
         offset = hexHeight;
     }
-    let topMargin = offset + (height) * (hexHeight);
+    let topMargin = 50 + offset + (height) * (hexHeight);
 
     let hexClickHandler = (e) => {
         if(isStart || isTarget) return;

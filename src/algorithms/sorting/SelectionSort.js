@@ -23,7 +23,8 @@ export default async function SelectionSort(arr, setSortableComponents) {
                 }
                 min = i;
                 arr[min].div.style.backgroundColor = "green";
-            } else {
+            }
+            else {
                 arr[i].div.style.backgroundColor = "red";
             }
         }

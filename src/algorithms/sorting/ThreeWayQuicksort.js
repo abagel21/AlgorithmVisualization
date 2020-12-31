@@ -65,14 +65,16 @@ async function threeWayQuicksort(arr, lo, hi, setSortableComponents) {
             // arr[lo].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
             await speedBlock();
-        } else if (arr[pointer].value > arr[lo].value) {
+        }
+        else if (arr[pointer].value > arr[lo].value) {
             let temp = arr[pointer];
             arr[pointer] = arr[hi];
             arr[hi] = temp;
             hi--;
             setSortableComponents(copyArr(arr));
             await speedBlock();
-        } else {
+        }
+        else {
             pointer++;
             await speedBlock();
         }
