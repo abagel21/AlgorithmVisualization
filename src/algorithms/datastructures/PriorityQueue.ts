@@ -18,7 +18,7 @@ class PriorityQueue {
       arr[lastIndex] = arr[0];
       arr[0] = temp;
       setSortableComponents(copyArr(arr));
-      await speedBlock();
+      await speedBlock("Sorting");
       await this.sink(
         arr,
         0,
@@ -38,7 +38,7 @@ class PriorityQueue {
     ) {
       //if aux[i] is less than the lower node on the tree, swap
       while (2 * (i + 1) - 1 < lastIndex) {
-        if(await checkForStop()) return null;
+        if(await checkForStop("Sorting")) return null;
         let j = 2 * (i + 1) - 1;
         arr[j].div.style.backgroundColor = "blue";
         setSortableComponents(copyArr(arr));
@@ -50,13 +50,13 @@ class PriorityQueue {
           arr[i].div.style.backgroundColor = "blue";
           i = j;
           setSortableComponents(copyArr(arr));
-          await speedBlock();
+          await speedBlock("Sorting");
         } else {
           break;
         }
         arr[j].div.style.backgroundColor = "red"
         setSortableComponents(copyArr(arr));
-          await speedBlock();
+          await speedBlock("Sorting");
       }
       return i;
     }
@@ -68,14 +68,14 @@ class PriorityQueue {
     ) {
       //if aux[i] is more than the higher node on the tree, swap
       while (i > 1 && aux[i].value > aux[Math.floor(i / 2)].value) {
-        if(await checkForStop()) return null;
+        if(await checkForStop("Sorting")) return null;
         let j = Math.floor(i / 2);
         let temp: SortableComponent = aux[i];
         aux[i] = aux[j];
         aux[j] = temp;
         i = j;
         setSortableComponents(copyArr(aux));
-        await speedBlock();
+        await speedBlock("Sorting");
       }
     }
     

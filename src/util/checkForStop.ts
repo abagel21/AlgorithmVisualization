@@ -1,20 +1,20 @@
 //Checks if the function has been paused
-function getStop() {
-    const stop = document.querySelector(".stopSorting")! as HTMLDivElement;
+function getStop(str:string) {
+    const stop = document.querySelector(`.stop${str}`)! as HTMLDivElement;
     return stop.dataset.status === "true";
   }
   //checks if the data has been reset or replaced
-  function getOtherStop() {
-    const stop = document.querySelector(".stopSorting")! as HTMLDivElement;
+  function getOtherStop(str:string) {
+    const stop = document.querySelector(`.stop${str}`)! as HTMLDivElement;
     return stop.dataset.reset === "true";
   }
 //checks both stopping functions and interrupts/ends the function if necessary
-  export default async function checkForStop() {
-    if (getOtherStop()) {
+  export default async function checkForStop(str:string) {
+    if (getOtherStop(str)) {
       console.log("TRUE")
       return true;
     }
-    while (getStop()) {
+    while (getStop(str)) {
         await new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve(false);

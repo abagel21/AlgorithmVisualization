@@ -5,15 +5,15 @@ import speedBlock from "../../util/speedBlock";
 export default async function InsertionSort(arr, setSortableComponents) {
     for (let i = 0; i < arr.length; i++) {
         arr[i].div.style.backgroundColor = "black";
-        await speedBlock();
+        await speedBlock("Sorting");
         for (let j = i; j > 0; j--) {
             //stop condition for pausing
-            if (await checkForStop())
+            if (await checkForStop("Sorting"))
                 return null;
             if (i !== j)
                 arr[j].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
             if (arr[j].value < arr[j - 1].value) {
                 let temp = arr[j];
                 arr[j] = arr[j - 1];
@@ -24,10 +24,10 @@ export default async function InsertionSort(arr, setSortableComponents) {
                 }
                 ;
                 setSortableComponents(copyArr(arr));
-                await speedBlock();
+                await speedBlock("Sorting");
                 if (i !== j)
                     arr[j].div.style.backgroundColor = "red";
-                await speedBlock();
+                await speedBlock("Sorting");
             }
             else {
                 arr[j].div.style.backgroundColor = "red";

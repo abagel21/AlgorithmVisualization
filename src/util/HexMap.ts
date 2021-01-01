@@ -28,9 +28,9 @@ export default class HexMap {
     hexInfo(c:number, height:number) : number {
         if(c < 0 || height < 0) return -2;
         // check the edges if the top level is irregular then check if the hex is out of bounds or a rock for odd cols
-        if (this.odd && c % 2 != 0 && (c >= this.contents.length || height >= this.contents[0].length - 1)) {
-            return -2;
-        }
+        // if (this.odd && c % 2 != 0 && (c >= this.contents.length || height >= this.contents[0].length - 1)) {
+        //     return -2;
+        // }
         // if the top level is not irregular or if the top level is irregular but we are looking at even column
         else if (c >= this.contents.length || height >= this.contents[0].length) {
             return -2;
@@ -44,6 +44,13 @@ export default class HexMap {
             return r - (c + 1)/2;
         } else {
             return r - c / 2
+        }
+    }
+    convertToRow(c:number, height:number) {
+        if(c%2 != 0) {
+            return height + (c + 1)/2;
+        } else {
+            return height + c/2;
         }
     }
 }

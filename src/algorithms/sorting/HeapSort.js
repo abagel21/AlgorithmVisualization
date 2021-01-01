@@ -5,21 +5,21 @@ import speedBlock from "../../util/speedBlock";
 export default async function HeapSort(arr, setSortableComponents) {
     //construct a binary heap from the data from the bottom up
     for (let i = Math.floor((arr.length - 1) / 2); i >= 0; i--) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         arr[i].div.style.backgroundColor = "purple";
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
         let x = (await sink(arr, i, arr.length, setSortableComponents));
         arr[i].div.style.backgroundColor = "red";
         arr[x].div.style.backgroundColor = "red";
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
     }
     console.log(isHeap(arr, 0, arr.length - 1));
     //pop the minimum repeatedly and enqueue it onto the end of the pq
     for (let i = arr.length - 1; i > 0; i--) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         await pop(arr, i, setSortableComponents);
     }
@@ -35,7 +35,7 @@ async function pop(arr, lastIndex, setSortableComponents) {
     assert(otherTemp.value === arr[lastIndex].value);
     assert(temp.value === arr[0].value);
     setSortableComponents(copyArr(arr));
-    await speedBlock();
+    await speedBlock("Sorting");
     await sink(arr, 0, lastIndex, setSortableComponents);
     arr[lastIndex].div.style.backgroundColor = "red";
     arr[0].div.style.backgroundColor = "red";
@@ -44,7 +44,7 @@ async function pop(arr, lastIndex, setSortableComponents) {
 async function sink(arr, i, lastIndex, setSortableComponents) {
     //if aux[i] is less than the lower node on the tree, swap
     while (2 * (i + 1) - 1 < lastIndex) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         arr[i].div.style.backgroundColor = "purple";
         let j = 2 * (i + 1) - 1;
@@ -59,14 +59,14 @@ async function sink(arr, i, lastIndex, setSortableComponents) {
             arr[i].div.style.backgroundColor = "red";
             i = j;
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
         }
         else {
             arr[j].div.style.backgroundColor = "red";
             break;
         }
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
     }
     arr[i].div.style.backgroundColor = "red";
     return i;

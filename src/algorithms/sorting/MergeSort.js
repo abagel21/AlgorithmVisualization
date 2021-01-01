@@ -3,7 +3,7 @@ import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
 export default async function MergeSort(arr, setSortableComponents) {
-    if (await checkForStop())
+    if (await checkForStop("Sorting"))
         return null;
     const aux = copyArr(arr);
     await sort(arr, aux, 0, arr.length - 1, setSortableComponents);
@@ -33,7 +33,7 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
         }
     }
     for (let n = lo; n <= hi; n++) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         if (i > mid) {
             arr[n] = aux[j++];
@@ -48,7 +48,7 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
             arr[n] = aux[i++];
         }
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
     }
     arr[mid].div.style.backgroundColor = "red";
     for (let i = lo; i <= hi; i++) {
@@ -56,19 +56,19 @@ async function merge(arr, aux, lo, mid, hi, setSortableComponents) {
         aux[i].div.style.backgroundColor = "red";
     }
     setSortableComponents(copyArr(arr));
-    await speedBlock();
+    await speedBlock("Sorting");
 }
 async function sort(arr, aux, i, j, setSortableComponents) {
     if (j <= i) {
         return;
     }
-    if (await checkForStop())
+    if (await checkForStop("Sorting"))
         return null;
     await sort(arr, aux, i, Math.floor(i + (j - i) / 2), setSortableComponents);
-    if (await checkForStop())
+    if (await checkForStop("Sorting"))
         return null;
     await sort(arr, aux, Math.floor(i + (j - i) / 2) + 1, j, setSortableComponents);
-    if (await checkForStop())
+    if (await checkForStop("Sorting"))
         return null;
     await merge(arr, aux, i, Math.floor(i + (j - i) / 2), j, setSortableComponents);
 }

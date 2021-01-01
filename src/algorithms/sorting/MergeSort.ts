@@ -7,7 +7,7 @@ export default async function MergeSort(
   arr: SortableComponent[],
   setSortableComponents: any
 ) {
-  if(await checkForStop()) return null;
+  if(await checkForStop("Sorting")) return null;
   const aux: SortableComponent[] = copyArr(arr);
   await sort(
     arr,
@@ -49,7 +49,7 @@ for(let i = lo; i <= hi; i++) {
     }
   }
   for (let n = lo; n <= hi; n++) {
-    if(await checkForStop()) return null;
+    if(await checkForStop("Sorting")) return null;
     if (i > mid){ 
         arr[n] = aux[j++];
     }
@@ -63,7 +63,7 @@ for(let i = lo; i <= hi; i++) {
          arr[n] = aux[i++];
         }
     setSortableComponents(copyArr(arr));
-    await speedBlock();
+    await speedBlock("Sorting");
   }
   arr[mid].div.style.backgroundColor = "red";
   for (let i = lo; i <= hi; i++) {
@@ -71,7 +71,7 @@ for(let i = lo; i <= hi; i++) {
     aux[i].div.style.backgroundColor = "red";
   }
   setSortableComponents(copyArr(arr));
-  await speedBlock();
+  await speedBlock("Sorting");
 }
 
 async function sort(
@@ -86,7 +86,7 @@ async function sort(
     return;
   }
 
-  if(await checkForStop()) return null;
+  if(await checkForStop("Sorting")) return null;
 
   await sort(
     arr,
@@ -96,7 +96,7 @@ async function sort(
     setSortableComponents
   );
 
-  if(await checkForStop()) return null;
+  if(await checkForStop("Sorting")) return null;
 
   await sort(
     arr,
@@ -106,7 +106,7 @@ async function sort(
     setSortableComponents
   );
 
-  if(await checkForStop()) return null;
+  if(await checkForStop("Sorting")) return null;
   await merge(
     arr,
     aux,

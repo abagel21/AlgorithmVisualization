@@ -1,6 +1,6 @@
 //calculates the speed value in milliseconds based on the range input
-const getSpeed = () => {
-    let speedEl = document.querySelector(".speedNumber")! as HTMLInputElement;
+const getSpeed = (str:string) => {
+    let speedEl = document.querySelector(`.speed${str}`)! as HTMLInputElement;
     let speed = (Number)(speedEl.value) / 6.25;
     return speed < 8
       ? 25 * (8 - speed)
@@ -9,10 +9,10 @@ const getSpeed = () => {
       : (12.5 * 1) / (speed - 8);
   };
 //pauses the function for the requisite milliseconds
-export default async function speedBlock() {
+export default async function speedBlock(str:string) {
   await new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(null);
-    }, getSpeed());
+    }, getSpeed(str));
   });
 }

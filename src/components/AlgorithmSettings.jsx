@@ -27,9 +27,6 @@ const AlgorithmSettings = ({
     setValue.value = 1;
   }, [setValue]);
   const [sliderValue, setSliderValue] = useState(50);
-  let speedObj = {
-    speed: sliderValue,
-  };
   const [currSelected, setCurrSelected] = useState("Select algorithm");
   const handleDataType = async (txt) => {
     setCurrSelected2(txt);
@@ -180,12 +177,11 @@ const AlgorithmSettings = ({
           <div className="dc3Wrapper">
             <input
               onChange={(e) => {
-                speedObj.speed = e.target.value;
                 setSliderValue(e.target.value);
               }}
               style={{ padding: "0" }}
               list="tickmarks"
-              className="speedNumber"
+              className="speedSorting"
               id="speedRange"
               type="range"
               step="6.25"

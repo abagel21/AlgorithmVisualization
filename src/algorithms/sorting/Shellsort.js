@@ -12,19 +12,19 @@ export default async function ShellSort(arr, setSortableComponents) {
             }
             arr[i].div.style.backgroundColor = "black";
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
             for (let j = i; j >= h; j = j - h) {
-                if (await checkForStop()) {
+                if (await checkForStop("Sorting")) {
                     return null;
                 }
                 setSortableComponents(copyArr(arr));
-                await speedBlock();
+                await speedBlock("Sorting");
                 if (arr[j].value < arr[j - h].value) {
                     let temp = arr[j];
                     arr[j] = arr[j - h];
                     arr[j - h] = temp;
                     setSortableComponents(copyArr(arr));
-                    await speedBlock();
+                    await speedBlock("Sorting");
                 }
                 else {
                     break;
@@ -35,7 +35,7 @@ export default async function ShellSort(arr, setSortableComponents) {
             }
             arr[i].div.style.backgroundColor = "red";
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
         }
         arr[0].div.style.backgroundColor = "red";
         h = Math.floor(h / 3);

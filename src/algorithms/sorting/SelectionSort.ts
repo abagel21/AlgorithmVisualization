@@ -17,14 +17,14 @@ export default async function SelectionSort(
     let min: number = pointer;
     arr[pointer].div.style.backgroundColor = "black";
     setSortableComponents(copyArr(arr));
-    await speedBlock();
+    await speedBlock("Sorting");
     for (let i = pointer + 1; i < arr.length; i++) {
-      if(await checkForStop()) {
+      if(await checkForStop("Sorting")) {
         return null;
       }
       arr[i].div.style.backgroundColor = "blue";
       setSortableComponents(copyArr(arr));
-      await speedBlock();
+      await speedBlock("Sorting");
       if (arr[i].value < arr[min].value) {
         if (min !== pointer) {
           arr[min].div.style.backgroundColor = "red";
@@ -39,7 +39,7 @@ export default async function SelectionSort(
     arr[min] = arr[pointer];
     arr[pointer] = temp;
     setSortableComponents(copyArr(arr));
-    await speedBlock();
+    await speedBlock("Sorting");
     arr[min].div.style.backgroundColor = "red";
     arr[pointer].div.style.backgroundColor = "red";
   }

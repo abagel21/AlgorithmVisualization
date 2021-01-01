@@ -3,7 +3,7 @@ import HexMap from '../util/HexMap'
 import Hex from "./Hex.jsx"
 import PropTypes from 'prop-types'
 
-const HexMapComponent = props => {
+const HexMapComponent = ({startCol, startHeight, map}) => {
     let [mouseIsDown, setMouseDown] = useState("false");
     let hexHor = Math.floor((window.innerWidth - 20) / (56 * .75) - 1)
     let hexVert = Math.floor((window.innerHeight - 222) / (48) );
@@ -11,9 +11,6 @@ const HexMapComponent = props => {
     let targetHeight = Math.floor((hexVert + 1)/2) - 1;
     let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
     let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
-    let [map, setMap] = useState(new HexMap(hexVert, hexHor))
-    map.contents[targetWidth][targetHeight] = -100;
-    map.contents[targetStartWidth][targetHeight] = 100;
     return (
         <div className = "hexMapWrapper">
             {map.contents.map((item, i) => {

@@ -6,20 +6,20 @@ export default async function Quicksort(arr, setSortableComponents) {
     const info = document.querySelector(".algorithmInformation");
     info.style.visibility = "visible";
     for (let i = 0; i < arr.length - 1; i++) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         arr[i].div.style.backgroundColor = "black";
         let j = Math.floor(Math.random() * (arr.length - i)) + i;
         arr[j].div.style.backgroundColor = "blue";
-        await speedBlock();
+        await speedBlock("Sorting");
         let temp = arr[j];
         arr[j] = arr[i];
         arr[i] = temp;
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
         arr[i].div.style.backgroundColor = "red";
         arr[j].div.style.backgroundColor = "red";
-        await speedBlock();
+        await speedBlock("Sorting");
     }
     //setting info div to invisible
     info.style.visibility = "hidden";
@@ -37,7 +37,7 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
     arr[pointer].div.style.backgroundColor = "purple";
     setSortableComponents(copyArr(arr));
     while (hi !== lo) {
-        if (await checkForStop())
+        if (await checkForStop("Sorting"))
             return null;
         for (let i = originalLo; i <= originalHi; i++) {
             if (i === hi)
@@ -52,10 +52,10 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
         // arr[pointer].div.style.backgroundColor = "purple";
         // arr[hi].div.style.backgroundColor = "green";
         // arr[lo].div.style.backgroundColor = "blue";
-        await speedBlock();
+        await speedBlock("Sorting");
         //incrementing lo while the value at lo is less than the value at pointer
         while (arr[lo].value < arr[pointer].value) {
-            if (await checkForStop())
+            if (await checkForStop("Sorting"))
                 return null;
             if (hi === lo)
                 break;
@@ -67,11 +67,11 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
                 arr[lo - 1].div.style.backgroundColor = "black";
             arr[lo].div.style.backgroundColor = "blue";
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
         }
         //incrementing hi while the value at hi is greater than the value at pointer
         while (arr[hi].value > arr[pointer].value) {
-            if (await checkForStop())
+            if (await checkForStop("Sorting"))
                 return null;
             if (hi === lo)
                 break;
@@ -80,7 +80,7 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
             arr[hi + 1].div.style.backgroundColor = "black";
             arr[hi].div.style.backgroundColor = "green";
             setSortableComponents(copyArr(arr));
-            await speedBlock();
+            await speedBlock("Sorting");
         }
         //swapping the two "erroneous" values
         let temp = arr[lo];
@@ -90,7 +90,7 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
         arr[lo].div.style.backgroundColor = "black";
         arr[hi].div.style.backgroundColor = "black";
         setSortableComponents(copyArr(arr));
-        await speedBlock();
+        await speedBlock("Sorting");
     }
     if (arr[hi].value > arr[pointer].value) {
         hi--;
@@ -107,11 +107,11 @@ async function quicksort(arr, lo, hi, setSortableComponents) {
     }
     arr[pointer].div.style.backgroundColor = "red";
     setSortableComponents(copyArr(arr));
-    await speedBlock();
-    if (await checkForStop())
+    await speedBlock("Sorting");
+    if (await checkForStop("Sorting"))
         return null;
     await quicksort(arr, originalLo, hi - 1, setSortableComponents);
-    if (await checkForStop())
+    if (await checkForStop("Sorting"))
         return null;
     await quicksort(arr, hi + 1, originalHi, setSortableComponents);
 }
