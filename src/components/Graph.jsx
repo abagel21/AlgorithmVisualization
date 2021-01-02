@@ -25,6 +25,14 @@ const Graph = ({selected}) => {
      let targetHeight = Math.floor((hexVert + 1)/2) - 1;
      let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
      let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
+     console.log(targetStartWidth);
+     console.log(targetWidth);
+     console.log(targetStartWidth%2);
+     console.log(targetWidth%2);
+     if(targetStartWidth%2 != targetWidth%2) {
+         console.log("changing from " + targetWidth + " to " + (targetWidth - 1));
+        targetWidth++;
+    }
      const [startCol, setCol] = useState(targetStartWidth);
      const [startHeight, setHeight] = useState(targetHeight)
      const [goalWidth, setGoalWidth] = useState(targetWidth);
@@ -60,12 +68,6 @@ const Graph = ({selected}) => {
                 // DFS
               );
             });
-            stop.dataset.visibility = "false";
-            graphButton.dataset.visibility="true";
-            sizeToggle.readonly = false;
-            sizeTop.style.backgroundColor = "white"
-            reset.readonly = false;
-            reset.style.backgroundColor = "#eee"
             break;
             case "BFS":
                 console.log("bfs")
@@ -74,12 +76,6 @@ const Graph = ({selected}) => {
                     BreadthFirst(hexMap, startCol, startHeight)
                   );
                 });
-                stop.dataset.visibility = "false";
-                graphButton.dataset.visibility="true";
-                sizeToggle.readonly = false;
-                sizeTop.style.backgroundColor = "white"
-                reset.readonly = false;
-                reset.style.backgroundColor = "#eee"
                 break;
             case "Dijkstra's":
                 res = await new Promise((resolve, reject) => {
@@ -87,12 +83,6 @@ const Graph = ({selected}) => {
                     // Dijkstra's
                     );
                 });
-                stop.dataset.visibility = "false";
-                graphButton.dataset.visibility="true";
-                sizeToggle.readonly = false;
-                sizeTop.style.backgroundColor = "white"
-                reset.readonly = false;
-                reset.style.backgroundColor = "#eee"
                 break;
             case "A* Search":
                 res = await new Promise((resolve, reject) => {
@@ -100,16 +90,17 @@ const Graph = ({selected}) => {
                     // A* Search
                     );
                 });
-                stop.dataset.visibility = "false";
-                graphButton.dataset.visibility="true";
-                sizeToggle.readonly = false;
-                sizeTop.style.backgroundColor = "white"
-                reset.readonly = false;
-                reset.style.backgroundColor = "#eee"
                 break;
           default:
-            return;
+              
+            break;
         }
+        stop.dataset.visibility = "false";
+        graphButton.dataset.visibility="true";
+        sizeToggle.readonly = false;
+        sizeTop.style.backgroundColor = "white"
+        reset.readonly = false;
+        reset.style.backgroundColor = "#eee"
       };
 
       // sets the minimum value of the resizing slider
@@ -172,6 +163,9 @@ const Graph = ({selected}) => {
                                 let targetHeight = Math.floor((hexVert + 1)/2) - 1;
                                 let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
                                 let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
+                                if(targetStartWidth%2 != targetWidth%2) {
+                                    targetWidth++;
+                                }
                                 setGoalWidth(targetWidth);
                                 setCol(targetStartWidth);
                                 setHeight(targetHeight)
@@ -246,7 +240,7 @@ const Graph = ({selected}) => {
               </div>
             </div>
         </div>
-            <HexMapComponent startCol={startCol} startHeight={startHeight} map={hexMap} sizeValue={sizeValue} />
+            <HexMapComponent startCol={startCol} startHeight={startHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} />
         </div>
     )
 }
