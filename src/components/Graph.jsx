@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react'
 import HexMapComponent from "./HexMapComponent";
 import PropTypes from 'prop-types'
 import BreadthFirst from "../algorithms/graph/BreadthFirst"
+import DepthFirst from "../algorithms/graph/DepthFirst"
 import HexMap from '../util/HexMap'
 import {clearAll, clearAlgorithm} from '../util/BFSClear'
 
@@ -61,7 +62,7 @@ const Graph = ({selected}) => {
           case "DFS":
             res = await new Promise((resolve, reject) => {
               resolve(
-                // DFS
+                DepthFirst(hexMap, startCol, startHeight)
               );
             });
             break;

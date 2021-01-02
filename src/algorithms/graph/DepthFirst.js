@@ -1,12 +1,12 @@
-import Queue from "../datastructures/Queue";
+import Stack from "../datastructures/Stack";
 import Coordinate from "../datastructures/Coordinate";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
 export default async function BreadthFirst(hexes, startCol, startHeight) {
     console.log("bfs called");
-    let q = new Queue();
+    let q = new Stack();
     let root = new Coordinate(startCol, startHeight, null);
-    q.enqueue(root);
+    q.push(root);
     while (!q.isEmpty()) {
         await checkForStop("Graphing");
         let node = q.pop();
@@ -24,20 +24,20 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
         if (hexInfo != 100)
             hex.classList.add("visited_hex");
         if (col % 2 == 0) {
-            q.enqueue(new Coordinate(col, height - 1, node));
-            q.enqueue(new Coordinate(col + 1, height, node));
-            q.enqueue(new Coordinate(col + 1, height + 1, node));
-            q.enqueue(new Coordinate(col, height + 1, node));
-            q.enqueue(new Coordinate(col - 1, height + 1, node));
-            q.enqueue(new Coordinate(col - 1, height, node));
+            q.push(new Coordinate(col, height - 1, node));
+            q.push(new Coordinate(col + 1, height, node));
+            q.push(new Coordinate(col + 1, height + 1, node));
+            q.push(new Coordinate(col, height + 1, node));
+            q.push(new Coordinate(col - 1, height + 1, node));
+            q.push(new Coordinate(col - 1, height, node));
         }
         else {
-            q.enqueue(new Coordinate(col, height - 1, node));
-            q.enqueue(new Coordinate(col + 1, height - 1, node));
-            q.enqueue(new Coordinate(col + 1, height, node));
-            q.enqueue(new Coordinate(col, height + 1, node));
-            q.enqueue(new Coordinate(col - 1, height, node));
-            q.enqueue(new Coordinate(col - 1, height - 1, node));
+            q.push(new Coordinate(col, height - 1, node));
+            q.push(new Coordinate(col + 1, height - 1, node));
+            q.push(new Coordinate(col + 1, height, node));
+            q.push(new Coordinate(col, height + 1, node));
+            q.push(new Coordinate(col - 1, height, node));
+            q.push(new Coordinate(col - 1, height - 1, node));
         }
         await speedBlock("Graph");
     }
@@ -46,7 +46,6 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
             resolve(null);
         }, 250);
     });
-    // root = root!.prev;
     while (root.prev != null) {
         let col = root.col;
         let height = root.height;

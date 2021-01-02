@@ -1,7 +1,7 @@
 import Queue from "../algorithms/datastructures/Queue";
 import Coordinate from "../algorithms/datastructures/Coordinate";
 export async function clearAll(hexes, startCol, startHeight) {
-    console.log("bfs clearALl called");
+    console.log("bfs clearAll called");
     let q = new Queue();
     let root = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
@@ -17,18 +17,18 @@ export async function clearAll(hexes, startCol, startHeight) {
         let hexInfo = hexes.hexInfo(col, height);
         if (hexInfo == -2 || visited[col][height] == 1)
             continue;
-        if(hexInfo != 100 && hexInfo != -100) {
+        if (hexInfo != 100 && hexInfo != -100) {
+            console.log(hexInfo);
             hexes.contents[col][height] = 0;
         }
         visited[col][height] = 1;
         let hex = document.querySelector(`.hex-${col}-${height}`);
-        hex.classList.remove("visited_hex");
+        if (hexInfo != 100)
+            hex.classList.remove("visited_hex");
         if (hex.classList.contains("shortestPath"))
             hex.classList.remove("shortestPath");
-        if(hex.children[0].classList.contains("wall")) {
-            hex.children[0].classList.remove("wall")
-            hexes.contents[col][height] = 0;
-        }
+        if (hex.children[0].classList.contains("wall"))
+            hex.children[0].classList.remove("wall");
         if (col % 2 == 0) {
             q.enqueue(new Coordinate(col, height - 1, node));
             q.enqueue(new Coordinate(col + 1, height, node));
