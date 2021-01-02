@@ -136,9 +136,17 @@ const Graph = ({selected}) => {
         <div>
             <div className="topBar" data-status={selected == "Graphs" ? "graphSettings" : "false"}>
                 <div className="graphSettings">
-                <div className="resetGraphing" onClick={(e) => handleReset(e)}>
-                Reset
-              </div>
+              <div className="dropdownSmall">
+                    <p className="dropdownTop resetGraphing">Reset</p>
+                    <div className="dropdownContent7">
+                        <p onClick={(e) => clearAlgorithm(hexMap, startCol, startHeight)}>
+                            Path
+                        </p>
+                        <p onClick={(e) => clearAll(hexMap, startCol, startHeight)}>
+                            All
+                        </p>
+                    </div>
+                </div>
                 <div className="dropdown">
                     <p className="dropdownTop size">Set Size</p>
                     <div className="dropdownContent6">

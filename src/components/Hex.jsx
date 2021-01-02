@@ -22,7 +22,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         setMouseDown("true")
         let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
         if(hexes.contents[col][height] == 0) {
-            console.log("THIS WASN't A WALL")
             hexes.contents[col][height] = -1;
             innerHex.classList.add("wall");
         } else if(hexes.contents[col][height] == -1) {
@@ -37,7 +36,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         if(mouseIsDown=="true") {
             let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
             if(hexes.contents[col][height] == 0) {
-                console.log("THIS WASN't A WALL")
                 hexes.contents[col][height] = -1;
                 innerHex.classList.add("wall");
             } else if(hexes.contents[col][height] == -1) {
