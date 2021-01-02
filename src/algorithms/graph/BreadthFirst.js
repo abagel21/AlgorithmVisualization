@@ -1,7 +1,7 @@
 import Queue from "../datastructures/Queue";
 import Coordinate from "../datastructures/Coordinate";
+import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
-import checkForStop from "../../util/checkForStop"
 export default async function BreadthFirst(hexes, startCol, startHeight) {
     console.log("bfs called");
     let q = new Queue();
@@ -45,7 +45,7 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
     await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(null);
-        }, 500);
+        }, 250);
     });
     while (root.prev != null) {
         let col = root.col;
