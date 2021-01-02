@@ -10,12 +10,11 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
     let root:Coordinate = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
     while(!q.isEmpty()) {
-        // checkForStop("Graph");
+        await checkForStop("Graphing");
         let node:Coordinate = q.pop();
         let col = node.col;
         let height = node.height;
         let hexInfo = hexes.hexInfo(col, height)
-        console.log(hexInfo);
         if(hexInfo == -100){
             root = node;
             break;
@@ -44,7 +43,7 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
     await new Promise((resolve, reject) => {
         setTimeout(() => {
         resolve(null);
-    }, 500)});
+    }, 250)});
     while(root.prev != null) {
         let col:number = root.col;
         let height:number = root.height;

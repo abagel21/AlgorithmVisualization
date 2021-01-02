@@ -1,6 +1,7 @@
 import Queue from "../datastructures/Queue";
 import Coordinate from "../datastructures/Coordinate";
 import speedBlock from "../../util/speedBlock";
+import checkForStop from "../../util/checkForStop"
 export default async function BreadthFirst(hexes, startCol, startHeight) {
     console.log("bfs called");
     let q = new Queue();
@@ -8,12 +9,11 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
     let root = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
     while (!q.isEmpty()) {
-        // checkForStop("Graph");
+        await checkForStop("Graphing");
         let node = q.pop();
         let col = node.col;
         let height = node.height;
         let hexInfo = hexes.hexInfo(col, height);
-        console.log(hexInfo);
         if (hexInfo == -100) {
             root = node;
             break;

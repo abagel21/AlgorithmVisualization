@@ -27,7 +27,7 @@ const AlgorithmSettings = ({
     setValue.value = 1;
   }, [setValue]);
   const [sliderValue, setSliderValue] = useState(50);
-  const [currSelected, setCurrSelected] = useState("Select algorithm");
+  const [currSelected, setCurrSelected] = useState("Algorithm");
   const handleDataType = async (txt) => {
     setCurrSelected2(txt);
     switch (txt) {

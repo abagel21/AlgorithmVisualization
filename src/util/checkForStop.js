@@ -11,7 +11,6 @@ function getOtherStop(str) {
 //checks both stopping functions and interrupts/ends the function if necessary
 export default async function checkForStop(str) {
     if (getOtherStop(str)) {
-        console.log("TRUE");
         return true;
     }
     while (getStop(str)) {
