@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
 const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isStart, isTarget, sizeValue}) => {
-    let [hexClass, setClass] = useState("innerHex")
     let hexWidth = 28 * sizeValue;
     let hexH = 24 * sizeValue;
     let hexSize = hexWidth/2
@@ -21,12 +20,14 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         if(isStart || isTarget) return;
         e.preventDefault();
         setMouseDown("true")
+        let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
         if(hexes.contents[col][height] == 0) {
+            console.log("THIS WASN't A WALL")
             hexes.contents[col][height] = -1;
-            setClass("innerHex wall")
+            innerHex.classList.add("wall");
         } else if(hexes.contents[col][height] == -1) {
             hexes.contents[col][height] = 0;
-            setClass("innerHex")
+            innerHex.classList.remove("wall");
         }
     }
     // for adding weight or walls when dragging
@@ -34,12 +35,14 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         if(isStart || isTarget) return;
         e.preventDefault();
         if(mouseIsDown=="true") {
+            let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
             if(hexes.contents[col][height] == 0) {
+                console.log("THIS WASN't A WALL")
                 hexes.contents[col][height] = -1;
-                setClass("innerHex wall")
+                innerHex.classList.add("wall");
             } else if(hexes.contents[col][height] == -1) {
                 hexes.contents[col][height] = 0;
-                setClass("innerHex")
+                innerHex.classList.remove("wall");
             }
         }
     }
@@ -50,11 +53,9 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         setMouseDown("false")
     }
 
-    console.log("rerendered");
-
     return (
-        <div className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
-            <div className={hexClass} onMouseDown={e => hexClickHandler(e)}></div>
+        <div data-hexInfo={hexes.contents[col][height]}className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
+            <div className={`innerHex`} onMouseDown={e => hexClickHandler(e)}></div>
         </div>
     )
 }

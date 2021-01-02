@@ -3,7 +3,7 @@ import HexMapComponent from "./HexMapComponent";
 import PropTypes from 'prop-types'
 import BreadthFirst from "../algorithms/graph/BreadthFirst"
 import HexMap from '../util/HexMap'
-import BFSClear from '../util/BFSClear'
+import {clearAll, clearAlgorithm} from '../util/BFSClear'
 
 const Graph = ({selected}) => {
     //TODO hex pause, play, moveable hexes, other algs, maze algorithms
@@ -27,7 +27,6 @@ const Graph = ({selected}) => {
      let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
      let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
      if(targetStartWidth%2 != targetWidth%2) {
-         console.log("changing from " + targetWidth + " to " + (targetWidth - 1));
         targetWidth++;
     }
      const [startCol, setCol] = useState(targetStartWidth);
@@ -131,7 +130,7 @@ const Graph = ({selected}) => {
         const stop = document.querySelector(".stopGraphing")
         if(stop.dataset.visibility == "true" && stop.dataset.status != "true") return;
         console.log("reset");
-        BFSClear(hexMap, startCol, startHeight);
+        clearAll(hexMap, startCol, startHeight);
     }
     return (
         <div>
@@ -149,6 +148,8 @@ const Graph = ({selected}) => {
                                 if(e.target.readonly) {
                                     return;
                                 }
+                                clearAlgorithm(hexMap, startCol, startHeight);
+                                clearAll(hexMap, startCol, startHeight);
                                 // recalculate core state when size is changed
                                 setSizeValue(e.target.value);
                                 let hexWidth = 28 * sizeRef.current;

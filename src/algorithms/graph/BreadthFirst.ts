@@ -7,7 +7,7 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
     console.log("bfs called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();
     // let startRow = hexes.convertToRow(startCol, startHeight);
-    let root:Coordinate = new Coordinate(startCol, startHeight, null);
+    let root:Coordinate|null = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
     while(!q.isEmpty()) {
         await checkForStop("Graphing");
@@ -44,12 +44,13 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
         setTimeout(() => {
         resolve(null);
     }, 250)});
-    while(root.prev != null) {
-        let col:number = root.col;
-        let height:number = root.height;
+    // root = root!.prev;
+    while(root!.prev != null) {
+        let col:number = root!.col;
+        let height:number = root!.height;
         let hex:Element|null = document.querySelector(`.hex-${col}-${height}`);
         hex!.classList.add("shortestPath")
-        root = root.prev;
+        root = root!.prev;
         await speedBlock("Graph");
         await speedBlock("Graph");
     }

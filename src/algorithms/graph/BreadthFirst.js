@@ -47,6 +47,7 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
             resolve(null);
         }, 250);
     });
+    // root = root.prev;
     while (root.prev != null) {
         let col = root.col;
         let height = root.height;
