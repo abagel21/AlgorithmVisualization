@@ -50,6 +50,8 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         setMouseDown("false")
     }
 
+    console.log("rerendered");
+
     return (
         <div className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
             <div className={hexClass} onMouseDown={e => hexClickHandler(e)}></div>

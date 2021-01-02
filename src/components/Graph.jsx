@@ -3,6 +3,7 @@ import HexMapComponent from "./HexMapComponent";
 import PropTypes from 'prop-types'
 import BreadthFirst from "../algorithms/graph/BreadthFirst"
 import HexMap from '../util/HexMap'
+import BFSClear from '../util/BFSClear'
 
 const Graph = ({selected}) => {
     //TODO hex pause, play, moveable hexes, other algs, maze algorithms
@@ -25,10 +26,6 @@ const Graph = ({selected}) => {
      let targetHeight = Math.floor((hexVert + 1)/2) - 1;
      let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
      let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
-     console.log(targetStartWidth);
-     console.log(targetWidth);
-     console.log(targetStartWidth%2);
-     console.log(targetWidth%2);
      if(targetStartWidth%2 != targetWidth%2) {
          console.log("changing from " + targetWidth + " to " + (targetWidth - 1));
         targetWidth++;
@@ -134,7 +131,7 @@ const Graph = ({selected}) => {
         const stop = document.querySelector(".stopGraphing")
         if(stop.dataset.visibility == "true" && stop.dataset.status != "true") return;
         console.log("reset");
-        setHexMap(new HexMap(hexVert, hexHor))
+        BFSClear(hexMap, startCol, startHeight);
     }
     return (
         <div>
