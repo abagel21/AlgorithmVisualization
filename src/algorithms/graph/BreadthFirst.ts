@@ -3,6 +3,7 @@ import Queue from "../datastructures/Queue"
 import Coordinate from "../datastructures/Coordinate"
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function BreadthFirst(hexes:HexMap, startCol:number, startHeight:number):Promise<Coordinate|null> {
     console.log("bfs called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();

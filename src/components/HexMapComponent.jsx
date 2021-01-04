@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React, {useState} from 'react'
 import HexMap from '../util/HexMap'
 import Hex from "./Hex.jsx"
 import PropTypes from 'prop-types'
-
-const HexMapComponent = ({startCol, startHeight, goalWidth, map, sizeValue}) => {
+const HexMapComponent = ({startCol, startHeight, goalWidth, map, sizeValue, cursorEffect}) => {
+    console.log(cursorEffect);
     let [mouseIsDown, setMouseDown] = useState("false");
     let hexWidth = 28 * sizeValue;
      let hexHeight = 24 * sizeValue;
@@ -17,15 +18,11 @@ const HexMapComponent = ({startCol, startHeight, goalWidth, map, sizeValue}) => 
         <div className = "hexMapWrapper">
             {map.contents.map((item, i) => {
                 return item.map((hex, j) => {
-                    return (<Hex key={Math.floor((i + j)*(i + j + 1)/2 + j)}val = {hex} col={i} height={j} hexes={map} hoffset = {horizontalOffset} mouseIsDown = {mouseIsDown} setMouseDown={setMouseDown} isStart={j == targetHeight ? i == targetStartWidth ? true : false : false} isTarget = {j == targetHeight ? i == targetWidth ? true : false : false} sizeValue = {sizeValue}/>)
+                    return (<Hex key={Math.floor((i + j)*(i + j + 1)/2 + j)}val = {hex} col={i} height={j} hexes={map} hoffset = {horizontalOffset} mouseIsDown = {mouseIsDown} setMouseDown={setMouseDown} isStart={j == targetHeight ? i == targetStartWidth ? true : false : false} isTarget = {j == targetHeight ? i == targetWidth ? true : false : false} sizeValue = {sizeValue} cursorEffect={cursorEffect}/>)
                 })
             })}
         </div>
     )
-}
-
-HexMapComponent.propTypes = {
-
 }
 
 export default HexMapComponent

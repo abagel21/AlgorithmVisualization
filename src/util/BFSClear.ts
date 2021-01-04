@@ -3,6 +3,7 @@ import Queue from "../algorithms/datastructures/Queue"
 import Coordinate from "../algorithms/datastructures/Coordinate"
 import checkForStop from "./checkForStop";
 import speedBlock from "./speedBlock";
+/* eslint-disable */
 export async function clearAll(hexes:HexMap, startCol:number, startHeight:number):Promise<Coordinate|null> {
     console.log("bfs clearAll called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();

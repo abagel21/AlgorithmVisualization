@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class Queue {
     constructor() {
         this.length = 0;

@@ -2,6 +2,7 @@ import Queue from "../datastructures/Queue";
 import Coordinate from "../datastructures/Coordinate";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function BreadthFirst(hexes, startCol, startHeight) {
     console.log("bfs called");
     let q = new Queue();

@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, {useState} from 'react'
-import PropTypes from 'prop-types'
 
-const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isStart, isTarget, sizeValue}) => {
+const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isStart, isTarget, sizeValue, cursorEffect}) => {
     let hexWidth = 28 * sizeValue;
     let hexH = 24 * sizeValue;
     let hexSize = hexWidth/2
@@ -13,20 +13,49 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
     } else {
         offset = hexHeight;
     }
-    let topMargin = 50 + offset + (height) * (hexHeight);
+    let topMargin = offset + (height) * (hexHeight);
 
     // for adding weight or walls when clicking
     let hexClickHandler = (e) => {
         if(isStart || isTarget) return;
         e.preventDefault();
         setMouseDown("true")
+        let hex = document.querySelector(`.hex-${col}-${height}`);
         let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
-        if(hexes.contents[col][height] == 0) {
-            hexes.contents[col][height] = -1;
-            innerHex.classList.add("wall");
-        } else if(hexes.contents[col][height] == -1) {
-            hexes.contents[col][height] = 0;
-            innerHex.classList.remove("wall");
+        console.log(cursorEffect)
+        switch(cursorEffect) {
+            case "Add Wall":
+                console.log("adding wall");
+                if(hexes.contents[col][height] == 0) {
+                    hexes.contents[col][height] = -1;
+                    innerHex.classList.add("wall");
+                } else if(hexes.contents[col][height] == -1) {
+                    hexes.contents[col][height] = 0;
+                    innerHex.classList.remove("wall");
+                }
+                break;
+            case "Add Weight":
+                console.log("Trying to add weight")
+                if(hexes.contents[col][height] == 0) {
+                    hexes.contents[col][height] = 5;
+                    innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
+                    innerHex.style.opacity= 1;
+                } else if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
+                    hexes.contents[col][height] = (hexes.contents[col][height] + 5);
+                    hexes.contents[col][height] = hexes.contents[col][height] > 100 ? 0 : hexes.contents[col][height];
+                    innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                }
+                break;
+            case "Remove Weight":
+                if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
+                    innerHex.style.backgroundColor = "transparent";
+                    innerHex.style.opacity = 0;
+                    hexes.contents[col][height] = 0;
+                }
+                break;
+            default:
+                console.log("NONE");
+                break;
         }
     }
     // for adding weight or walls when dragging
@@ -35,12 +64,40 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         e.preventDefault();
         if(mouseIsDown=="true") {
             let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
-            if(hexes.contents[col][height] == 0) {
-                hexes.contents[col][height] = -1;
-                innerHex.classList.add("wall");
-            } else if(hexes.contents[col][height] == -1) {
-                hexes.contents[col][height] = 0;
-                innerHex.classList.remove("wall");
+            switch(cursorEffect) {
+                case "Add Wall":
+                    console.log("adding wall");
+                    if(hexes.contents[col][height] == 0) {
+                        hexes.contents[col][height] = -1;
+                        innerHex.classList.add("wall");
+                    } else if(hexes.contents[col][height] == -1) {
+                        hexes.contents[col][height] = 0;
+                        innerHex.classList.remove("wall");
+                    }
+                    break;
+                case "Add Weight":
+                    console.log("Trying to add weight")
+                    if(hexes.contents[col][height] == 0) {
+                        hexes.contents[col][height] = 5;
+                        innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
+                        innerHex.style.opacity= 1;
+                    } else if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
+                        hexes.contents[col][height] = (hexes.contents[col][height] + 5);
+                        hexes.contents[col][height] = hexes.contents[col][height] > 100 ? 0 : hexes.contents[col][height];
+                        console.log((hexes.contents[col][height]/200 + .5))
+                        innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                    }
+                    break;
+                case "Remove Weight":
+                    if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
+                        innerHex.style.backgroundColor = "transparent";
+                        innerHex.style.opacity = 0;
+                        hexes.contents[col][height] = 0;
+                    }
+                    break;
+                default:
+                    console.log("NONE");
+                    break;
             }
         }
     }
@@ -56,10 +113,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
             <div className={`innerHex`} onMouseDown={e => hexClickHandler(e)}></div>
         </div>
     )
-}
-
-Hex.propTypes = {
-
 }
 
 export default Hex

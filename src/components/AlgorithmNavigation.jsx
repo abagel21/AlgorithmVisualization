@@ -1,7 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
-
+/* eslint-disable */
 const AlgorithmNavigation = ({setSelected}) => {
     const onClick = (e) => {
         e.target.parentNode.childNodes.forEach(child => child.classList.remove("selected"))

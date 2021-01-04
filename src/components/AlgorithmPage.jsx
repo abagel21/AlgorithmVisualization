@@ -1,8 +1,7 @@
 import React from 'react'
 import Graph from './Graph'
 import SortingSpace from "./SortingSpace"
-import PropTypes from 'prop-types'
-
+/* eslint-disable */
 const AlgorithmPage = ({selected}) => {
     return (
         <div className="contentWrapper">
@@ -19,8 +18,5 @@ const AlgorithmPage = ({selected}) => {
     )
 }
 
-AlgorithmPage.propTypes = {
-
-}
 
 export default AlgorithmPage

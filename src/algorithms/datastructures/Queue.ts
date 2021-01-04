@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class Queue<M> {
     root: Node<M>|null|undefined;
     last: Node<M>|null|undefined;

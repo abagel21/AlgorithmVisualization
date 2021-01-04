@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class Coordinate {
     constructor(col, height, prev) {
         this.col = col;

@@ -1,5 +1,6 @@
 import Queue from "../algorithms/datastructures/Queue";
 import Coordinate from "../algorithms/datastructures/Coordinate";
+/* eslint-disable */
 export async function clearAll(hexes, startCol, startHeight) {
     console.log("bfs clearAll called");
     let q = new Queue();
