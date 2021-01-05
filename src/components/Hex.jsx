@@ -24,26 +24,33 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
         console.log(cursorEffect)
         switch(cursorEffect) {
-            case "Add Wall":
+            case "Toggle Wall":
                 console.log("adding wall");
                 if(hexes.contents[col][height] == 0) {
+                    console.log("adding")
                     hexes.contents[col][height] = -1;
                     innerHex.classList.add("wall");
                 } else if(hexes.contents[col][height] == -1) {
                     hexes.contents[col][height] = 0;
                     innerHex.classList.remove("wall");
                 }
+                console.log(hexes.contents[col][height])
                 break;
             case "Add Weight":
                 console.log("Trying to add weight")
                 if(hexes.contents[col][height] == 0) {
-                    hexes.contents[col][height] = 5;
+                    hexes.contents[col][height] = 10;
                     innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
                     innerHex.style.opacity= 1;
                 } else if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
-                    hexes.contents[col][height] = (hexes.contents[col][height] + 5);
-                    hexes.contents[col][height] = hexes.contents[col][height] > 100 ? 0 : hexes.contents[col][height];
-                    innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                    hexes.contents[col][height] = (hexes.contents[col][height] + 10);
+                    if(hexes.contents[col][height] > 100) {
+                        hexes.contents[col][height] = 0
+                        innerHex.style.opacity= 0;
+                    } else {
+                        innerHex.style.opacity= 1;
+                        innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                    }
                 }
                 break;
             case "Remove Weight":
@@ -51,6 +58,9 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                     innerHex.style.backgroundColor = "transparent";
                     innerHex.style.opacity = 0;
                     hexes.contents[col][height] = 0;
+                } else if (hexes.contents[col][height] == 0) {
+                    innerHex.style.backgroundColor = "transparent";
+                    innerHex.style.opacity = 0;
                 }
                 break;
             default:
@@ -65,27 +75,33 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         if(mouseIsDown=="true") {
             let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
             switch(cursorEffect) {
-                case "Add Wall":
+                case "Toggle Wall":
                     console.log("adding wall");
                     if(hexes.contents[col][height] == 0) {
+                        console.log("adding")
                         hexes.contents[col][height] = -1;
                         innerHex.classList.add("wall");
                     } else if(hexes.contents[col][height] == -1) {
                         hexes.contents[col][height] = 0;
                         innerHex.classList.remove("wall");
                     }
+                    console.log(hexes.contents[col][height])
                     break;
                 case "Add Weight":
                     console.log("Trying to add weight")
                     if(hexes.contents[col][height] == 0) {
-                        hexes.contents[col][height] = 5;
+                        hexes.contents[col][height] = 10;
                         innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
                         innerHex.style.opacity= 1;
                     } else if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
-                        hexes.contents[col][height] = (hexes.contents[col][height] + 5);
-                        hexes.contents[col][height] = hexes.contents[col][height] > 100 ? 0 : hexes.contents[col][height];
-                        console.log((hexes.contents[col][height]/200 + .5))
-                        innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                        hexes.contents[col][height] = (hexes.contents[col][height] + 10);
+                        if(hexes.contents[col][height] > 100) {
+                            hexes.contents[col][height] = 0
+                            innerHex.style.opacity= 0;
+                        } else {
+                            innerHex.style.opacity= 1;
+                            innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[col][height]/200 + .5)})`;
+                        }
                     }
                     break;
                 case "Remove Weight":
@@ -93,6 +109,9 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                         innerHex.style.backgroundColor = "transparent";
                         innerHex.style.opacity = 0;
                         hexes.contents[col][height] = 0;
+                    } else if (hexes.contents[col][height] == 0) {
+                        innerHex.style.backgroundColor = "transparent";
+                        innerHex.style.opacity = 0;
                     }
                     break;
                 default:

@@ -2,84 +2,61 @@ import SortableComponent from '../../util/SortableComponent';
 import copyArr from "../../util/copyArr";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+import Comparable from "./Comparable";
 /* eslint-disable */
-class PriorityQueue {
-    //UNFINISHED
-
-    async pop(
-        arr: SortableComponent[],
-      lastIndex: number,
-      setSortableComponents: any
-    ) {
-        arr[lastIndex].div.style.backgroundColor = "green";
-        arr[0].div.style.backgroundColor = "black";
-      let temp: SortableComponent = arr[lastIndex];
-      let otherTemp : SortableComponent = arr[0];
-      arr[lastIndex] = arr[0];
-      arr[0] = temp;
-      setSortableComponents(copyArr(arr));
-      await speedBlock("Sorting");
-      await this.sink(
-        arr,
-        0,
-        lastIndex,
-        setSortableComponents
-      );
-      arr[lastIndex].div.style.backgroundColor = "red";
-        arr[0].div.style.backgroundColor = "red";
-        setSortableComponents(copyArr(arr));
+// Minimum priority queue
+export default class PriorityQueue<T extends Comparable> {
+    lastIndex:number = 0;
+    arr:(T)[] = [];
+    push(val:T):void {
+      if(this.arr.length == this.lastIndex) {
+        this.arr.push(val);
+      } else {
+        this.arr[this.lastIndex] = val;
+      }
+      this.swim(this.lastIndex);
+      this.lastIndex++;
+    }
+    pop():T {
+      let temp: T = this.arr[0];
+      this.arr[0] = this.arr[this.lastIndex - 1];
+      this.sink(0);
+      this.lastIndex--;
+      return temp;
     }
     
-    async sink(
-        arr: SortableComponent[],
-      i: number,
-      lastIndex: number,
-      setSortableComponents: any
-    ) {
-      //if aux[i] is less than the lower node on the tree, swap
-      while (2 * (i + 1) - 1 < lastIndex) {
-        if(await checkForStop("Sorting")) return null;
-        let j = 2 * (i + 1) - 1;
-        arr[j].div.style.backgroundColor = "blue";
-        setSortableComponents(copyArr(arr));
-        if (j + 1 < lastIndex && arr[j].value < arr[j + 1].value) j++;
-        if (arr[i].value < arr[j].value) {
-          let temp: SortableComponent = arr[i];
-          arr[i] = arr[j];
-          arr[j] = temp;
-          arr[i].div.style.backgroundColor = "blue";
+    sink(i: number):void {
+      //if i is greater than the lower node on the tree, swap
+      while (2 * i + 1 < this.lastIndex) {
+        let j = 2 * i + 1;
+        if (j + 1 < this.lastIndex && this.arr[j].compare(this.arr[j + 1]) > 0) j++;
+        if (this.arr[i].compare(this.arr[j]) > 0) {
+          let temp: T = this.arr[i];
+          this.arr[i] = this.arr[j];
+          this.arr[j] = temp;
           i = j;
-          setSortableComponents(copyArr(arr));
-          await speedBlock("Sorting");
         } else {
           break;
         }
-        arr[j].div.style.backgroundColor = "red"
-        setSortableComponents(copyArr(arr));
-          await speedBlock("Sorting");
       }
-      return i;
     }
     
-    async swim(
-      aux: SortableComponent[],
-      i: number,
-      setSortableComponents: any
-    ) {
-      //if aux[i] is more than the higher node on the tree, swap
-      while (i > 1 && aux[i].value > aux[Math.floor(i / 2)].value) {
-        if(await checkForStop("Sorting")) return null;
-        let j = Math.floor(i / 2);
-        let temp: SortableComponent = aux[i];
-        aux[i] = aux[j];
-        aux[j] = temp;
+    swim(i: number):void {
+      //if arr[i] is less than the higher node on the tree, swap
+      while (i > 0 && this.arr[i].compare(this.arr[Math.floor((i - 1) / 2)]) < 0) {
+        let j = Math.floor((i - 1) / 2);
+        let temp: T = this.arr[i];
+        this.arr[i] = this.arr[j];
+        this.arr[j] = temp;
         i = j;
-        setSortableComponents(copyArr(aux));
-        await speedBlock("Sorting");
       }
     }
+
+    isEmpty():boolean {
+      return this.lastIndex == 0;
+    }
     
-    isHeap(arr: SortableComponent[], i: number, n: number) {
+    isHeap(i: number, n: number) {
       // If a leaf node
       if (i > (n - 2) / 2) {
         return true;
@@ -88,10 +65,10 @@ class PriorityQueue {
       // If an internal node and is greater than its children, and
       // same is recursively true for the children
       if (
-        arr[i] >= arr[2 * i + 1] &&
-        arr[i] >= arr[2 * i + 2] &&
-        this.isHeap(arr, 2 * i + 1, n) &&
-        this.isHeap(arr, 2 * i + 2, n)
+        this.arr[i] >= this.arr[2 * i + 1] &&
+        this.arr[i] >= this.arr[2 * i + 2] &&
+        this.isHeap(2 * i + 1, n) &&
+        this.isHeap(2 * i + 2, n)
       ) {
         return true;
       }

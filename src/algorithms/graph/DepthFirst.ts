@@ -15,14 +15,14 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
         let col = node.col;
         let height = node.height;
         let hexInfo = hexes.hexInfo(col, height)
-        if(hexInfo == -100){
+        if(hexInfo == -1000){
             root = node;
             break;
         }
         if(hexInfo < 0 || hexInfo == 1) continue;
         hexes.contents[col][height] = 1;
         let hex:Element = document.querySelector(`.hex-${col}-${height}`)!;
-        if(hexInfo != 100) hex.classList.add("visited_hex");
+        if(hexInfo != 1000) hex.classList.add("visited_hex");
         if(col%2 == 0) {
             q.push(new Coordinate(col, height - 1, node));
             q.push(new Coordinate(col + 1, height, node));
@@ -44,6 +44,7 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
         setTimeout(() => {
         resolve(null);
     }, 250)});
+    root = root.prev;
     while(root!.prev != null) {
         let col:number = root!.col;
         let height:number = root!.height;

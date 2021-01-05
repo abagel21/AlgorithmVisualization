@@ -1,76 +1,68 @@
-import copyArr from "../../util/copyArr";
-import checkForStop from "../../util/checkForStop";
-import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
-class PriorityQueue {
-    //UNFINISHED
-    async pop(arr, lastIndex, setSortableComponents) {
-        arr[lastIndex].div.style.backgroundColor = "green";
-        arr[0].div.style.backgroundColor = "black";
-        let temp = arr[lastIndex];
-        let otherTemp = arr[0];
-        arr[lastIndex] = arr[0];
-        arr[0] = temp;
-        setSortableComponents(copyArr(arr));
-        await speedBlock("Sorting");
-        await this.sink(arr, 0, lastIndex, setSortableComponents);
-        arr[lastIndex].div.style.backgroundColor = "red";
-        arr[0].div.style.backgroundColor = "red";
-        setSortableComponents(copyArr(arr));
+// Minimum priority queue
+export default class PriorityQueue {
+    constructor() {
+        this.lastIndex = 0;
+        this.arr = [];
     }
-    async sink(arr, i, lastIndex, setSortableComponents) {
-        //if aux[i] is less than the lower node on the tree, swap
-        while (2 * (i + 1) - 1 < lastIndex) {
-            if (await checkForStop("Sorting"))
-                return null;
-            let j = 2 * (i + 1) - 1;
-            arr[j].div.style.backgroundColor = "blue";
-            setSortableComponents(copyArr(arr));
-            if (j + 1 < lastIndex && arr[j].value < arr[j + 1].value)
+    push(val) {
+        if (this.arr.length == this.lastIndex) {
+            this.arr.push(val);
+        }
+        else {
+            this.arr[this.lastIndex] = val;
+        }
+        this.swim(this.lastIndex);
+        this.lastIndex++;
+    }
+    pop() {
+        let temp = this.arr[0];
+        this.arr[0] = this.arr[this.lastIndex - 1];
+        this.sink(0);
+        this.lastIndex--;
+        return temp;
+    }
+    sink(i) {
+        //if i is greater than the lower node on the tree, swap
+        while (2 * i + 1 < this.lastIndex) {
+            let j = 2 * i + 1;
+            if (j + 1 < this.lastIndex && this.arr[j].compare(this.arr[j + 1]) > 0)
                 j++;
-            if (arr[i].value < arr[j].value) {
-                let temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                arr[i].div.style.backgroundColor = "blue";
+            if (this.arr[i].compare(this.arr[j]) > 0) {
+                let temp = this.arr[i];
+                this.arr[i] = this.arr[j];
+                this.arr[j] = temp;
                 i = j;
-                setSortableComponents(copyArr(arr));
-                await speedBlock("Sorting");
             }
             else {
                 break;
             }
-            arr[j].div.style.backgroundColor = "red";
-            setSortableComponents(copyArr(arr));
-            await speedBlock("Sorting");
         }
-        return i;
     }
-    async swim(aux, i, setSortableComponents) {
-        //if aux[i] is more than the higher node on the tree, swap
-        while (i > 1 && aux[i].value > aux[Math.floor(i / 2)].value) {
-            if (await checkForStop("Sorting"))
-                return null;
-            let j = Math.floor(i / 2);
-            let temp = aux[i];
-            aux[i] = aux[j];
-            aux[j] = temp;
+    swim(i) {
+        //if arr[i] is less than the higher node on the tree, swap
+        while (i > 0 && this.arr[i].compare(this.arr[Math.floor((i - 1) / 2)]) < 0) {
+            let j = Math.floor((i - 1) / 2);
+            let temp = this.arr[i];
+            this.arr[i] = this.arr[j];
+            this.arr[j] = temp;
             i = j;
-            setSortableComponents(copyArr(aux));
-            await speedBlock("Sorting");
         }
     }
-    isHeap(arr, i, n) {
+    isEmpty() {
+        return this.lastIndex == 0;
+    }
+    isHeap(i, n) {
         // If a leaf node
         if (i > (n - 2) / 2) {
             return true;
         }
         // If an internal node and is greater than its children, and
         // same is recursively true for the children
-        if (arr[i] >= arr[2 * i + 1] &&
-            arr[i] >= arr[2 * i + 2] &&
-            this.isHeap(arr, 2 * i + 1, n) &&
-            this.isHeap(arr, 2 * i + 2, n)) {
+        if (this.arr[i] >= this.arr[2 * i + 1] &&
+            this.arr[i] >= this.arr[2 * i + 2] &&
+            this.isHeap(2 * i + 1, n) &&
+            this.isHeap(2 * i + 2, n)) {
             return true;
         }
         return false;

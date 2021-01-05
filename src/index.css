@@ -65,7 +65,8 @@ code {
     position: relative;
     width: 9rem;
     z-index: 10000;
-    transition: all .5s ease;
+    transition: height .5s ease;
+    z-index: 1;
 }
 
 .dropdownMedium p {
@@ -113,7 +114,7 @@ code {
 }
 .dropdownSmall:hover .dropdownContent7 {
     visibility: visible;
-    height: 5rem;
+    max-height: 10rem;
 }
 .dropdownMedium:hover .dropdownContent8 {
     visibility: visible;
@@ -296,7 +297,7 @@ code {
 
 .dropdownContent7 {
     visibility: hidden;
-    height: 0;
+    max-height: 0;
     position: absolute;
     width: 100%;
     background-color: #eee;
@@ -426,18 +427,18 @@ code {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  position: relative;
   /* margin-bottom: 3rem; */
-  -webkit-transition: all .5s ease;
-  transition-property: height, visibility;
-  transition-duration: .5s;
+  -webkit-transition: all .2s ease;
+  transition-property: height;
+  transition-duration: .2s;
   height: 0;
   visibility: hidden;
   overflow: hidden;
-  /* position:absolute; */
-  z-index: -1;
+  z-index: -10;
 }
 [data-status = "sortingSettings"] {
-  z-index: 1;
+  z-index: 10;
   overflow: visible;
   visibility: visible;
   height: 3.5rem;
@@ -445,7 +446,7 @@ code {
 
 [data-status = "graphSettings"] {
   background-color: #C7DBE6;
-  z-index: 1;
+  z-index: 10;
   overflow: visible;
   visibility: visible;
   height: 3.5rem;
@@ -1004,7 +1005,9 @@ code {
     width: 56px;
     height: 48px;
     background-color: #81adc8;
-    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    transition-property: background-color;
+    transition-duration: .1s;
 }
 
 .innerHex {
@@ -1015,11 +1018,17 @@ code {
     opacity: 0;
 }
 
+.weighted {
+  transition-property: background-color;
+  transition-duration: .1s;
+}
+
 .wall {
     opacity: 1!important;
     animation: wallAnimation .5s ease-out;
     animation-direction: alternate;
     animation-fill-mode: forwards;
+    background-color: black!important;
 }
 
 .start {
@@ -1166,5 +1175,6 @@ ul {
   margin: .5rem;
   height: 48px;
   width: 56px;
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  transition: background-color .2s ease-out;
 }

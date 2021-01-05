@@ -2,14 +2,17 @@ import React, {useState, useRef} from 'react'
 import HexMapComponent from "./HexMapComponent";
 import BreadthFirst from "../algorithms/graph/BreadthFirst"
 import DepthFirst from "../algorithms/graph/DepthFirst"
+import Dijkstra from "../algorithms/graph/Dijkstra"
+import AStar from "../algorithms/graph/AStar"
+import Coordinate from "../algorithms/datastructures/Coordinate"
 import HexMap from '../util/HexMap'
-import {clearAll, clearAlgorithm} from '../util/BFSClear'
+import {clearAll, clearAlgorithm, clearWeights} from '../util/BFSClear'
 /* eslint-disable */
 const Graph = ({selected}) => {
     //TODO hex pause, play, moveable hexes, other algs, maze algorithms
     const [algorithm, setAlgorithm] = useState("Algorithm")
     const [sliderValue, setSliderValue] = useState(50);
-    const [cursorEffect, setCursorEffect] = useState("Add Wall");
+    const [cursorEffect, setCursorEffect] = useState("Toggle Wall");
     // set size calculations
     const [sizeValue, _setSizeValue] = useState(3);
     const sizeRef = useRef(sizeValue);
@@ -22,7 +25,7 @@ const Graph = ({selected}) => {
      let hexWidth = 28 * sizeValue;
      let hexHeight = 24 * sizeValue;
      let hexHor = Math.floor((window.innerWidth - 20) / (hexWidth * .75) - 1) - 1;
-     let hexVert = Math.floor((window.innerHeight - 222) / (hexHeight) );
+     let hexVert = Math.floor((window.innerHeight*.75) / (hexHeight) );
      let horizontalOffset = (window.innerWidth - (hexHor+.5) * (hexWidth + 1) * .75)/2;
      let targetHeight = Math.floor((hexVert + 1)/2) - 1;
      let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
@@ -34,8 +37,8 @@ const Graph = ({selected}) => {
      const [startHeight, setHeight] = useState(targetHeight)
      const [goalWidth, setGoalWidth] = useState(targetWidth);
      const [hexMap, setHexMap] = useState(new HexMap(hexVert, hexHor));
-     hexMap.contents[goalWidth][startHeight] = -100;
-     hexMap.contents[startCol][startHeight] = 100;
+     hexMap.contents[goalWidth][startHeight] = -1000;
+     hexMap.contents[startCol][startHeight] = 1000;
 
      // handles calling the requisite algorithm when the graph button is pressed
     const handleGraph = async (e) => {
@@ -60,6 +63,7 @@ const Graph = ({selected}) => {
         // perform the algorithm
         switch (algorithm) {
           case "DFS":
+            clearWeights(hexMap, startCol, startHeight)
             res = await new Promise((resolve, reject) => {
               resolve(
                 DepthFirst(hexMap, startCol, startHeight)
@@ -68,6 +72,7 @@ const Graph = ({selected}) => {
             break;
             case "BFS":
                 console.log("bfs")
+                clearWeights(hexMap, startCol, startHeight)
                 res = await new Promise((resolve, reject) => {
                   resolve(
                     BreadthFirst(hexMap, startCol, startHeight)
@@ -77,14 +82,14 @@ const Graph = ({selected}) => {
             case "Dijkstra's":
                 res = await new Promise((resolve, reject) => {
                     resolve(
-                    // Dijkstra's
+                        Dijkstra(hexMap, startCol, startHeight)
                     );
                 });
                 break;
             case "A* Search":
                 res = await new Promise((resolve, reject) => {
                     resolve(
-                    // A* Search
+                        AStar(hexMap, startCol, startHeight, new Coordinate(targetWidth, targetHeight))
                     );
                 });
                 break;
@@ -138,13 +143,16 @@ const Graph = ({selected}) => {
             <div className="topBar" data-status={selected == "Graphs" ? "graphSettings" : "false"}>
                 <div className="graphSettings">
                 <div className="dropdownSmall">
-                        <p className="dropdownTop resetGraphing">Reset</p>
+                        <p className="dropdownTop resetGraphing">Clear</p>
                         <div className="dropdownContent7">
+                            <p onClick={(e) => clearAll(hexMap, startCol, startHeight)}>
+                                All
+                            </p>
                             <p onClick={(e) => clearAlgorithm(hexMap, startCol, startHeight)}>
                                 Path
                             </p>
-                            <p onClick={(e) => clearAll(hexMap, startCol, startHeight)}>
-                                All
+                            <p onClick={(e) => clearWeights(hexMap, startCol, startHeight)}>
+                                Weights
                             </p>
                         </div>
                     </div>
@@ -250,7 +258,7 @@ const Graph = ({selected}) => {
             <div className="clickTypeSelector">
                 <div className="cursorWrapper">
                     {/*rgba(194,12,12,0.5)*/}
-                    <div className="currentCursor" style={{backgroundColor:cursorEffect=="Add Wall" ? "black" : cursorEffect=="Add Weight" ? "#c20c0c" : "#81adc8"}}></div>
+                    <div className="currentCursor" style={{backgroundColor:cursorEffect=="Toggle Wall" ? "black" : cursorEffect=="Add Weight" ? "#c20c0c" : "#81adc8"}}></div>
                     <div className="dropdownMedium">
                             <p className="dropdownTop">{cursorEffect}</p>
                             <div
@@ -260,7 +268,7 @@ const Graph = ({selected}) => {
                             }}
                             >
                             {[
-                                "Add Wall", 
+                                "Toggle Wall", 
                                 "Add Weight",
                                 "Remove Weight"
                             ].map((txt) => {

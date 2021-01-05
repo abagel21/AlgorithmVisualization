@@ -14,7 +14,7 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
         let col = node.col;
         let height = node.height;
         let hexInfo = hexes.hexInfo(col, height);
-        if (hexInfo == -100) {
+        if (hexInfo == -1000) {
             root = node;
             break;
         }
@@ -22,7 +22,7 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
             continue;
         hexes.contents[col][height] = 1;
         let hex = document.querySelector(`.hex-${col}-${height}`);
-        if (hexInfo != 100)
+        if (hexInfo != 1000)
             hex.classList.add("visited_hex");
         if (col % 2 == 0) {
             q.push(new Coordinate(col, height - 1, node));
@@ -47,6 +47,7 @@ export default async function BreadthFirst(hexes, startCol, startHeight) {
             resolve(null);
         }, 250);
     });
+    root = root.prev;
     while (root.prev != null) {
         let col = root.col;
         let height = root.height;
