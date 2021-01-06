@@ -30,7 +30,7 @@ export default async function Dijkstra(hexes:HexMap, startCol:number, startHeigh
         if(hexInfo != 1000) hex.classList.add("visited_hex");
         if(innerHex.style.opacity == "1") {
             // innerHex.style.opacity = "0";
-            hex.style.animationFillMode = "none";
+            // hex.style.animationFillMode = "none";
         }
         if(col%2 == 0) {
             let next = new Coordinate(col, height - 1, node, node.weight + 1+ hexInfo/10);
@@ -84,9 +84,9 @@ export default async function Dijkstra(hexes:HexMap, startCol:number, startHeigh
         let hex:HTMLDivElement = document.querySelector(`.hex-${col}-${height}`)! as HTMLDivElement;
         let innerHex:HTMLDivElement = hex.children[0] as HTMLDivElement;
         hex!.classList.add("shortestPath")
-        if(innerHex.style.opacity == "1") {
-            innerHex.style.opacity = ".5";
-        }
+        // if(innerHex.style.opacity == "1") {
+        //     innerHex.style.opacity = ".5";
+        // }
         root = prev.get(root);
         await speedBlock("Graph");
         await speedBlock("Graph");

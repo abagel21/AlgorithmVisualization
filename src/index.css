@@ -1033,7 +1033,7 @@ code {
 
 .start {
     background-color: #9e6240;
-    clip-path: polygon(25% 0, 75% 0, 50% 50%, 75% 100%, 25% 100%, 0 50%);
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
 }
 
 .target {
@@ -1117,6 +1117,9 @@ ul {
 
 .shortestPath {
   animation: shortest .5s ease-out forwards;
+  transition-property: clip-path;
+  transition-duration: .5s;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
 }
 
 @keyframes shortest {
