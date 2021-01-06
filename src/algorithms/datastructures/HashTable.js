@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class HashTable {
     constructor(initNumBuckets) {
         this.MAX_LOAD_FACTOR = 0.75;

@@ -1,4 +1,5 @@
 import Hashable from "./Hashable";
+/* eslint-disable */
 export default class HashTable<K extends Hashable, V>{
     MAX_LOAD_FACTOR:number = 0.75;
     buckets:Node<K, V>[] = null;
