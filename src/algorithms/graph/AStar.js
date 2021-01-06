@@ -25,20 +25,20 @@ export default async function AStar(hexes, startCol, startHeight, goal) {
         if (hexInfo != 1000)
             hex.classList.add("visited_hex");
         if (col % 2 == 0) {
-            q.push(new Coordinate(col, height - 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col, height - 1)));
-            q.push(new Coordinate(col + 1, height, node, node.weight +hexInfo / 10, calculateDistance(goal, col + 1, height)));
-            q.push(new Coordinate(col + 1, height + 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col + 1, height + 1)));
-            q.push(new Coordinate(col, height + 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col, height + 1)));
-            q.push(new Coordinate(col - 1, height + 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col - 1, height + 1)));
-            q.push(new Coordinate(col - 1, height, node, node.weight +hexInfo / 10, calculateDistance(goal, col - 1, height)));
+            q.push(new Coordinate(col, height - 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col, height - 1)));
+            q.push(new Coordinate(col + 1, height, node, node.weight + hexInfo / 10, calculateDistance(goal, col + 1, height)));
+            q.push(new Coordinate(col + 1, height + 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col + 1, height + 1)));
+            q.push(new Coordinate(col, height + 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col, height + 1)));
+            q.push(new Coordinate(col - 1, height + 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col - 1, height + 1)));
+            q.push(new Coordinate(col - 1, height, node, node.weight + hexInfo / 10, calculateDistance(goal, col - 1, height)));
         }
         else {
-            q.push(new Coordinate(col, height - 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col, height - 1)));
-            q.push(new Coordinate(col + 1, height - 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col + 1, height - 1)));
-            q.push(new Coordinate(col + 1, height, node, node.weight +hexInfo / 10, calculateDistance(goal, col + 1, height)));
-            q.push(new Coordinate(col, height + 1, node, node.weight +hexInfo / 10, calculateDistance(goal, col, height + 1)));
-            q.push(new Coordinate(col - 1, height, node, node.weight +hexInfo / 10, calculateDistance(goal, col - 1, height)));
-            q.push(new Coordinate(col - 1, height - 1, node, node.weigh +hexInfo / 10, calculateDistance(goal, col - 1, height - 1)));
+            q.push(new Coordinate(col, height - 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col, height - 1)));
+            q.push(new Coordinate(col + 1, height - 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col + 1, height - 1)));
+            q.push(new Coordinate(col + 1, height, node, node.weight + hexInfo / 10, calculateDistance(goal, col + 1, height)));
+            q.push(new Coordinate(col, height + 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col, height + 1)));
+            q.push(new Coordinate(col - 1, height, node, node.weight + hexInfo / 10, calculateDistance(goal, col - 1, height)));
+            q.push(new Coordinate(col - 1, height - 1, node, node.weight + hexInfo / 10, calculateDistance(goal, col - 1, height - 1)));
         }
         await speedBlock("Graph");
     }
@@ -66,11 +66,13 @@ export default async function AStar(hexes, startCol, startHeight, goal) {
 function calculateDistance(goal, nextCol, nextHeight) {
     let x = goal.col - nextCol;
     let y = goal.height - nextHeight;
-    if(x%2 != 0) {
-        y = y + (x + 1)/2;
-    } else {
-        y = y + x / 2
+    if (x % 2 != 0) {
+        y = y + (x + 1) / 2;
     }
+    else {
+        y = y + x / 2;
+    }
+    y = (y + x) / 2;
     if (Math.sign(x) == Math.sign(y)) {
         return Math.abs(x + y);
     }

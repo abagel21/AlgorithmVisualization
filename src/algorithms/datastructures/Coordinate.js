@@ -10,4 +10,10 @@ export default class Coordinate {
     compare(val) {
         return (this.weight + this.dist) - (val.weight + val.dist);
     }
+    hash() {
+        return Math.floor((this.col + this.height) * (this.col + this.height + 1) / 2 + this.height);
+    }
+    equals(o) {
+        return o.col == this.col && o.height == this.height;
+    }
 }

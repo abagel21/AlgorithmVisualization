@@ -30,6 +30,7 @@ export async function clearAll(hexes, startCol, startHeight) {
             hex.classList.remove("shortestPath");
         if (hex.children[0].classList.contains("wall"))
             hex.children[0].classList.remove("wall");
+        hex.children[0].style.opacity = 0;
         if (col % 2 == 0) {
             q.enqueue(new Coordinate(col, height - 1, node));
             q.enqueue(new Coordinate(col + 1, height, node));
@@ -67,11 +68,14 @@ export async function clearAlgorithm(hexes, startCol, startHeight) {
         if (hexInfo == -2 || visited[col][height] == 1)
             continue;
         let hex = document.querySelector(`.hex-${col}-${height}`);
+        let innerHex = hex.children[0];
         if (hexInfo == 1) {
             hexes.contents[col][height] = 0;
             hex.classList.remove("visited_hex");
             if (hex.classList.contains("shortestPath"))
                 hex.classList.remove("shortestPath");
+            if (innerHex.style.opacity = "0.5")
+                innerHex.style.opacity = "1";
         }
         visited[col][height] = 1;
         if (col % 2 == 0) {

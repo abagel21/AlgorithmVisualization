@@ -2,10 +2,11 @@ import SortableComponent from "../../util/SortableComponent";
 import copyArr from "../../util/copyArr";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function Quicksort(
   arr: SortableComponent[],
   setSortableComponents: any,
-) {
+):Promise<SortableComponent[]> {
 //   knuth shuffle for probabilistic guarantee (and displaying that shuffling is happening)
   const info = document.querySelector(".algorithmInformation")! as HTMLDivElement;
   info.style.visibility = "visible";
@@ -41,7 +42,7 @@ async function quicksort(
   lo: number,
   hi: number,
   setSortableComponents: any,
-) {
+):Promise<void> {
   if (hi <= lo) return;
   let pointer = lo;
   let originalHi = hi;

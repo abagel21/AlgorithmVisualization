@@ -2,10 +2,11 @@ import SortableComponent from "../../util/SortableComponent";
 import copyArr from "../../util/copyArr";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function ThreeWayQuicksort(
   arr: SortableComponent[],
   setSortableComponents: any,
-) {
+):Promise<SortableComponent[]> {
   //shuffle for probabilistic guarantee (and displaying that shuffling is happening)
   const info = document.querySelector(".algorithmInformation")! as HTMLDivElement;
   info.style.visibility = "visible";
@@ -39,7 +40,7 @@ async function threeWayQuicksort(
   lo: number,
   hi: number,
   setSortableComponents: any,
-) {
+):Promise<void> {
   if(hi <= lo) return;
   const originalLo = lo;
   const originalHi = hi;

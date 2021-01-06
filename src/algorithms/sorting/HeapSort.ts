@@ -3,6 +3,7 @@ import copyArr from "../../util/copyArr";
 import assert from "assert";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function HeapSort(
   arr: SortableComponent[],
   setSortableComponents: any

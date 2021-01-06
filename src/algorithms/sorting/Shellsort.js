@@ -1,6 +1,7 @@
 import copyArr from "../../util/copyArr";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function ShellSort(arr, setSortableComponents) {
     let h = 1;
     while (h < Math.floor(arr.length / 3))

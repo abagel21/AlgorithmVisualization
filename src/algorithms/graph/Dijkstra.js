@@ -1,13 +1,17 @@
 import PriorityQueue from "../datastructures/PriorityQueue";
 import Coordinate from "../datastructures/Coordinate";
+import HashTable from "../datastructures/HashTable";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
 /* eslint-disable */
 export default async function Dijkstra(hexes, startCol, startHeight) {
-    console.log("bfs called");
     let q = new PriorityQueue();
     let root = new Coordinate(startCol, startHeight, null);
+    let weights = new HashTable(hexes.contents.length * hexes.contents[0].length);
+    let prev = new HashTable(hexes.contents.length * hexes.contents[0].length);
     q.push(root);
+    weights.put(root, 0);
+    prev.put(root, null);
     while (!q.isEmpty()) {
         await checkForStop("Graphing");
         let node = q.pop();
@@ -22,24 +26,52 @@ export default async function Dijkstra(hexes, startCol, startHeight) {
             continue;
         hexes.contents[col][height] = 1;
         let hex = document.querySelector(`.hex-${col}-${height}`);
+        let innerHex = hex.children[0];
         if (hexInfo != 1000)
             hex.classList.add("visited_hex");
+        if (innerHex.style.opacity == "1") {
+            // innerHex.style.opacity = "0";
+            hex.style.animationFillMode = "none";
+        }
         if (col % 2 == 0) {
-            // + hexInfo/100
-            q.push(new Coordinate(col, height - 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col + 1, height, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col + 1, height + 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col, height + 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col - 1, height + 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col - 1, height, node, node.weight + 1 + hexInfo / 50));
+            let next = new Coordinate(col, height - 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col + 1, height, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col + 1, height + 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col, height + 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col - 1, height + 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col - 1, height, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
         }
         else {
-            q.push(new Coordinate(col, height - 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col + 1, height - 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col + 1, height, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col, height + 1, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col - 1, height, node, node.weight + 1 + hexInfo / 50));
-            q.push(new Coordinate(col - 1, height - 1, node, node.weight + 1 + hexInfo / 50));
+            let next = new Coordinate(col, height - 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col + 1, height - 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col + 1, height, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col, height + 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col - 1, height, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
+            next = new Coordinate(col - 1, height - 1, node, node.weight + 1 + hexInfo / 10);
+            updatePath(next, node, weights, prev);
+            q.push(next);
         }
         await speedBlock("Graph");
     }
@@ -48,19 +80,32 @@ export default async function Dijkstra(hexes, startCol, startHeight) {
             resolve(null);
         }, 250);
     });
-    root = root.prev;
-    while (root.prev != null) {
+    root = prev.get(root);
+    while (prev.containsKey(root)) {
         let col = root.col;
         let height = root.height;
         let hex = document.querySelector(`.hex-${col}-${height}`);
         let innerHex = hex.children[0];
         hex.classList.add("shortestPath");
         if (innerHex.style.opacity == "1") {
-            innerHex.style.opacity = ".5";
+            hex.style.animationFillMode = "forward";
         }
-        root = root.prev;
+        root = prev.get(root);
         await speedBlock("Graph");
         await speedBlock("Graph");
     }
     return root;
+}
+function updatePath(node, prev, weights, prevDict) {
+    if (weights.containsKey(node)) {
+        let weight = weights.get(node);
+        if (node.weight < weight) {
+            weights.put(node, node.weight);
+            prevDict.put(node, prev);
+        }
+    }
+    else {
+        weights.put(node, node.weight);
+        prevDict.put(node, prev);
+    }
 }

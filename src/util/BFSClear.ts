@@ -25,10 +25,11 @@ export async function clearAll(hexes:HexMap, startCol:number, startHeight:number
             hexes.contents[col][height] = 0;
         }
         visited[col][height] = 1;
-        let hex:Element = document.querySelector(`.hex-${col}-${height}`)!;
+        let hex:HTMLDivElement = document.querySelector(`.hex-${col}-${height}`)! as HTMLDivElement;
         if(hexInfo != 100) hex.classList.remove("visited_hex");
         if(hex.classList.contains("shortestPath")) hex.classList.remove("shortestPath")
         if(hex.children[0].classList.contains("wall")) hex.children[0].classList.remove("wall")
+        hex.children[0].style.opacity = 0;
         if(col%2 == 0) {
             q.enqueue(new Coordinate(col, height - 1, node));
             q.enqueue(new Coordinate(col + 1, height, node));
