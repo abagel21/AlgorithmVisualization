@@ -18,12 +18,12 @@ export async function clearAll(hexes, startCol, startHeight) {
         let hexInfo = hexes.hexInfo(col, height);
         if (hexInfo == -2 || visited[col][height] == 1)
             continue;
-        if (hexInfo != 1000 && hexInfo != -1000) {
+        visited[col][height] = 1;
+        let hex = document.querySelector(`.hex-${col}-${height}`);
+        if (hexInfo != 1000 && hexInfo != -1000 && !hex.classList.contains("start") && !hex.classList.contains("target")) {
             console.log(hexInfo);
             hexes.contents[col][height] = 0;
         }
-        visited[col][height] = 1;
-        let hex = document.querySelector(`.hex-${col}-${height}`);
         let innerHex = hex.children[0];
         if (hexInfo != 1000)
             hex.classList.remove("visited_hex");

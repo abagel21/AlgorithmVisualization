@@ -10,7 +10,7 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
     let root:Coordinate|null = new Coordinate(startCol, startHeight, null);
     q.push(root);
     while(!q.isEmpty()) {
-        await checkForStop("Graphing");
+        if (await checkForStop("Graphing")) return null;
         let node:Coordinate = q.pop();
         let col = node.col;
         let height = node.height;
@@ -22,7 +22,8 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
         if(hexInfo < 0 || hexInfo == 1) continue;
         hexes.contents[col][height] = 1;
         let hex:Element = document.querySelector(`.hex-${col}-${height}`)!;
-        if(hexInfo != 1000) hex.classList.add("visited_hex");
+        if (await checkForStop("Graphing")) return null;
+        if(hexInfo != 1000 && !hex.classList.contains("start")) hex.classList.add("visited_hex");
         if(col%2 == 0) {
             q.push(new Coordinate(col, height - 1, node));
             q.push(new Coordinate(col + 1, height, node));
@@ -45,6 +46,7 @@ export default async function BreadthFirst(hexes:HexMap, startCol:number, startH
         resolve(null);
     }, 250)});
     root = root.prev;
+    if(root == null) return;
     while(root!.prev != null) {
         let col:number = root!.col;
         let height:number = root!.height;

@@ -13,7 +13,8 @@ export default async function AStar(hexes, startCol, startHeight, goal) {
     weights.put(root, 0);
     prev.put(root, null);
     while (!q.isEmpty()) {
-        await checkForStop("Graphing");
+        if (await checkForStop("Graphing"))
+            return null;
         let node = q.pop();
         let col = node.col;
         let height = node.height;
@@ -27,7 +28,9 @@ export default async function AStar(hexes, startCol, startHeight, goal) {
         hexes.contents[col][height] = 1;
         let hex = document.querySelector(`.hex-${col}-${height}`);
         let innerHex = hex.children[0];
-        if (hexInfo != 1000)
+        if (await checkForStop("Graphing"))
+            return null;
+        if (hexInfo != 1000 && !hex.classList.contains("start"))
             hex.classList.add("visited_hex");
         if (innerHex.style.opacity == "1") {
             // innerHex.style.opacity = "0";
@@ -81,6 +84,8 @@ export default async function AStar(hexes, startCol, startHeight, goal) {
         }, 250);
     });
     root = prev.get(root);
+    if (root == null)
+        return;
     while (prev.containsKey(root)) {
         let col = root.col;
         let height = root.height;

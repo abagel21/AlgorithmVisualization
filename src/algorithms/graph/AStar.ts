@@ -14,7 +14,7 @@ export default async function AStar(hexes:HexMap, startCol:number, startHeight:n
     weights.put(root, 0);
     prev.put(root, null);
     while(!q.isEmpty()) {
-        await checkForStop("Graphing");
+        if (await checkForStop("Graphing")) return null;
         let node:Coordinate = q.pop();
         let col = node.col;
         let height = node.height;
@@ -27,7 +27,8 @@ export default async function AStar(hexes:HexMap, startCol:number, startHeight:n
         hexes.contents[col][height] = 1;
         let hex:HTMLDivElement = document.querySelector(`.hex-${col}-${height}`)! as HTMLDivElement;
         let innerHex:HTMLDivElement = hex!.children[0] as HTMLDivElement;
-        if(hexInfo != 1000) hex.classList.add("visited_hex");
+        if (await checkForStop("Graphing")) return null;
+        if(hexInfo != 1000 && !hex.classList.contains("start")) hex.classList.add("visited_hex");
         if(innerHex.style.opacity == "1") {
             // innerHex.style.opacity = "0";
             // hex.style.animationFillMode = "none";
@@ -78,6 +79,7 @@ export default async function AStar(hexes:HexMap, startCol:number, startHeight:n
         resolve(null);
     }, 250)});
     root = prev.get(root);
+    if(root == null) return;
     while(prev.containsKey(root)) {
         let col:number = root!.col;
         let height:number = root!.height;

@@ -5,6 +5,10 @@ const AlgorithmNavigation = ({setSelected}) => {
         e.target.parentNode.childNodes.forEach(child => child.classList.remove("selected"))
         e.target.classList.add("selected");
         setSelected(e.target.innerHTML)
+        const stop1 = document.querySelector(".stopSorting")
+        const stop2 = document.querySelector(".stopGraphing")
+        stop1.dataset.reset="true";
+        stop2.dataset.reset="true";
     }
     return (
         <nav className="navbar">

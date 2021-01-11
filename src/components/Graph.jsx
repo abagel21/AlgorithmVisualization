@@ -35,20 +35,22 @@ const Graph = ({selected}) => {
     }
      const [startCol, setCol] = useState(targetStartWidth);
      const [startHeight, setHeight] = useState(targetHeight)
+     const [goalHeight, setGoalHeight] = useState(targetHeight);
      const [goalWidth, setGoalWidth] = useState(targetWidth);
      const [hexMap, setHexMap] = useState(new HexMap(hexVert, hexHor));
-     hexMap.contents[goalWidth][startHeight] = -1000;
+     const [dragProperty, setDragProperty] = useState("start");
+     hexMap.contents[goalWidth][goalHeight] = -1000;
      hexMap.contents[startCol][startHeight] = 1000;
 
      // handles calling the requisite algorithm when the graph button is pressed
     const handleGraph = async (e) => {
         e.preventDefault();
-
+        clearAlgorithm(hexMap, startCol, startHeight)
         // adjust the data status of stop, graph, and size toggling
         const stop = document.querySelector(".stopGraphing");
         stop.dataset.visibility = "true";
-        stop.dataset.reset = "false";
         stop.dataset.status = "false";
+        stop.dataset.reset = "false";
         const graphButton = document.querySelector(".graphTrigger");
         graphButton.dataset.visibility="false";
         const sizeToggle = document.querySelector(".sizeGraph")
@@ -145,13 +147,33 @@ const Graph = ({selected}) => {
                 <div className="dropdownSmall">
                         <p className="dropdownTop resetGraphing">Clear</p>
                         <div className="dropdownContent7">
-                            <p onClick={(e) => clearAll(hexMap, startCol, startHeight)}>
+                            <p onClick={(e) => {
+                                const stop = document.querySelector(".stopGraphing")
+                                const graphButton = document.querySelector(".graphTrigger");
+                                stop.textContent = "Stop";
+                                stop.dataset.status="false"
+                                stop.dataset.reset="true";
+                                stop.dataset.visibility = "false";
+                                graphButton.dataset.visibility="true";
+                                clearAll(hexMap, startCol, startHeight)
+                                }}>
                                 All
                             </p>
-                            <p onClick={(e) => clearAlgorithm(hexMap, startCol, startHeight)}>
+                            <p onClick={(e) => {
+                                const stop = document.querySelector(".stopGraphing")
+                                const graphButton = document.querySelector(".graphTrigger");
+                                stop.textContent = "Stop";
+                                stop.dataset.status="false"
+                                stop.dataset.reset="true";
+                                stop.dataset.visibility = "false";
+                                graphButton.dataset.visibility="true";
+                                clearAlgorithm(hexMap, startCol, startHeight)
+                                }}>
                                 Path
                             </p>
-                            <p onClick={(e) => clearWeights(hexMap, startCol, startHeight)}>
+                            <p onClick={(e) => {
+                                clearWeights(hexMap, startCol, startHeight)
+                                }}>
                                 Weights
                             </p>
                         </div>
@@ -278,7 +300,7 @@ const Graph = ({selected}) => {
                     </div>
                 </div>
             </div>
-            <HexMapComponent startCol={startCol} startHeight={startHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} cursorEffect={cursorEffect}/>
+            <HexMapComponent startCol={startCol} startHeight={startHeight} goalHeight={goalHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} cursorEffect={cursorEffect} setCol = {setCol} setHeight = {setHeight} setGoalWidth={setGoalWidth} setGoalHeight={setGoalHeight} setDragProperty= {setDragProperty} dragProperty={dragProperty}/>
         </div>
     )
 }

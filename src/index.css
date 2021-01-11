@@ -74,15 +74,15 @@ code {
 }
 
 @media(max-width: 1200px) {
-  .dropdown {
-    width: 10rem;
-  }
+    .dropdown {
+        width: 10rem;
+    }
 }
 
 @media(max-width: 1200px) {
-  .dropdown {
-    width: 7.5rem;
-  }
+    .dropdown {
+        width: 7.5rem;
+    }
 }
 
 .dropdown:hover .dropdownContent {
@@ -99,6 +99,7 @@ code {
     visibility: visible;
     height: 3rem;
 }
+
 .dropdown:hover .dropdownContent4 {
     visibility: visible;
     height: 9.75rem;
@@ -108,14 +109,17 @@ code {
     visibility: visible;
     height: 3rem;
 }
+
 .dropdown:hover .dropdownContent6 {
     visibility: visible;
     height: 3rem;
 }
+
 .dropdownSmall:hover .dropdownContent7 {
     visibility: visible;
     max-height: 10rem;
 }
+
 .dropdownMedium:hover .dropdownContent8 {
     visibility: visible;
     height: 7.25rem;
@@ -201,9 +205,9 @@ code {
 }
 
 .dc3Wrapper {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .dropdownContent3 p {
@@ -406,57 +410,58 @@ code {
 }
 
 @media(max-width: 900px) {
-  .flexWrapper {
-    padding-top: 5rem;
-  }
+    .flexWrapper {
+        padding-top: 5rem;
+    }
 }
 
 .spaceWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 80%;
-  height: 80vh;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    height: 80vh;
 }
 
 .topBar {
-  background-color: #DEA47e;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  position: relative;
-  /* margin-bottom: 3rem; */
-  -webkit-transition: all .2s ease;
-  transition-property: height;
-  transition-duration: .2s;
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
-  z-index: -10;
-}
-[data-status = "sortingSettings"] {
-  z-index: 10;
-  overflow: visible;
-  visibility: visible;
-  height: 3.5rem;
+    background-color: #DEA47e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    /* margin-bottom: 3rem; */
+    -webkit-transition: all .2s ease;
+    transition-property: height;
+    transition-duration: .2s;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    z-index: -10;
 }
 
-[data-status = "graphSettings"] {
-  background-color: #C7DBE6;
-  z-index: 10;
-  overflow: visible;
-  visibility: visible;
-  height: 3.5rem;
+[data-status="sortingSettings"] {
+    z-index: 10;
+    overflow: visible;
+    visibility: visible;
+    height: 3.5rem;
+}
+
+[data-status="graphSettings"] {
+    background-color: #C7DBE6;
+    z-index: 10;
+    overflow: visible;
+    visibility: visible;
+    height: 3.5rem;
 }
 
 .graphSettings {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
 }
 
 .sortingSpace {
@@ -561,9 +566,9 @@ code {
 }
 
 .contentSettings {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -628,7 +633,7 @@ code {
 }
 
 .graphTrigger {
-  padding: .5rem;
+    padding: .5rem;
     background-color: #eee;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
@@ -917,6 +922,7 @@ code {
     margin-bottom: 1.75%;
 }
 
+
 /* @media (max-width: 500px) {
     .speedSettings {
         width: 80%;
@@ -1019,8 +1025,8 @@ code {
 }
 
 .weighted {
-  transition-property: background-color;
-  transition-duration: .1s;
+    transition-property: background-color;
+    transition-duration: .1s;
 }
 
 .wall {
@@ -1033,12 +1039,12 @@ code {
 
 .start {
     background-color: #9e6240;
-    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
 }
 
 .target {
     background-color: #CD4631;
-    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
 }
 
 @keyframes wallAnimation {
@@ -1116,10 +1122,10 @@ ul {
 }
 
 .shortestPath {
-  animation: shortest .5s ease-out forwards;
-  transition-property: clip-path;
-  transition-duration: .5s;
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
+    animation: shortest .5s ease-out forwards;
+    transition-property: clip-path;
+    transition-duration: .5s;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 50% 50%);
 }
 
 @keyframes shortest {
@@ -1163,21 +1169,21 @@ ul {
 }
 
 .clickTypeSelector {
-  display:flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
 }
 
 .cursorWrapper {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .currentCursor {
-  margin: .5rem;
-  height: 48px;
-  width: 56px;
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-  transition: background-color .2s ease-out;
+    margin: .5rem;
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    transition: background-color .2s ease-out;
 }

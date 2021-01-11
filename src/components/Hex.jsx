@@ -1,7 +1,8 @@
 /* eslint-disable */
+import { truncate } from 'lodash';
 import React, {useState} from 'react'
 
-const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isStart, isTarget, sizeValue, cursorEffect}) => {
+const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isStart, isTarget, sizeValue, cursorEffect, setTargetWidth, setStartHeight, setGoalHeight, setStartWidth, setDragProperty, dragProperty, goalHeight, startWidth, goalWidth, startHeight, drag, setDrag}) => {
     let hexWidth = 28 * sizeValue;
     let hexH = 24 * sizeValue;
     let hexSize = hexWidth/2
@@ -14,6 +15,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         offset = hexHeight;
     }
     let topMargin = offset + (height) * (hexHeight);
+    const [inc, addInc] = useState(0);
 
     // for adding weight or walls when clicking
     let hexClickHandler = (e) => {
@@ -127,8 +129,73 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         setMouseDown("false")
     }
 
+    const handleDrag = e => {
+        setDrag(true);
+        console.log("DRAG STARTED")
+        if(isStart) {
+            setDragProperty("start");
+            isStart = false;
+            e.target.classList.remove("start")
+        } else {
+            setDragProperty("target");
+            isTarget = false;
+            e.target.classList.remove("target")
+        }
+    }
+
+    const handleDrop = e => {
+        setDrag(false);
+        console.log("DROPPED")
+        console.log(e.target);
+        // if they try to drag the start onto the target or target onto the start
+        if(dragProperty == "start" && isTarget) {
+            const start = document.querySelector(`.hex-${startWidth}-${startHeight}`);
+            start.classList.add("start");
+            return;
+        }
+        else if (dragProperty == "target" && isStart) {
+            const target = document.querySelector(`.hex-${goalWidth}-${goalHeight}`);
+            target.classList.add("target")
+            return;
+        }
+        const endHex = e.target.parentNode;
+        const height = parseInt(endHex.classList[1].split("-")[2]);
+        const col = parseInt(endHex.classList[1].split("-")[1]);
+        if(dragProperty=="start") {
+            isStart = true;
+            hexes.contents[startWidth][startHeight] = 0;
+            setStartWidth(col);
+            setStartHeight(height);
+            e.target.classList.add("start")
+        } else {
+            isTarget = true;
+            hexes.contents[goalWidth][goalHeight] = 0;
+            setTargetWidth(col);
+            setGoalHeight(height);
+            e.target.classList.add("target")
+        }
+    }
+    const onDragOver = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    const onDragEnd = (e) => {
+        console.log("DRAG ENDED");
+        console.log(drag);
+        if(drag) {
+            if(dragProperty=="start") {
+                const start = document.querySelector(`.hex-${startWidth}-${startHeight}`);
+                start.classList.add("start");
+            } else {
+                const target = document.querySelector(`.hex-${goalWidth}-${goalHeight}`);
+                target.classList.add("target")
+            }
+        }
+    }
+
     return (
-        <div data-hexInfo={hexes.contents[col][height]}className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
+        <div onDragEnd = {onDragEnd} onDragOver = {onDragOver} onDrop = {e => handleDrop(e)} onDragStart={e => handleDrag(e)} draggable={isStart || isTarget} data-hexInfo={hexes.contents[col][height]} className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
             <div className={`innerHex`} onMouseDown={e => hexClickHandler(e)}></div>
         </div>
     )

@@ -18,7 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
     "jsx": "react",
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "noEmit": true
   },
   "include": [
     "src/**/*"
