@@ -2,13 +2,13 @@ import React from 'react'
 /* eslint-disable */
 const AlgorithmNavigation = ({setSelected}) => {
     const onClick = (e) => {
-        e.target.parentNode.childNodes.forEach(child => child.classList.remove("selected"))
-        e.target.classList.add("selected");
-        setSelected(e.target.innerHTML)
         const stop1 = document.querySelector(".stopSorting")
         const stop2 = document.querySelector(".stopGraphing")
         stop1.dataset.reset="true";
         stop2.dataset.reset="true";
+        e.target.parentNode.childNodes.forEach(child => child.classList.remove("selected"))
+        e.target.classList.add("selected");
+        setSelected(e.target.innerHTML)
     }
     return (
         <nav className="navbar">

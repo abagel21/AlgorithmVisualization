@@ -18,3 +18,6 @@ The site includes selection sort, insertion sort, quicksort, merge sort, three w
 ## Planned Updates
 - Bubble Sort
 - Quick Select
+- Binary Search Trees 
+- AVL Trees
+- Strings (KMP, Boyer-Moore, Rabin-Karp)
