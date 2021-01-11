@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # Algorithm Visualization
-After finishing the Algorithms Part I course on coursera, I decided to complete a self-designed capstone project involving visualizing the main sorting algorithms in the course to better understand their intricacies and challenge myself while practicing algorithmic design, typescript, and a static website. After completing Honors Object Oriented Programming and Data Structures in my first semester of college, I added in graphs, trees, and strings.
+After finishing the Algorithms Part I course on coursera, I decided to complete a self-designed capstone project involving visualizing the main sorting algorithms in the course to better understand their intricacies and challenge myself while practicing algorithmic design, typescript, and a static website. After completing Honors Object Oriented Programming and Data Structures in my first semester of college, I added in graphs on a hexagonal map.
 
 ## Demo
 The site is hosted at <a href='https://algorithms-visualize.netlify.app'>algorithms-visualize.netlify.app</a>.
