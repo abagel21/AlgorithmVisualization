@@ -278,29 +278,55 @@ const Graph = ({selected}) => {
                 </div>
             </div>
             <div className="clickTypeSelector">
-                <div className="cursorWrapper">
-                    {/*rgba(194,12,12,0.5)*/}
-                    <div className="currentCursor" style={{backgroundColor:cursorEffect=="Toggle Wall" ? "black" : cursorEffect=="Add Weight" ? "#c20c0c" : "#81adc8"}}></div>
-                    <div className="dropdownMedium">
-                            <p className="dropdownTop">{cursorEffect}</p>
-                            <div
-                            className="dropdownContent8"
-                            onClick={(e) => {
-                                //nothing
-                            }}
-                            >
-                            {[
-                                "Toggle Wall", 
-                                "Add Weight",
-                                "Remove Weight"
-                            ].map((txt) => {
-                                return <p onClick={(e) => setCursorEffect(txt)}>{txt}</p>;
-                            })}
-                            </div>
+                    <div className="cursorWrapper">
+                        {/*rgba(194,12,12,0.5)*/}
+                        <div className="currentCursor" style={{backgroundColor:cursorEffect=="Toggle Wall" ? "black" : cursorEffect=="+Weight" ? "#c20c0c" : "#81adc8"}}></div>
+                        <div className="dropdownMedium">
+                                <p className="dropdownTop">{cursorEffect}</p>
+                                <div
+                                className="dropdownContent8"
+                                onClick={(e) => {
+                                    //nothing
+                                }}
+                                >
+                                {[
+                                    "Toggle Wall", 
+                                    "+Weight",
+                                    "-Weight"
+                                ].map((txt) => {
+                                    return <p onClick={(e) => setCursorEffect(txt)}>{txt}</p>;
+                                })}
+                                </div>
+                        </div>
                     </div>
                 </div>
-            </div>
             <HexMapComponent startCol={startCol} startHeight={startHeight} goalHeight={goalHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} cursorEffect={cursorEffect} setCol = {setCol} setHeight = {setHeight} setGoalWidth={setGoalWidth} setGoalHeight={setGoalHeight} setDragProperty= {setDragProperty} dragProperty={dragProperty}/>
+            <div className="info">
+                <div className="startWrapper infoItem">
+                    <div className="startExample"></div>
+                    <p className="startDescriptor">Start Hex</p>
+                </div>
+                <div className="endWrapper infoItem">
+                    <div className="endExample"></div>
+                    <p className="endDescriptor">End Hex</p>
+                </div>
+                <div className="wallWrapper infoItem">
+                    <div className="wallExample"></div>
+                    <p className="wallDescriptor">Wall</p>
+                </div>
+                <div className="weightWrapper infoItem">
+                    <div className="weightExample"></div>
+                    <p className="weightDescriptor">Weight Hex</p>
+                </div>
+                <div className="visitedWrapper infoItem">
+                    <div className="visitedExample"></div>
+                    <p className="visitedDescriptor">Visited Hex</p>
+                </div>
+                <div className="pathWrapper infoItem">
+                    <div className="pathExample"></div>
+                    <p className="pathDescriptor">Path Hex</p>
+                </div>
+            </div>
         </div>
     )
 }

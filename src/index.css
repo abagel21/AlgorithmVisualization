@@ -1,5 +1,6 @@
 html {
     font-size: 16px;
+    caret-color: transparent;
 }
 
 body {
@@ -122,7 +123,7 @@ code {
 
 .dropdownMedium:hover .dropdownContent8 {
     visibility: visible;
-    height: 7.25rem;
+    height: 9rem;
 }
 
 .dropdown p {
@@ -346,6 +347,7 @@ code {
     cursor: pointer;
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
+    /* font-size: 1.4rem; */
 }
 
 .dropdownContent8 p:hover {
@@ -1075,27 +1077,76 @@ ul {
 }
 
 .navlink {
-    height: 100%;
-    padding-right: .5rem;
+    height: 2.5rem;
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* padding-right: .5rem;
     padding-left: .5rem;
-    padding-top: .1rem;
-    padding-bottom: .1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem; */
+    /* margin-left: 1rem;
+    margin-right: 1rem; */
     list-style: none;
-    border-radius: 10%;
-    border: 2px #DEA47e solid;
-    background-color: white;
+    background-color: #DEA47e;
     border-bottom: none;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     transition-property: background-color, transform;
     transition-duration: .25s;
+    position: relative;
+    margin-right: -1rem;
+    clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
+    /* clip-path: inset(10% 10% 10% 10% round 20%, 20%); */
+}
+
+.s {
+    z-index: 5;
+}
+
+.g {
+    z-index: 4;
+}
+
+.t {
+    z-index: 3
+}
+
+.st {
+    z-index: 2;
+}
+
+.h {
+    z-index: 1;
+}
+
+.navlink p {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(.95, .9);
+    clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
+    transition-property: background-color, transform;
+    transition-duration: .25s;
+    cursor: pointer;
+    font-size: 1.5rem;
+    /* clip-path: inset(10% 10% 10% 10% round 20%, 20%); */
 }
 
 .selected {
     background-color: #DEA47e!important;
     transform: scale(1.1);
+}
+
+.selectedWrapper {
+    transform: scale(1.1) translateY(-1px);
+    z-index: 10;
 }
 
 .header {
@@ -1178,6 +1229,8 @@ ul {
 .cursorWrapper {
     display: flex;
     align-items: center;
+    font-size: 1.4rem;
+    font-weight: 400;
 }
 
 .currentCursor {
@@ -1187,3 +1240,239 @@ ul {
     clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
     transition: background-color .2s ease-out;
 }
+
+.support {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: block;
+    text-align: center;
+    font-size: 1.4rem;
+    color: black;
+}
+
+.support__dropdown {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.support__faq .droppedAnswer {
+    visibility: visible;
+    opacity: 1;
+    max-height: 50rem;
+}
+
+.support__faq-list {
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.support__faq-question {
+    -webkit-box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+    box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+    cursor: pointer;
+    min-width: 60%;
+    padding: 1rem;
+    font-size: 2rem;
+    font-weight: 400;
+    list-style-type: none;
+    position: relative;
+    margin: 0;
+}
+
+.dropArrow {
+    margin: 0;
+}
+
+.support__faq-question:hover {
+    -webkit-box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.support__faq-question p {
+    position: absolute;
+    top: 50%;
+    right: .5rem;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.support__faq-answer {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    -webkit-transition-property: opacity, visibility, max-height;
+    transition-property: opacity, visibility, max-height;
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    width: 60%;
+    overflow: hidden;
+}
+
+.support__contact-us {
+    margin-bottom: 5rem;
+}
+
+.info {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.infoItem {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoItem p {
+    font-size: 1.25rem;
+}
+
+.startExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: #9e6240;
+    margin-right: .5rem;
+}
+
+.endExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: #CD4631;
+    margin-right: .5rem;
+}
+
+.wallExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: black;
+    margin-right: .5rem;
+}
+
+.weightExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: rgba(194, 12, 12, .5);
+    margin-right: .5rem;
+}
+
+* .visitedExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: rgba(5, 100, 200, 0.8);
+    margin-right: .5rem;
+}
+
+.pathExample {
+    height: 48px;
+    width: 56px;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    background-color: rgba(10, 200, 100, 0.8);
+    margin-right: .5rem;
+}
+
+.modalWrapper {
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    height: 0;
+    opacity: 0;
+    z-index: 1000000;
+    transition-property: opacity, visibility, height;
+    transition-duration: .25s;
+}
+
+.innerModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    padding: 5rem;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+    overflow: hidden;
+}
+
+.modalTitle {
+    font-size: 3rem;
+}
+
+.modalContent {
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-top: 3rem;
+}
+
+.modalImage {
+    background-image: url("./util/algorithm.png");
+    background-size: cover;
+    width: 100%;
+    height: 40vh;
+}
+
+.modalClose {
+    position: absolute;
+    margin: 0;
+    top: 0rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+[data-status="visible"] {
+    visibility: visible;
+    height: 100vh;
+    opacity: 1;
+}
+
+
+/*# sourceMappingURL=support.css.map */

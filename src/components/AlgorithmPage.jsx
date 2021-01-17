@@ -1,5 +1,6 @@
 import React from 'react'
 import Graph from './Graph'
+import Help from "./Help"
 import SortingSpace from "./SortingSpace"
 /* eslint-disable */
 const AlgorithmPage = ({selected}) => {
@@ -13,6 +14,12 @@ const AlgorithmPage = ({selected}) => {
             </div>
             <div className="graph" style = {{visibility: selected == "Graphs" ? "visible" : "hidden", height: selected == "Graphs" ? 1 : 0}}>
                 <Graph selected={selected}/>
+            </div>
+            <div className="tree" style = {{visibility: selected == "Trees" ? "visible" : "hidden", height: selected == "Trees" ? 1 : 0, display: selected == "Trees" ? "block" : "none"}}>
+                <h1>WIP</h1>
+            </div>
+            <div className="help" style = {{visibility: selected == "Help" ? "visible" : "hidden", height: selected == "Help" ? 1 : 0}}>
+                <Help selected={selected}/>
             </div>
         </div>
     )

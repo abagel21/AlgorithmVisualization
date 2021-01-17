@@ -38,7 +38,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                 }
                 console.log(hexes.contents[col][height])
                 break;
-            case "Add Weight":
+            case "+Weight":
                 console.log("Trying to add weight")
                 if(hexes.contents[col][height] == 0) {
                     hexes.contents[col][height] = 10;
@@ -55,7 +55,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                     }
                 }
                 break;
-            case "Remove Weight":
+            case "-Weight":
                 if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
                     innerHex.style.backgroundColor = "transparent";
                     innerHex.style.opacity = 0;
@@ -89,7 +89,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                     }
                     console.log(hexes.contents[col][height])
                     break;
-                case "Add Weight":
+                case "+Weight":
                     console.log("Trying to add weight")
                     if(hexes.contents[col][height] == 0) {
                         hexes.contents[col][height] = 10;
@@ -106,7 +106,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                         }
                     }
                     break;
-                case "Remove Weight":
+                case "-Weight":
                     if(hexes.contents[col][height] > 1 && hexes.contents[col][height] != 1000) {
                         innerHex.style.backgroundColor = "transparent";
                         innerHex.style.opacity = 0;
