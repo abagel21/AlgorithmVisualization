@@ -1,4 +1,6 @@
 import React from 'react'
+import logo from "../util/algorithm_logo.png"
+import logosvg from "../Component 1.svg"
 /* eslint-disable */
 const AlgorithmNavigation = ({selected, setSelected}) => {
     const onClick = (e) => {
@@ -38,7 +40,11 @@ const AlgorithmNavigation = ({selected, setSelected}) => {
     }
     return (
         <nav className="navbar">
-            <div className="header">Algorithm Visualizer</div>
+            <div className="headerWrapper">
+                {/* <img src={logo} alt="LOGO" className="logo"/> */}
+                <img src={logosvg} alt="LOGO" className="logo"/>
+                <div className="header">Algorithm Visualizer</div>
+            </div>
             <ul>
                 <li className="navlink s" onClick = {e => onClick(e)}>
                     <p className="navlink-inner selected" onClick = {e => onClick(e)}>Sorting</p>
