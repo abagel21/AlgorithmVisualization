@@ -14,7 +14,8 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
     } else {
         offset = hexHeight;
     }
-    let topMargin = offset + (height) * (hexHeight);
+    let topMargin;
+    topMargin = offset + (height) * (hexHeight) - hexHeight/2;
     const [inc, addInc] = useState(0);
 
     // for adding weight or walls when clicking

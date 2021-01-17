@@ -9,10 +9,13 @@ const HexMapComponent = ({startCol, startHeight, goalHeight, goalWidth, map, siz
      let hexHeight = 24 * sizeValue;
     let hexHor = Math.floor((window.innerWidth - 20) / (hexWidth * .75) - 1)
     let hexVert = Math.floor((window.innerHeight*.6) / (hexHeight) );
-    let horizontalOffset = (window.innerWidth - (hexHor+.5) * (hexWidth + 1) * .75)/2;
+    let horizontalOffset = (window.innerWidth - ((hexHor + 1) * (hexWidth) * .75 - hexWidth))/2;
+    console.log(window.innerWidth)
+    console.log((hexHor + 1) * (hexWidth) * .75 - hexWidth)
+    console.log(hexVert)
     const [drag, setDrag] = useState(false);
     return (
-        <div className = "hexMapWrapper">
+        <div className = "hexMapWrapper" style={{height: `${(hexVert + 1)*(hexHeight + 1) + hexHeight/2 - 1}px`, width: `${(hexHor + 1) * (hexWidth) * .75 - hexWidth}px`}}>
             {map.contents.map((item, i) => {
                 return item.map((hex, j) => {
                     return (<Hex key={Math.floor((i + j)*(i + j + 1)/2 + j)} val = {hex} col={i} height={j} hexes={map} hoffset = {horizontalOffset} mouseIsDown = {mouseIsDown} setMouseDown={setMouseDown} isStart={j == startHeight ? i == startCol ? true : false : false} isTarget = {j == goalHeight ? i == goalWidth ? true : false : false} sizeValue = {sizeValue} cursorEffect={cursorEffect} setStartWidth = {setCol} setStartHeight = {setHeight} setTargetWidth={setGoalWidth} setDragProperty= {setDragProperty} dragProperty={dragProperty} startWidth={startCol} startHeight={startHeight} goalWidth={goalWidth} goalHeight={goalHeight} setGoalHeight={setGoalHeight} drag={drag} setDrag={setDrag}/>)

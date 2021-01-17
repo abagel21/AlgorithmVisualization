@@ -25,7 +25,7 @@ const Graph = ({selected}) => {
      let hexWidth = 28 * sizeValue;
      let hexHeight = 24 * sizeValue;
      let hexHor = Math.floor((window.innerWidth - 20) / (hexWidth * .75) - 1) - 1;
-     let hexVert = Math.floor((window.innerHeight*.75) / (hexHeight) );
+     let hexVert = Math.floor((window.innerHeight*.7) / (hexHeight) );
      let horizontalOffset = (window.innerWidth - (hexHor+.5) * (hexWidth + 1) * .75)/2;
      let targetHeight = Math.floor((hexVert + 1)/2) - 1;
      let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
