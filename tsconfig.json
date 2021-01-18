@@ -17,7 +17,8 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
-    "jsx": "react"
+    "jsx": "react",
+    "noEmit": true
   },
   "include": [
     "src/**/*"
