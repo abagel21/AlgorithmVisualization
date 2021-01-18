@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default class HexMap {
     /** array of the hex map contents where -1=wall, 0=empty, 1=visited, 100 = target */
     contents: number[][] = [];

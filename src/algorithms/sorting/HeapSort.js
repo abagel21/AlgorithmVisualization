@@ -2,6 +2,7 @@ import copyArr from "../../util/copyArr";
 import assert from "assert";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function HeapSort(arr, setSortableComponents) {
     //construct a binary heap from the data from the bottom up
     for (let i = Math.floor((arr.length - 1) / 2); i >= 0; i--) {

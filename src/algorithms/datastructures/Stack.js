@@ -3,17 +3,15 @@ export default class Queue {
     constructor() {
         this.length = 0;
         this.root = null;
-        this.last = null;
     }
-    enqueue(val) {
+    push(val) {
         if (this.length == 0) {
             this.root = new Node(val);
-            this.last = this.root;
         }
         else {
-            let temp = new Node(val);
-            this.last.next = temp;
-            this.last = temp;
+            let temp = this.root;
+            this.root = new Node(val);
+            this.root.prev = temp;
         }
         this.length++;
     }
@@ -21,7 +19,7 @@ export default class Queue {
         if (this.isEmpty())
             throw new Error();
         let val = this.root?.val;
-        this.root = this.root?.next;
+        this.root = this.root?.prev;
         this.length--;
         return val;
     }
@@ -31,7 +29,7 @@ export default class Queue {
 }
 class Node {
     constructor(val) {
-        this.next = null;
+        this.prev = null;
         this.val = val;
     }
 }

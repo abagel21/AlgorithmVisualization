@@ -6,7 +6,7 @@ import speedBlock from "../../util/speedBlock";
 export default async function MergeSort(
   arr: SortableComponent[],
   setSortableComponents: any
-) {
+):Promise<SortableComponent[]> {
   if(await checkForStop("Sorting")) return null;
   const aux: SortableComponent[] = copyArr(arr);
   await sort(
@@ -29,7 +29,7 @@ async function merge(
   mid: number,
   hi: number,
   setSortableComponents: any
-) {
+):Promise<void> {
   let i = lo;
   let j = mid + 1;
   //copy array
@@ -80,7 +80,7 @@ async function sort(
   i: number,
   j: number,
   setSortableComponents: any
-) {
+):Promise<void> {
 
   if (j <= i) {
     return;

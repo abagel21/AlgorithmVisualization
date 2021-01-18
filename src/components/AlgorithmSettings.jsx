@@ -172,7 +172,7 @@ const AlgorithmSettings = ({
   return (
     <div className="settings">
       <div className="dropdown">
-        <p className="dropdownTop">Set Speed</p>
+        <p className="dropdownTop">{window.innerWidth < 500 ? "Speed":"Set Speed"}</p>
         <div className="dropdownContent3">
           <div className="dc3Wrapper">
             <input

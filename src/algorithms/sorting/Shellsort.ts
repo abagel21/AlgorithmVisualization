@@ -2,6 +2,7 @@ import SortableComponent from '../../util/SortableComponent';
 import copyArr from "../../util/copyArr";
 import checkForStop from "../../util/checkForStop";
 import speedBlock from "../../util/speedBlock";
+/* eslint-disable */
 export default async function ShellSort(arr : SortableComponent[], setSortableComponents : any) {
         let h:number = 1;
         while(h < Math.floor(arr.length /3)) h= 3* h + 1

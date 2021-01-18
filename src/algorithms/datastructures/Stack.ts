@@ -1,27 +1,24 @@
 /* eslint-disable */
 export default class Queue<M> {
     root: Node<M>|null|undefined;
-    last: Node<M>|null|undefined;
     length: number = 0;
     constructor() {
         this.root = null;
-        this.last = null;
     }
-    enqueue(val:M) {
+    push(val:M) {
         if(this.length == 0) {
             this.root = new Node(val)
-            this.last = this.root;
         } else {
-            let temp = new Node(val);
-            this.last!.next = temp;
-            this.last = temp;
+            let temp:Node<M>|null|undefined = this.root;
+            this.root = new Node(val);
+            this.root.prev = temp;
         }
         this.length++;
     }
     pop():M {
         if(this.isEmpty()) throw new Error();
         let val:any = this.root?.val;
-        this.root = this.root?.next;
+        this.root = this.root?.prev;
         this.length--;
         return val;
     }
@@ -31,7 +28,7 @@ export default class Queue<M> {
 }
 class Node<T> {
     val: T;
-    next: Node<T>|null = null;
+    prev: Node<T>|null|undefined = null;
     constructor(val:T) {
         this.val = val;
     }
