@@ -18,7 +18,7 @@ const Help = ({}) => {
             <div className="support__faq">
             <ul className="support__faq-list">
                 <div className="support__dropdown">
-                    <li className="support__faq-question" onClick = {e => handleClick(e)}>{"How do I use the Sortingr page?"}<p className="dropArrow">&#9947;</p></li>
+                    <li className="support__faq-question" onClick = {e => handleClick(e)}>{"How do I use the Sorting page?"}<p className="dropArrow">&#9947;</p></li>
                     <p className="support__faq-answer">The focus of the Sorting page is on the group of bars in the middle. The number of bars (sortable objects) is controlled by a slider at the bottom. You can also set the way the data is ordered--randomized, ascending, descending, or randomized with an emphasis on generating duplicates--at the top. The speed and type of algorithm is also in the top navbar. Click "Sort" to begin the visualization once an algorithm is selected. Algorithms can be paused during runtime and the speed can be adjusted for different granularity. Click "Reset" once an algorithm is finished to try another algorithm.</p>
                 </div>
                 <div className="support__dropdown">
