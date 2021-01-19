@@ -15,10 +15,31 @@ const Graph = ({selected}) => {
     const [cursorEffect, setCursorEffect] = useState("Toggle Wall");
     // set size calculations
     const [sizeValue, _setSizeValue] = useState(3);
+    const windowResize = () => {
+        clearAlgorithm(hexMap, startCol, startHeight);
+        clearAll(hexMap, startCol, startHeight);
+        let hexWidth = 24 * 1.1547005 * sizeRef.current;
+        let hexHeight = 24 * sizeRef.current;
+        let otherLength = ((hexHeight + 2)/2)/Math.tan(60 * Math.PI / 180);
+        let hexHor = Math.floor((window.innerWidth - 20) / (otherLength * 3)) - 1;
+        let hexVert = Math.floor((window.innerHeight*.6) / (hexHeight) );
+        let horizontalOffset = (window.innerWidth - ((hexHor + 1) * (hexWidth) * .75 - hexWidth))/2;
+        setHexMap(new HexMap(hexVert, hexHor))
+        let targetHeight = Math.floor((hexVert + 1)/2) - 1;
+        let targetStartWidth = Math.floor((hexHor + 1)/4) - 1;
+        let targetWidth = Math.floor((hexHor + 1)*3/4) - 1;
+        if(targetStartWidth%2 != targetWidth%2) {
+            targetWidth++;
+        }
+        setGoalWidth(targetWidth);
+        setCol(targetStartWidth);
+        setHeight(targetHeight)
+        setGoalHeight(targetHeight)
+    }
+    window.onresize = windowResize;
     const sizeRef = useRef(sizeValue);
     const setSizeValue = (data) => {
         sizeRef.current = data;
-        console.log(data)
         _setSizeValue(data);
     }
      // figure out starting calculations
@@ -74,7 +95,6 @@ const Graph = ({selected}) => {
             });
             break;
             case "BFS":
-                console.log("bfs")
                 clearWeights(hexMap, startCol, startHeight)
                 res = await new Promise((resolve, reject) => {
                   resolve(
@@ -138,7 +158,6 @@ const Graph = ({selected}) => {
     const handleReset = (e) => {
         const stop = document.querySelector(".stopGraphing")
         if(stop.dataset.visibility == "true" && stop.dataset.status != "true") return;
-        console.log("reset");
         clearAll(hexMap, startCol, startHeight);
     }
     return (

@@ -25,22 +25,17 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
         setMouseDown("true")
         let hex = document.querySelector(`.hex-${col}-${height}`);
         let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
-        console.log(cursorEffect)
         switch(cursorEffect) {
             case "Toggle Wall":
-                console.log("adding wall");
                 if(hexes.contents[col][height] == 0) {
-                    console.log("adding")
                     hexes.contents[col][height] = -1;
                     innerHex.classList.add("wall");
                 } else if(hexes.contents[col][height] == -1) {
                     hexes.contents[col][height] = 0;
                     innerHex.classList.remove("wall");
                 }
-                console.log(hexes.contents[col][height])
                 break;
             case "+Weight":
-                console.log("Trying to add weight")
                 if(hexes.contents[col][height] == 0) {
                     hexes.contents[col][height] = 10;
                     innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
@@ -67,7 +62,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                 }
                 break;
             default:
-                console.log("NONE");
                 break;
         }
     }
@@ -79,19 +73,15 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
             let innerHex = document.querySelector(`.hex-${col}-${height}`).children[0];
             switch(cursorEffect) {
                 case "Toggle Wall":
-                    console.log("adding wall");
                     if(hexes.contents[col][height] == 0) {
-                        console.log("adding")
                         hexes.contents[col][height] = -1;
                         innerHex.classList.add("wall");
                     } else if(hexes.contents[col][height] == -1) {
                         hexes.contents[col][height] = 0;
                         innerHex.classList.remove("wall");
                     }
-                    console.log(hexes.contents[col][height])
                     break;
                 case "+Weight":
-                    console.log("Trying to add weight")
                     if(hexes.contents[col][height] == 0) {
                         hexes.contents[col][height] = 10;
                         innerHex.style.backgroundColor = "rgba(194,12,12,.5)";
@@ -118,7 +108,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
                     }
                     break;
                 default:
-                    console.log("NONE");
                     break;
             }
         }
@@ -132,7 +121,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
 
     const handleDrag = e => {
         setDrag(true);
-        console.log("DRAG STARTED")
         if(isStart) {
             setDragProperty("start");
             isStart = false;
@@ -146,8 +134,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
 
     const handleDrop = e => {
         setDrag(false);
-        console.log("DROPPED")
-        console.log(e.target);
         // if they try to drag the start onto the target or target onto the start
         if(dragProperty == "start" && isTarget) {
             const start = document.querySelector(`.hex-${startWidth}-${startHeight}`);
@@ -182,8 +168,6 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
     }
 
     const onDragEnd = (e) => {
-        console.log("DRAG ENDED");
-        console.log(drag);
         if(drag) {
             if(dragProperty=="start") {
                 const start = document.querySelector(`.hex-${startWidth}-${startHeight}`);

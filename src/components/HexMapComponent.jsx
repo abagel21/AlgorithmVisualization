@@ -10,13 +10,8 @@ const HexMapComponent = ({startCol, startHeight, goalHeight, goalWidth, map, siz
      let otherLength = ((hexHeight + 2)/2)/Math.tan(60 * Math.PI / 180);
     let hexHor = Math.floor((window.innerWidth - 20) / (otherLength * 3)) - 1;
     let hexVert = Math.floor((window.innerHeight*.6) / (hexHeight) );
-    console.log(hexHor)
-    console.log(map.contents.length)
-    console.log(hexWidth)
     let rectLength=2* otherLength
     let horizontalOffset = (window.innerWidth - (rectLength * hexHor + (hexHor + 1) * otherLength))/2;
-    console.log(otherLength)
-    console.log(otherLength/hexWidth)
     const [drag, setDrag] = useState(false);
     return (
         <div className = "hexMapWrapper" style={{height: `${(hexVert)*(hexHeight + 1) + hexHeight/2 - 1}px`, width: `${rectLength * hexHor + (hexHor + 1) * otherLength}px`}}>
