@@ -2,7 +2,6 @@ import Queue from "../algorithms/datastructures/Queue";
 import Coordinate from "../algorithms/datastructures/Coordinate";
 /* eslint-disable */
 export async function clearAll(hexes, startCol, startHeight) {
-    console.log("bfs clearAll called");
     let q = new Queue();
     let root = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
@@ -21,7 +20,6 @@ export async function clearAll(hexes, startCol, startHeight) {
         visited[col][height] = 1;
         let hex = document.querySelector(`.hex-${col}-${height}`);
         if (hexInfo != 1000 && hexInfo != -1000 && !hex.classList.contains("start") && !hex.classList.contains("target")) {
-            console.log(hexInfo);
             hexes.contents[col][height] = 0;
         }
         let innerHex = hex.children[0];
@@ -52,7 +50,6 @@ export async function clearAll(hexes, startCol, startHeight) {
     return root;
 }
 export async function clearAlgorithm(hexes, startCol, startHeight) {
-    console.log("bfs clearAlgorithm called");
     let q = new Queue();
     let root = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);

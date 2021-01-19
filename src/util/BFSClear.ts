@@ -5,7 +5,6 @@ import checkForStop from "./checkForStop";
 import speedBlock from "./speedBlock";
 /* eslint-disable */
 export async function clearAll(hexes:HexMap, startCol:number, startHeight:number):Promise<Coordinate|null> {
-    console.log("bfs clearAll called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();
     let root:Coordinate = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
@@ -23,7 +22,6 @@ export async function clearAll(hexes:HexMap, startCol:number, startHeight:number
         visited[col][height] = 1;
         let hex:HTMLDivElement = document.querySelector(`.hex-${col}-${height}`)! as HTMLDivElement;
         if(hexInfo != 1000 && hexInfo != -1000 && !hex.classList.contains("start") && !hex.classList.contains("target")) {
-            console.log(hexInfo);
             hexes.contents[col][height] = 0;
         }
         let innerHex:HTMLDivElement = hex.children[0]! as HTMLDivElement;
@@ -51,7 +49,6 @@ export async function clearAll(hexes:HexMap, startCol:number, startHeight:number
 }
 
 export async function clearAlgorithm(hexes:HexMap, startCol:number, startHeight:number):Promise<Coordinate|null> {
-    console.log("bfs clearAlgorithm called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();
     let root:Coordinate = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
@@ -95,7 +92,6 @@ export async function clearAlgorithm(hexes:HexMap, startCol:number, startHeight:
 }
 
 export async function clearWeights(hexes:HexMap, startCol:number, startHeight:number):Promise<Coordinate|null> {
-    console.log("bfs clearAlgorithm called");
     let q:Queue<Coordinate> = new Queue<Coordinate>();
     let root:Coordinate = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);
