@@ -628,6 +628,18 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
 }
 
+@media(max-height: 1000px) {
+    .contentSettings {
+        bottom: .1rem;
+    }
+}
+
+@media(max-height: 700px) {
+    .contentSettings {
+        bottom: .25rem;
+    }
+}
+
 .sortableElement {
     background-color: "red";
     margin-left: 4px;
