@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React from 'react'
 import logo from "../util/algorithm_logo.png"
 import logosvg from "../Component 1.svg"
-/* eslint-disable */
 const AlgorithmNavigation = ({selected, setSelected}) => {
     const onClick = (e) => {
         if(selected == "Help" ) {
