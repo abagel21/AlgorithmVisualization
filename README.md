@@ -17,7 +17,7 @@ The site includes selection sort, insertion sort, quicksort, merge sort, three w
 
 ## Planned Updates
 - Bubble Sort
-- Quick Select
+- Minimum Spanning Trees with Kruskal's/Prim's/Dijkstra's
 - Autogenerate patterns in hex map
 - Binary Search Trees 
 - AVL Trees
