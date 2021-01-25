@@ -21,4 +21,8 @@ export default async function checkForStop(str) {
             }, 500);
         });
     }
+    if (getOtherStop(str)) {
+        console.log("TRUE");
+        return true;
+    }
 }

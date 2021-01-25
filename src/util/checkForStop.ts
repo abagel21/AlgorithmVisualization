@@ -21,4 +21,8 @@ function getStop(str:string) {
           }, 500);
         });
       }
+      if (getOtherStop(str)) {
+        console.log("TRUE")
+        return true;
+      }
   }

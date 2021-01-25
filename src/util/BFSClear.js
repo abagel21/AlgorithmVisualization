@@ -95,7 +95,6 @@ export async function clearAlgorithm(hexes, startCol, startHeight) {
     return root;
 }
 export async function clearWeights(hexes, startCol, startHeight) {
-    console.log("bfs clearAlgorithm called");
     let q = new Queue();
     let root = new Coordinate(startCol, startHeight, null);
     q.enqueue(root);

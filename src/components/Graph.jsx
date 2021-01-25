@@ -6,6 +6,7 @@ import Dijkstra from "../algorithms/graph/Dijkstra"
 import AStar from "../algorithms/graph/AStar"
 import Coordinate from "../algorithms/datastructures/Coordinate"
 import HexMap from '../util/HexMap'
+import {RecursiveDivision, chooseSplit} from "../algorithms/graph/RecursiveDivision"
 import {clearAll, clearAlgorithm, clearWeights} from '../util/BFSClear'
 /* eslint-disable */
 const Graph = ({selected}) => {
@@ -329,6 +330,10 @@ const Graph = ({selected}) => {
                         </div>
                     </div>
                 </div>
+                <button onClick = {e => {
+                    clearAll(hexMap, startCol, startHeight);
+                    RecursiveDivision(hexMap, 0, 0, hexMap.contents.length, hexMap.contents[0].length, chooseSplit(hexMap.contents.length, hexMap.contents[0].length))
+                }}>RECURSIVELY DIVIDE</button>
             <HexMapComponent startCol={startCol} startHeight={startHeight} goalHeight={goalHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} cursorEffect={cursorEffect} setCol = {setCol} setHeight = {setHeight} setGoalWidth={setGoalWidth} setGoalHeight={setGoalHeight} setDragProperty= {setDragProperty} dragProperty={dragProperty}/>
             <div className="info">
                 <div className="startWrapper infoItem">

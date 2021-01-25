@@ -9,6 +9,7 @@ import Shellsort from "../algorithms/sorting/Shellsort";
 import knuth from "../algorithms/sorting/KnuthShuffle";
 import createSortableComponents from "../util/createSortableComponents";
 import createDuplicateSortableComponents from "../util/createDuplicateSortableComponents";
+import bubbleSort from "../algorithms/sorting/BubbleSort"
 
 /* eslint-disable */
 
@@ -85,6 +86,18 @@ const AlgorithmSettings = ({
         res = await new Promise((resolve, reject) => {
           resolve(
             selectionSort(
+              sortableComponents,
+              setSortableComponents
+            )
+          );
+        });
+        if (stop.dataset.status === "false") stop.dataset.visibility = "false";
+        if (res) setSortableComponents(res);
+        break;
+      case "Bubble Sort":
+        res = await new Promise((resolve, reject) => {
+          resolve(
+            bubbleSort(
               sortableComponents,
               setSortableComponents
             )
@@ -213,6 +226,7 @@ const AlgorithmSettings = ({
           {[
             "Insertion Sort",
             "Selection Sort",
+            "Bubble Sort",
             "Shellsort",
             "Merge Sort",
             "Knuth Shuffle",
