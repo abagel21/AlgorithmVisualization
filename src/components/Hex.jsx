@@ -180,7 +180,7 @@ const Hex = ({val, col, height, hexes, hoffset, mouseIsDown, setMouseDown, isSta
     }
 
     return (
-        <div onDragEnd = {onDragEnd} onDragOver = {onDragOver} onDrop = {e => handleDrop(e)} onDragStart={e => handleDrag(e)} draggable={isStart || isTarget} data-hexInfo={hexes.contents[col][height]} className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
+        <div onDragEnd = {onDragEnd} onDragOver = {onDragOver} onDrop = {e => handleDrop(e)} onDragStart={e => handleDrag(e)} draggable={isStart || isTarget} className = {`hex hex-${col}-${height} ${isStart ? "start" : ""} ${isTarget ? "target" : ""}`} style={{left: leftMargin, top: topMargin, width: hexWidth, height: hexH}} onMouseUp={e => mouseUpHandler(e)} onMouseEnter={e => mouseOverHandler(e)}>
             <div className={`innerHex`} onMouseDown={e => hexClickHandler(e)}></div>
         </div>
     )

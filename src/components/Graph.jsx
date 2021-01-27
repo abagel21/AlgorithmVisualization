@@ -7,6 +7,8 @@ import AStar from "../algorithms/graph/AStar"
 import Coordinate from "../algorithms/datastructures/Coordinate"
 import HexMap from '../util/HexMap'
 import {RecursiveDivision, chooseSplit} from "../algorithms/graph/RecursiveDivision"
+import addWeights from "../util/addWeights"
+import {weightRecursiveDivision} from "../algorithms/graph/WeightRecursiveDivision"
 import {clearAll, clearAlgorithm, clearWeights} from '../util/BFSClear'
 /* eslint-disable */
 const Graph = ({selected}) => {
@@ -62,27 +64,27 @@ const Graph = ({selected}) => {
      const [goalWidth, setGoalWidth] = useState(targetWidth);
      const [hexMap, setHexMap] = useState(new HexMap(hexVert, hexHor));
      const [dragProperty, setDragProperty] = useState("start");
-     hexMap.contents[goalWidth][goalHeight] = -1000;
-     hexMap.contents[startCol][startHeight] = 1000;
+     if(goalWidth<hexMap.contents.length && goalHeight < hexMap.contents[0].length)
+        hexMap.contents[goalWidth][goalHeight] = -1000;
+    if(startCol<hexMap.contents.length && startHeight < hexMap.contents[0].length)
+        hexMap.contents[startCol][startHeight] = 1000;
 
      // handles calling the requisite algorithm when the graph button is pressed
     const handleGraph = async (e) => {
         e.preventDefault();
         clearAlgorithm(hexMap, startCol, startHeight)
         // adjust the data status of stop, graph, and size toggling
+        const graphButton = document.querySelector(".graphTrigger");
+        if(graphButton.dataset.readonly == "true") return;
+        graphButton.dataset.visibility="false";
+        const sizeToggle = document.querySelector(".sizeGraph")
+        sizeToggle.readonly = true;
         const stop = document.querySelector(".stopGraphing");
         stop.dataset.visibility = "true";
         stop.dataset.status = "false";
         stop.dataset.reset = "false";
-        const graphButton = document.querySelector(".graphTrigger");
-        graphButton.dataset.visibility="false";
-        const sizeToggle = document.querySelector(".sizeGraph")
-        sizeToggle.readonly = true;
         const sizeTop = document.querySelector(".size");
         sizeTop.style.backgroundColor = "#D3D3D3"
-        const reset = document.querySelector(".resetGraphing");
-        reset.readonly = true;
-        reset.style.backgroundColor = "#D3D3D3"
         let res;
 
         // perform the algorithm
@@ -121,22 +123,22 @@ const Graph = ({selected}) => {
               
             break;
         }
+        hexMap.contents[startCol][startHeight] = 1000;
         stop.dataset.visibility = "false";
         graphButton.dataset.visibility="true";
         sizeToggle.readonly = false;
         sizeTop.style.backgroundColor = "white"
-        reset.readonly = false;
-        reset.style.backgroundColor = "#eee"
       };
 
       // sets the minimum value of the resizing slider
       const calculateMinimumHexMultiplier= () => {
         let width = window.innerWidth;
-        if(width > 2100) return "2.25";
-        else if (width > 1500) return "2";
-        else if (width > 1200) return "1.75";
-        else if (width > 900) return "1.5";
-        else return "1"
+        return "1";
+        if(width > 2100) return "1.25";
+        else if (width > 1500) return "1";
+        else if (width > 1200) return ".75";
+        else if (width > 900) return ".5";
+        else return ".25"
       }
     // forces a redraw of the dom
     const refresh = () => {
@@ -160,6 +162,40 @@ const Graph = ({selected}) => {
         const stop = document.querySelector(".stopGraphing")
         if(stop.dataset.visibility == "true" && stop.dataset.status != "true") return;
         clearAll(hexMap, startCol, startHeight);
+    }
+
+    const generateObstacle = async (txt) => {
+        // set graphing and clearing to readonly
+        const graph = document.querySelector(".graphTrigger")
+        graph.dataset.readonly = "true"
+        graph.style.backgroundColor="#D3D3D3";
+        const setSize = document.querySelector(".size");
+        setSize.style.backgroundColor="#D3D3D3";
+        const sizeToggle = document.querySelector(".sizeGraph")
+        sizeToggle.readonly = true;
+        const stop = document.querySelector(".stopGraphing");
+        stop.dataset.reset = "false";
+        switch(txt) {
+            case "Maze":
+                await clearAll(hexMap, startCol, startHeight);
+                await RecursiveDivision(hexMap, 0, 0, hexMap.contents[0].length, hexMap.contents.length, chooseSplit(hexMap.contents[0].length, hexMap.contents.length))
+                break;
+            case "Random Weights":
+                await clearAll(hexMap, startCol, startHeight);
+                await addWeights(hexMap, startCol, startHeight);
+                break;
+            case "Weight Maze":
+                await clearAll(hexMap, startCol, startHeight);
+                await weightRecursiveDivision(hexMap, 0, 0, hexMap.contents[0].length, hexMap.contents.length, chooseSplit(hexMap.contents[0].length, hexMap.contents.length))
+                break;
+            default: 
+                break;
+        }
+        graph.dataset.readonly = "false"
+        graph.style.backgroundColor="#eee";
+        setSize.style.backgroundColor="white";
+        sizeToggle.readonly = false;
+        stop.dataset.reset = "true";
     }
     return (
         <div>
@@ -279,8 +315,8 @@ const Graph = ({selected}) => {
                             "BFS",
                             "Dijkstra's",
                             "A* Search",
-                        ].map((txt) => {
-                            return <p onClick={(e) => setAlgorithm(txt)}>{txt}</p>;
+                        ].map((txt, index) => {
+                            return <p key={index} onClick={(e) => setAlgorithm(txt)}>{txt}</p>;
                         })}
                         </div>
                     </div>
@@ -323,17 +359,30 @@ const Graph = ({selected}) => {
                                     "Toggle Wall", 
                                     "+Weight",
                                     "-Weight"
-                                ].map((txt) => {
-                                    return <p onClick={(e) => setCursorEffect(txt)}>{txt}</p>;
+                                ].map((txt, index) => {
+                                    return <p key={index} onClick={(e) => setCursorEffect(txt)}>{txt}</p>;
                                 })}
                                 </div>
                         </div>
                     </div>
+                    <div className="dropdownMedium">
+                    <div className="dropdownTop obstacle">Obstacles</div>
+                    <div
+                                className="dropdownContent9"
+                                onClick={(e) => {
+                                    //nothing
+                                }}
+                                >
+                                {[
+                                    "Maze", 
+                                    "Random Weights",
+                                    "Weight Maze"
+                                ].map((txt, index) => {
+                                    return <p key={index} onClick={(e) => generateObstacle(txt)}>{txt}</p>;
+                                })}
+                                </div>
                 </div>
-                <button onClick = {e => {
-                    clearAll(hexMap, startCol, startHeight);
-                    RecursiveDivision(hexMap, 0, 0, hexMap.contents.length, hexMap.contents[0].length, chooseSplit(hexMap.contents.length, hexMap.contents[0].length))
-                }}>RECURSIVELY DIVIDE</button>
+                </div>
             <HexMapComponent startCol={startCol} startHeight={startHeight} goalHeight={goalHeight} goalWidth={goalWidth} map={hexMap} sizeValue={sizeValue} cursorEffect={cursorEffect} setCol = {setCol} setHeight = {setHeight} setGoalWidth={setGoalWidth} setGoalHeight={setGoalHeight} setDragProperty= {setDragProperty} dragProperty={dragProperty}/>
             <div className="info">
                 <div className="startWrapper infoItem">

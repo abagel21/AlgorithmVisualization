@@ -70,6 +70,24 @@ export async function clearAlgorithm(hexes:HexMap, startCol:number, startHeight:
             hex.classList.remove("visited_hex");
             if(hex.classList.contains("shortestPath")) hex.classList.remove("shortestPath")
             // if(innerHex.style.opacity == "1") innerHex.style.opacity = "0";
+            if (innerHex.style.backgroundColor != "transparent") {
+                let num:string|string[] = innerHex.style.backgroundColor.split(",")[3]
+                let weight = 0;
+                if (num != null) {
+                    num = num.trim().split(".")[1].split("")
+                    if (num.length > 2) {
+                        num = num[0] + num[1]
+                        weight = (parseInt(num) - 50) / 100 * 200
+                        console.log(weight)
+                    } else {
+                        num = num[0]
+                        weight = (parseInt(num) - 5) / 10 * 200
+                        console.log(weight)
+                    }
+                }
+                hexes.contents[col][height] = weight;
+            }
+            
         }
         visited[col][height] = 1;
         if(col%2 == 0) {
@@ -112,6 +130,7 @@ export async function clearWeights(hexes:HexMap, startCol:number, startHeight:nu
             hexes.contents[col][height] = 0;
             innerHex.style.backgroundColor = "transparent";
         }
+        innerHex.style.opacity = "0";
         visited[col][height] = 1;
         if(col%2 == 0) {
             q.enqueue(new Coordinate(col, height - 1, node));

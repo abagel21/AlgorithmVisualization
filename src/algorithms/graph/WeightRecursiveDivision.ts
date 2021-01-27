@@ -3,7 +3,7 @@ import HexMap from "../../util/HexMap";
 import speedBlock from "../../util/speedBlock";
 import checkForStop from "../../util/checkForStop";
 /* eslint-disable */
-export async function RecursiveDivision(hexes:HexMap, x:number, y:number, width:number, height:number, bisection: boolean): Promise<null> {
+export async function weightRecursiveDivision(hexes:HexMap, x:number, y:number, width:number, height:number, bisection: boolean): Promise<null> {
     if (await checkForStop("Graphing")) return null;
     if (await checkForStop("Graphing")) return null;
     if (width < 3 || height < 3) return;
@@ -29,15 +29,19 @@ export async function RecursiveDivision(hexes:HexMap, x:number, y:number, width:
                 continue;
             }
             hexes.contents[dy][wallHeight] = -1;
-            dy++;
             let innerHex:HTMLDivElement = hex.childNodes[0] as HTMLDivElement;
-            innerHex.classList.add("wall");
+            let weight = Math.floor(Math.random() * 11) * 10;
+            hexes.contents[dy][wallHeight] = weight;
+            innerHex.style.opacity= "1";
+            if(hexes.contents[dy][wallHeight] > 0)
+                innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[dy][wallHeight]/200 + .5)})`
+            dy++;
             await speedBlock("Graph");
         }
         let newWidth = wallHeight - x;
-        await RecursiveDivision(hexes, x, y, newWidth, height, chooseSplit(newWidth, height));
+        await weightRecursiveDivision(hexes, x, y, newWidth, height, chooseSplit(newWidth, height));
         newWidth = x + width - wallHeight - 1;
-        await RecursiveDivision(hexes, wallHeight + 1, y, newWidth, height, chooseSplit(newWidth, height));
+        await weightRecursiveDivision(hexes, wallHeight + 1, y, newWidth, height, chooseSplit(newWidth, height));
     } else {
         // the horizontal width of the wall
         let wallWidth = y + 1 + Math.floor(Math.random() * (height - 2));
@@ -59,16 +63,20 @@ export async function RecursiveDivision(hexes:HexMap, x:number, y:number, width:
                 dx++;
                 continue;
             }
-            hexes.contents[wallWidth][dx] = -1;
-            dx++;
+
             let innerHex:HTMLDivElement = hex.childNodes[0] as HTMLDivElement;
-            innerHex.classList.add("wall");
+            let weight = Math.floor(Math.random() * 11) * 10;
+            hexes.contents[wallWidth][dx] = weight;
+            innerHex.style.opacity= "1";
+            if(hexes.contents[wallWidth][dx] > 0)
+                innerHex.style.backgroundColor = `rgba(194,12,12,${(hexes.contents[wallWidth][dx]/200 + .5)})`
+            dx++;
             await speedBlock("Graph");
         }
         let newHeight = wallWidth - y;
-        await RecursiveDivision(hexes, x, y, width, newHeight, chooseSplit(width, newHeight));
+        await weightRecursiveDivision(hexes, x, y, width, newHeight, chooseSplit(width, newHeight));
         newHeight = y + height - wallWidth - 1;
-        await RecursiveDivision(hexes, x, wallWidth + 1, width, newHeight, chooseSplit(width, newHeight));
+        await weightRecursiveDivision(hexes, x, wallWidth + 1, width, newHeight, chooseSplit(width, newHeight));
     }
 }
 

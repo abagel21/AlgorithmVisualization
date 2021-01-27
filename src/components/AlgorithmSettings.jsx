@@ -210,8 +210,8 @@ const AlgorithmSettings = ({
             "ascending",
             "descending",
             "randomized w/ duplicates",
-          ].map((txt) => {
-            return <p onClick={(e) => handleDataType(txt)}>{txt}</p>;
+          ].map((txt, index) => {
+            return <p key={index} onClick={(e) => handleDataType(txt)}>{txt}</p>;
           })}
         </div>
       </div>
@@ -233,8 +233,8 @@ const AlgorithmSettings = ({
             "Quicksort",
             "3-Way Quicksort",
             "Heap Sort",
-          ].map((txt) => {
-            return <p onClick={(e) => setCurrSelected(txt)}>{txt}</p>;
+          ].map((txt, index) => {
+            return <p key={index} onClick={(e) => setCurrSelected(txt)}>{txt}</p>;
           })}
         </div>
       </div>
